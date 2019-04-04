@@ -1,9 +1,21 @@
-USE DatabaseFinal;
+DROP SCHEMA DatabaseFinal;
+CREATE SCHEMA DatabaseFinal;
+Use DatabaseFinal;
+CREATE TABLE Person(
+   ID        Int          AUTO_INCREMENT PRIMARY KEY NOT NULL,
+   FirstName VARCHAR (25) NOT NULL, 
+   LastName  VARCHAR (25) NOT NULL, 
+   Password  VARCHAR (90) NOT NULL,
+   Salt      VARCHAR (45) NOT NULL,  
+   Email     VARCHAR (25) NOT NULL UNIQUE 
+);
 CREATE TABLE Curriculum(
-    Name varchar (25) PRIMARY KEY,
-    HeadPerson varchar (25) NOT NULL,
+    Name varchar (25) PRIMARY KEY NOT NULL,
+    HeadPerson int NOT NULL,
     MinimumHours int NOT NULL,
-     MaxTopicsCovered INT NOT NULL 
+    MaxTopicsCovered INT NOT NULL,
+
+    FOREIGN KEY (HeadPerson)  REFERENCES Person(ID)
     
 );
 CREATE TABLE Courses(
