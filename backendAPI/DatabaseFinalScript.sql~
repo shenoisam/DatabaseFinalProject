@@ -2,7 +2,7 @@ DROP SCHEMA DatabaseFinal;
 CREATE SCHEMA DatabaseFinal;
 Use DatabaseFinal;
 CREATE TABLE Person(
-   ID        VARCHAR (25) PRIMARY KEY NOT NULL,
+   ID        Int          AUTO_INCREMENT PRIMARY KEY NOT NULL,
    FirstName VARCHAR (25) NOT NULL, 
    LastName  VARCHAR (25) NOT NULL, 
    Password  VARCHAR (90) NOT NULL,
@@ -24,18 +24,9 @@ CREATE TABLE Courses(
    CourseNumber        VarChar(25)   NOT NULL,
    CreditHours         INT           NOT NULL, 
    CourseDescription   VARCHAR(45)   NOT NULL, 
+   Curriculum          VarChar (25)  NOT NULL,
    CONSTRAINT UC_Courses UNIQUE (SubjectCode, CourseNumber),
-  
-);
-CREATE TABLE CurCourse (
-   Curriculum VARCHAR (25) NOT NULL,
-   CourseName VARCHAR (25) NOT NULL,
-   
-   FOREIGN KEY (Curriculum)  REFERENCES Curriculum(Name),
-   FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
-   CONSTRAINT CurCourse_pk PRIMARY KEY (Curriculum, CourseName)
-   
-   
+   FOREIGN KEY (Curriculum)  REFERENCES Curriculum(Name)
 );
 CREATE TABLE Topics(
   ID            VARCHAR (25) PRIMARY KEY,
@@ -67,21 +58,6 @@ CREATE TABLE Section(
    Comment1   VARCHAR(45)  NOT NULL, 
    Comment2   VARCHAR(45)  NOT NULL,
    CourseName VARCHAR(25)  NOT NULL, 
-   APlus      INT         , 
-   A          INT          , 
-   AMinus     INT          , 
-   BPlus      INT          , 
-   B          INT          , 
-   BMinus     INT          , 
-   CPlus      INT          , 
-   C          INT          , 
-   CMinus     INT          , 
-   DPlus      INT          , 
-   D          INT          , 
-   DMinus     INT          , 
-   F          INT          ,
-   W          INT          , 
-   I          INT          ,
    
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
    CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester) 
