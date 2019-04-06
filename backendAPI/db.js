@@ -3,11 +3,8 @@
 
  Class Descriptions borrowed from: https://itnext.io/how-to-share-a-single-database-connection-in-a-node-js-express-js-app-fcad4cbcb1e
 */
-
 var mysql = require('mysql');
 var assert = require('assert')
-
-
 
 let _db; 
 
@@ -29,6 +26,7 @@ function initDb(callback) {
     
      _db = db 
     return callback(_db);
+	
 };
 
 function getDb() {
