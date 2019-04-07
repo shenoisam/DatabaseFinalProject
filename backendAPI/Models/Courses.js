@@ -1,13 +1,14 @@
-/*
+
 var createCourses = function(req,res,next){
-   var Name              = req.body.Name
-   var MaxCovered        = req.body.MaxTopicsCovered 
-   var MinHours          = req.body.MinimumHours 
-   var id                = req.body.HeadPerson 
+   var Name              = req.body.CourseName
+   var SubjectCode       = req.body.SubjectCode 
+   var CourseNumber      = req.body.CourseNumber  
+   var CreditHours       = req.body.CreditHours 
+   var CourseDescription = rewq.body.CourseDescription
    
-   if(!NaN(MaxCovered) && !NaN(MinHours)){
+   if(!NaN(CreditHours)){
       res.locals.sql  = "INSERT INTO Courses VALUES ?"
-	  res.locals.values = [[Name,id, MinHours,MaxCovered]]
+	  res.locals.values = [[CourseName,SubjectCode, CourseNumber,CreditHours,CourseDescription]]
 	  next();
    }else{
 	   res.send({Error: "Invalid Input"})
@@ -16,4 +17,3 @@ var createCourses = function(req,res,next){
 }
 
 module.exports = {createCourses}
-*/
