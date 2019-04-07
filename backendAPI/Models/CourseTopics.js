@@ -1,6 +1,6 @@
 
 
-var CreatCourseTopics = function(req,res,next){
+var CreateCourseTopics = function(req,res,next){
 	var CourseName = req.body.CourseName
 	var Topic      = req.body.Topic 
 	
@@ -10,3 +10,4 @@ var CreatCourseTopics = function(req,res,next){
     next()	
 	
 }
+module.exports = {CreateCourseTopics}

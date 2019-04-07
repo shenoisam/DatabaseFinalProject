@@ -1,5 +1,5 @@
 
-var createCourses = function(req,res,next){
+var CreateCourses = function(req,res,next){
    var Name              = req.body.CourseName
    var SubjectCode       = req.body.SubjectCode 
    var CourseNumber      = req.body.CourseNumber  
@@ -16,4 +16,4 @@ var createCourses = function(req,res,next){
 	
 }
 
-module.exports = {createCourses}
+module.exports = {CreateCourses}

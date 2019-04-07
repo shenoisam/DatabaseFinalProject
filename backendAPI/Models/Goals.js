@@ -1,5 +1,5 @@
 
-var createGoals = function(req,res,next){
+var CreateGoals = function(req,res,next){
 	var ID          = req.body.ID
 	var Description = req.body.Description
 	var Cur         = req.body.Curriculum 
@@ -9,3 +9,5 @@ var createGoals = function(req,res,next){
 	next()
 	
 }
+
+module.exports = {CreateGoals}

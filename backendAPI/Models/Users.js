@@ -1,4 +1,4 @@
-var ran = require('../passwordEncryption.js')
+var ran = require('./../Routes/passwordEncryption.js')
 
 
 var createUser  = function(req,res,next){

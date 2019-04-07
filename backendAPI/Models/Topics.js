@@ -1,7 +1,7 @@
 
 
 
-var createTopic = function(req,res,next){
+var CreateTopic = function(req,res,next){
 	var ID      = req.body.ID
 	var Units   = req.body.Units
 	var Level   = req.body.Level
@@ -14,4 +14,4 @@ var createTopic = function(req,res,next){
 	
 }
 
-module.exports = {createTopic}
+module.exports = {CreateTopic}
