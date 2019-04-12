@@ -14,6 +14,7 @@ var Topics          = require('./../Models/Topics.js')
 var routes          = require('./routes.js')
 
 
+//Insert into the tables 
 router.post('/CreateUser',Users.createUser,routes.insertData,routes.sendUserId)
 router.post('/CreateCourseGoals',CourseGoals.CreateCourseGoal,routes.insertData,routes.end)
 router.post('/CreateCourses',Courses.CreateCourses,routes.insertData,routes.end)
@@ -25,8 +26,9 @@ router.post('/CreateGoals',Goals.CreateGoals,routes.insertData,routes.end)
 router.post('/CreateSection',Section.CreateSection,routes.insertData,routes.end)
 router.post('/CreateTopic',Topics.CreateTopic,routes.insertData,routes.end)
 
-
-router.post('/GetUser',Users.GetUserById,routes.query)
+//Get from the inserted diagrams
+router.post('/LoginUser',Users.LoginUser,routes.query)
+router.post('/GetUserById',Users.GetUserById,routes.query)
 router.post('/GetCurriculum',Curriclum.GetCurriculum,routes.query)
 router.post('/GetGoals',Goals.GetGoals,routes.query)
 router.post('/GetSection',Section.GetSection,routes.query)
