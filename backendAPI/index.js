@@ -2,7 +2,12 @@
 var express = require('express') 
 var logger = require('morgan')
 var bodyParser = require('body-parser') 
+
+//Set up the database connection
 var db = require("./db.js") 
+db.initDb(function(db){
+
+})
 
 //Import all of the models needed for this project 
 
@@ -17,9 +22,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'))
 
-/*db.initDb(function(db){
 
-})*/
 
 
 //Routes

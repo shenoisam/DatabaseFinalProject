@@ -11,7 +11,7 @@ CREATE TABLE Person(
 );
 CREATE TABLE Curriculum(
     Name varchar (25) PRIMARY KEY NOT NULL,
-    HeadPerson int NOT NULL,
+    HeadPerson VARCHAR (25) NOT NULL,
     MinimumHours int NOT NULL,
     MaxTopicsCovered INT NOT NULL,
 
@@ -24,7 +24,7 @@ CREATE TABLE Courses(
    CourseNumber        VarChar(25)   NOT NULL,
    CreditHours         INT           NOT NULL, 
    CourseDescription   VARCHAR(45)   NOT NULL, 
-   CONSTRAINT UC_Courses UNIQUE (SubjectCode, CourseNumber),
+   CONSTRAINT UC_Courses UNIQUE (SubjectCode, CourseNumber)
   
 );
 CREATE TABLE CurCourse (

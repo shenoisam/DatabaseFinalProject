@@ -5,9 +5,14 @@ var CreateCurriculum = function (req,res,next){
     var m = req.body.MinimumHours 
     var t = req.body.MaxTopicsCovered 
 	
-	res.locals.values = [[n,h,m,t]]
-	res.locals.sql = "INSERT INTO Curriculum VALUES ?"
+	res.locals.val = [[n,h,m,t]]
+    res.locals.sql = "INSERT INTO Curriculum VALUES ?"
+    next()
 	
 }
 
+
+var getCurriculumInfo = function(req,res,next){
+    res.locals.sql = "SELECT "
+}
 module.exports = {CreateCurriculum}

@@ -31,4 +31,4 @@ function saltHashPassword(userpassword) {
 }
 
 
-module.exports = {saltHashPassword,sha512}
+module.exports = {saltHashPassword,sha512,genRandomString}

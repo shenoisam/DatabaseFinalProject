@@ -4,7 +4,7 @@
     var gi = req.body.GoalsID  
 	
 	res.locals.sql    = "INSERT INTO CourseGoals VALUES ?"
-    res.locals.values = [[cn,gi]]
+    res.locals.val = [[cn,gi]]
 	
 	next()
  }

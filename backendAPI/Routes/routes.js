@@ -12,15 +12,16 @@ var encryption = require(__dirname+'/passwordEncryption')
 
 
 var insertData = function(req,res, next){
-
+   var sql = res.locals.sql 
+   var val = res.locals.val
+  
     _db.query(sql, [val], function (err, result) {
         if (err) throw err;
-           console.log("Number of records inserted: " + result.affectedRows);
-        });
-		
-   //Send a user token for indentification?
-   res.send({})
-	
+        console.log("Number of records inserted: " + result.affectedRows);
+        //Send a user token for indentification?
+        next()
+        }
+   );
 }
 
 
@@ -35,4 +36,15 @@ var query = function(req,res,next){
     })
 }
 
-module.exports = {query,insertData}
+//Send the user id for storage client side
+var sendUserId = function(req,res,next){
+    var id = res.locals.id
+    res.send({id})
+}
+var end = function(req,res,next){
+    res.send({})
+}
+
+
+
+module.exports = {query,insertData,sendUserId,end}

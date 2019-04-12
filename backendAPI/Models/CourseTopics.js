@@ -5,7 +5,7 @@ var CreateCourseTopics = function(req,res,next){
 	var Topic      = req.body.Topic 
 	
 	res.locals.sql    = "INSERT INTO CourseTopics VALUES ?"
-    res.locals.values = [[CourseName,Topic]]
+    res.locals.val = [[CourseName,Topic]]
     
     next()	
 	

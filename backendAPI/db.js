@@ -14,9 +14,9 @@ function initDb(callback) {
         return callback(_db);
     }
     var db = mysql.createConnection({
-        host : 'databasefinal.cwhn9bu30dlm.us-east-2.rds.amazonaws.com',
+        host : 'localhost',
         user : 'DatabaseFinal',
-        password : 'SuwQRgS5Ua',
+        password : 'potato',
         database : 'DatabaseFinal'
      });
      db.connect(function(err) {
