@@ -6,5 +6,11 @@ var CreateSection = function(){
    
    next()
 }
-
-module.exports = {CreateSection}
+var GetSection = function(req,res,next){
+   res.locals.select = "*"
+   res.locals.table = "Section"
+   res.locals.rmStr = "ID = ? AND Semester = ?"
+   res.locals.params = [req.body.ID,req.body.Semester]
+   next()
+}
+module.exports = {CreateSection,GetSection}

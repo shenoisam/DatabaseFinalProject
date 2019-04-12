@@ -9,5 +9,12 @@ var CreateGoals = function(req,res,next){
 	next()
 	
 }
+var GetGoals = function(req,res,next){
+   res.locals.select = "*"
+   res.locals.table = "Goals"
+   res.locals.rmStr = "ID = ?"
+   res.locals.params = [req.body.ID]
+   next()
+}
 
-module.exports = {CreateGoals}
+module.exports = {CreateGoals,GetGoals}

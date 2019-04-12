@@ -17,10 +17,23 @@ var createUser  = function(req,res,next){
 	
 	next()
 }
-var findUser = function(req,res,next){
-   sql = "SELECT * FROM Person WHERE "	
+var LoginUser = function(req,res,next){
+   res.locals.select = "*"
+   res.locals.table = "Person"
+   res.locals.rmStr = "WHERE Email = ? AND Password = ?"
+   res.locals.params = [req.body.Email, req.body.Password]
+   next()
+
 	
 }
+var GetUserById = function (req,res,next){
+   res.locals.select = "*"
+   res.locals.table = "Person"
+   res.locals.rmStr = "ID = ?"
+   res.locals.params = [req.body.ID]
+   
+   next() 
 
+}
 
-module.exports = {createUser}
+module.exports = {createUser,GetUserById,LoginUser}

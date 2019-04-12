@@ -13,5 +13,12 @@ var CreateTopic = function(req,res,next){
 	next()
 	
 }
+var GetTopic = function(req,res,next){
+	res.locals.select = "*"
+	res.locals.table = "Topics"
+	res.locals.rmStr = "ID = ?"
+	res.locals.params = [req.body.ID]
+	next()
+}
 
-module.exports = {CreateTopic}
+module.exports = {CreateTopic,GetTopic}

@@ -12,7 +12,11 @@ var CreateCurriculum = function (req,res,next){
 }
 
 
-var getCurriculumInfo = function(req,res,next){
-    res.locals.sql = "SELECT "
+var GetCurriculum = function(req,res,next){
+    res.locals.sql = "*"
+    res.locals.table = "Curriculum"
+    res.locals.rmStr = " Name = ?"
+    res.locals.params = [req.body.Name]
+    next();
 }
-module.exports = {CreateCurriculum}
+module.exports = {CreateCurriculum,GetCurriculum}

@@ -26,9 +26,9 @@ var insertData = function(req,res, next){
 
 
 var query = function(req,res,next){
-    var t = req.body.Table 
-    str = "SELECT * FROM ?"
-    _db.query(str,t,function(err,r2){
+    var str = "SELECT " + res.locals.select + " FROM " + res.locals.table + " WHERE " + res.locals.rmStr
+    var params = res.locals.params
+    _db.query(str,params, function(err,r2){
         if(err){
             console.log(err)
         }

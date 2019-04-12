@@ -12,5 +12,12 @@ var CreateCourses = function(req,res,next){
    
 	
 }
+var GetCourses = function(req,res,next){
+   res.locals.select = "*"
+	res.locals.table = "Courses"
+	res.locals.rmStr = "CourseName = ?"
+	res.locals.params = [req.body.CourseName]
+	next()
+}
 
-module.exports = {CreateCourses}
+module.exports = {CreateCourses,GetCourses}

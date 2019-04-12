@@ -10,4 +10,11 @@ var CreateCourseTopics = function(req,res,next){
     next()	
 	
 }
-module.exports = {CreateCourseTopics}
+var GetCourseTopics = function(req,res,next){
+	res.locals.select = "*"
+	res.locals.table = "CourseTopic"
+	res.locals.rmStr = "CourseName = ? AND Topic = ?"
+	res.locals.params = [req.body.CourseName,req.body.Topic]
+	next()
+}
+module.exports = {CreateCourseTopics,GetCourseTopics }

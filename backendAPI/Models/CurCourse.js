@@ -9,5 +9,12 @@ var CreateCurCourse = function(req,res,next){
     next()	
 	
 }
+var GetCurCourses = function(req,res,next){
+	res.locals.select = "*"
+	res.locals.table = "CurCourses"
+	res.locals.rmStr = "Curriculum = ? AND CourseName = ?"
+	res.locals.params = [req.body.Curriculum, req.body.CourseName]
+	next()
+}
 
-module.exports = {CreateCurCourse}
+module.exports = {CreateCurCourse,GetCurCourses}
