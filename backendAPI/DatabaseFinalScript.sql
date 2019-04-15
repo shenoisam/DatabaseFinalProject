@@ -1,3 +1,4 @@
+
 DROP SCHEMA DatabaseFinal;
 CREATE SCHEMA DatabaseFinal;
 Use DatabaseFinal;
