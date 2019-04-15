@@ -35,6 +35,18 @@ var query = function(req,res,next){
         res.send({r2})
     })
 }
+var update = function (req,res,next){
+   var str = "UPDATE " + res.locals.table + " SET " + res.locals.att + " WHERE " + res.locals.rmStr
+   var params = res.locals.params
+
+   _db.query(str,params, function(err,r2){
+    if(err){
+        console.log(err)
+    }
+    res.send({r2})
+})
+
+}
 
 //Send the user id for storage client side
 var sendUserId = function(req,res,next){
@@ -47,4 +59,4 @@ var end = function(req,res,next){
 
 
 
-module.exports = {query,insertData,sendUserId,end}
+module.exports = {query,insertData,sendUserId,end,update}

@@ -39,10 +39,10 @@ CREATE TABLE CurCourse (
 );
 CREATE TABLE Topics(
   ID            VARCHAR (25) PRIMARY KEY,
-  Units         VarChar (25) NOT NULL, 
-  Level         INT          CHECK (Level>0 AND Level < 4),
+  Units         Decimal(20,1)NOT NULL, 
+  Level         INT          NOT NULL CHECK (Level>0 AND Level < 4),
   Name          VARCHAR (25) NOT NULL, 
-  SubjectArea   VARCHAR (25)
+  SubjectArea   VARCHAR (25) NOT NULL
 );
 CREATE TABLE Goals(
   ID          VarChar (25) PRIMARY KEY,
@@ -67,7 +67,7 @@ CREATE TABLE Section(
    Comment1   VARCHAR(45)  NOT NULL, 
    Comment2   VARCHAR(45)  NOT NULL,
    CourseName VARCHAR(25)  NOT NULL, 
-   APlus      INT         , 
+   APlus      INT          , 
    A          INT          , 
    AMinus     INT          , 
    BPlus      INT          , 
@@ -82,6 +82,21 @@ CREATE TABLE Section(
    F          INT          ,
    W          INT          , 
    I          INT          ,
+   GAPlus     INT          , 
+   GA         INT          , 
+   GAMinus    INT          , 
+   GBPlus     INT          , 
+   GB         INT          , 
+   GBMinus    INT          , 
+   GCPlus     INT          , 
+   GC         INT          , 
+   GCMinus    INT          , 
+   GDPlus     INT          , 
+   GD         INT          , 
+   GDMinus    INT          , 
+   GF         INT          ,
+   GW         INT          , 
+   GI         INT          ,
    
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
    CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester) 

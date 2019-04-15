@@ -37,8 +37,15 @@ router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
 router.post('/GetCourses',Courses.GetCourses,routes.query)
 router.post('/GetCourseTopics',CourseTopics.GetCourseTopics,routes.query)
 router.post('/GetCurCourse',CurCourse.GetCurCourses,routes.query)
-
 router.post('/GetCurriculumTopics',CurriclumTopics.GetCurriculumTopics,routes.query)
+
+//Update all of the different types of data 
+router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)
+router.post('/UpdateGoals',Goals.UpdateGoals,routes.update)
+router.post('/UpdateSection',Section.UpdateSection,routes.update)
+router.post('/UpdateTopic',Topics.UpdateTopics,routes.update)
+router.post('/UpdateCourses',Courses.UpdateCourses,routes.update)
+
 
 
 module.exports = router

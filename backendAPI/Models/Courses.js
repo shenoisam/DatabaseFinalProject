@@ -19,5 +19,31 @@ var GetCourses = function(req,res,next){
 	res.locals.params = [req.body.CourseName]
 	next()
 }
+var UpdateCourses = function(req,res,next){
+   res.locals.table = "Courses"
+   
+   //WHEN NAMING THESE ATTRIBUTES MAKE SURE TO USE Attribute[] AND Values[] FOR EACH OF THE FIELDS
+   var a = req.body.Attribute
+   var val = req.body.Values
 
-module.exports = {CreateCourses,GetCourses}
+
+   var uString  = ""
+   var params = []
+   if (a.length == val.length){
+       for(var i =0; i<a.length; i++){
+           uString  = uString + "?  = ? " 
+           params.append(a[i]) 
+           params.append(val[i]) 
+       }
+       res.locals.att = uString
+       res.locals.rmStr = " CourseName = ?"
+       params.append(req.body.ID)
+       res.locals.params = params
+       next() 
+
+   }else{
+       res.send({err: "ERROR! Attributes and Lengths don't match up"})
+   }
+}
+
+module.exports = {CreateCourses,GetCourses,UpdateCourses}
