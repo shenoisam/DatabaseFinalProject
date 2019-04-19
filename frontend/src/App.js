@@ -3,15 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import {NavBar} from './common/navbar.js'
 
-class App extends Component {
+class Appp extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="Appp">
       <NavBar/>
-      
       </div>
     );
   }
 }
 
-export default App;
+export default Appp;
