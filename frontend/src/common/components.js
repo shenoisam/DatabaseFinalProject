@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 import ReactSelect from 'react-select';
 import * as ReduxForm from 'redux-form';
-import * as Utils from '~/alloy/utils/core-utils';
-import * as Validation from '~/utils/validation';
+import * as Utils from './../alloy/utils/core-utils';
+import * as Validation from './../alloy/utils/validation';
 
 function buildReduxValidator(validator, props) {
 	return value => validator.spec(value) ? undefined : validator.error(props, value);
@@ -195,7 +195,13 @@ export class CurriculumPage extends React.Component {
 	render() {
 		return (
 			<div>
-
+				<div className="col-4">
+				</div>
+				<div className="col-4">
+					list of all curriculum
+				</div>
+				<div className="col-4">
+				</div>
 			</div>
 		);
 	}

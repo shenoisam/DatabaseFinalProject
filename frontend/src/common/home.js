@@ -16,6 +16,7 @@ class Home extends React.Component {
             </NavBar>
             This is the home page!
 
+
         </Router>
         );
         

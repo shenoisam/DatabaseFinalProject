@@ -2,7 +2,7 @@ import React from 'react';
 import Favicon from 'react-favicon';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {Register, Login} from '../user/register.js'
-import {CurriculumPage, CoursePage, SectionPage, SpecificSectionPage} from '/Users/benjaminmilligan/Desktop/DatabaseFinal/DatabaseFinalProject/frontend/src/common/components.js';
+import {CurriculumPage, CoursePage, SectionPage, SpecificSectionPage} from './components.js';
 
 class NavBar extends React.Component {
 	constructor(props) {
@@ -14,7 +14,7 @@ class NavBar extends React.Component {
       <Router>
   			<div>
   				<nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
-  					<a className="navbar-brand" href="#">Database Final</a>
+  					<a className="navbar-brand" href="/">Database Final</a>
   					<button className="navbar-toggler" type="button" data-toggle="collapse"
   							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
   							aria-expanded="false" aria-label="Toggle navigation">
@@ -23,23 +23,21 @@ class NavBar extends React.Component {
 
   					<div className="collapse navbar-collapse" id="navbarSupportedContent">
   						<ul className="navbar-nav mr-auto">
-  							<li className="nav-item active">
+  							{/* <li className="nav-item active">
   								<a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-  							</li>
+  							</li> */}
 
-  							<li className="nav-item">
-  								<a className="nav-link" href="#/">Create User</a>
-  							</li>
-                <li className="nav-item">
-  								<a className="nav-link" href="#/">Courses</a>
+                			{/* <li className="nav-item">
+  								<a className="nav-link" href="/course">Courses</a>
   							</li>
   							<li className="nav-item">
-  								<a className="nav-link" href="#/">Sections</a>
-  							</li>
+  								<a className="nav-link" href="/section">Sections</a>
+  							</li> */}
   						</ul>
 
   						<ul className="navbar-nav" style={{float:'right'}}>
 
+							{/* if theyre logged in lets display their username */}
   							<li className="nav-item">
   								<a className="nav-link" href="/register">Register</a>
   							</li>
@@ -57,9 +55,6 @@ class NavBar extends React.Component {
   				</nav>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-		  <Route path="/course" component={CoursePage} />
-		  <Route path="/section" component={SectionPage} />
-		  <Route path="/specific-section" component={SpecificSectionPage} />
 
   			</div>
       </Router>
