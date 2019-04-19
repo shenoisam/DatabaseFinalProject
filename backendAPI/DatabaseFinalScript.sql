@@ -31,6 +31,7 @@ CREATE TABLE Courses(
 CREATE TABLE CurCourse (
    Curriculum VARCHAR (25) NOT NULL,
    CourseName VARCHAR (25) NOT NULL,
+   Required   bit          NOT NULL, 
    
    FOREIGN KEY (Curriculum)  REFERENCES Curriculum(Name),
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
@@ -62,7 +63,6 @@ CREATE TABLE Section(
    CourseName VARCHAR(25)  NOT NULL, 
    APlus      INT          , 
    A          INT          , 
-   AMinus     INT          , 
    BPlus      INT          , 
    B          INT          , 
    BMinus     INT          , 
