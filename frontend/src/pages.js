@@ -51,3 +51,48 @@ export class LoginPage extends React.Component {
 		);
 	}
 }
+
+export class CreateUser extends React.Component {
+	render() {
+		return (
+			<div className="container padded">
+				<div className="row">
+					<div className="col-12">
+						<h2>Create a User</h2>
+						<hr />
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
+export class Courses extends React.Component {
+	render() {
+		return (
+			<div className="container padded">
+				<div className="row">
+					<div className="col-12">
+						<h2>Courses</h2>
+						<hr />
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
+export class Sections extends React.Component {
+	render() {
+		return (
+			<div className="container padded">
+				<div className="row">
+					<div className="col-12">
+						<h2>Sections</h2>
+						<hr />
+					</div>
+				</div>
+			</div>
+		);
+	}
+}

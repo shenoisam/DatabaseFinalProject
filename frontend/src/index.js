@@ -4,10 +4,16 @@ import './index.css';
 import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
-import {NavBar} from './common/navbar.js'
-import {Register, Login} from './user/register.js'
+import {NavBar} from './common/navbar.js';
+import createLogger from 'redux-logger';
+import {Register, Login} from './user/register.js';
 import logo from './logo.svg';
-import * as Pages from './pages.js'
+import * as Pages from './pages.js';
+import Cookies from 'universal-cookie';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
+import * as Utils from './alloy/utils/core-utils';
 
 const PrimaryLayout = () => (
   <div className="primary-layout">
@@ -18,6 +24,9 @@ const PrimaryLayout = () => (
     <Route path="/" exact component={Pages.Home} />
     <Route path="/register" exact component={Pages.RegisterPage} />
     <Route path="/login" component={Pages.LoginPage} />
+    <Route path="/create" exact component={Pages.CreateUser} />
+    <Route path="/courses" exact component={Pages.Courses} />
+    <Route path="/sections" exact component={Pages.Sections} />
     </main>
   </div>
 )

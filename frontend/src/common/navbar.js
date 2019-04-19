@@ -25,13 +25,13 @@ class NavBar extends React.Component {
   							</li>
 
   							<li className="nav-item">
-  								<a className="nav-link" href="#/">Create User</a>
+  								<a className="nav-link" href="/create">Create User</a>
   							</li>
                 <li className="nav-item">
-  								<a className="nav-link" href="#/">Courses</a>
+  								<a className="nav-link" href="/courses">Courses</a>
   							</li>
   							<li className="nav-item">
-  								<a className="nav-link" href="#/">Sections</a>
+  								<a className="nav-link" href="/sections">Sections</a>
   							</li>
   						</ul>
 
