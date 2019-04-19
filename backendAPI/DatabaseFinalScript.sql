@@ -53,14 +53,6 @@ CREATE TABLE Goals(
   FOREIGN KEY (Curriculum)  REFERENCES Curriculum(Name)
 );
 
-CREATE TABLE CourseTopic(
-   CourseName VARCHAR (25) NOT NULL,
-   Topic      VARCHAR(25)  NOT NULL,
-   
-   FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
-   FOREIGN KEY (Topic)       REFERENCES Courses(CourseName),
-   CONSTRAINT CourseTopics_pk PRIMARY KEY (CourseName, Topic)
-);
 CREATE TABLE Section(
    ID         INT          NOT NULL, Check(ID>99 AND ID < 1000),
    Semester   VARCHAR(25)  NOT NULL, 
@@ -83,6 +75,16 @@ CREATE TABLE Section(
    F          INT          ,
    W          INT          , 
    I          INT          ,
+   
+   
+   FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
+   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester) 
+   
+);
+CREATE TABLE SectionGoal(
+   ID         INT          NOT NULL, Check(ID>99 AND ID < 1000),
+   Semester   VARCHAR(25)  NOT NULL, 
+   GoalsID    VarChar(25)  NOT NULL, 
    GAPlus     INT          , 
    GA         INT          , 
    GAMinus    INT          , 
@@ -98,10 +100,11 @@ CREATE TABLE Section(
    GF         INT          ,
    GW         INT          , 
    GI         INT          ,
-   
-   FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
-   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester) 
-   
+
+   FOREIGN KEY (GoalsID)       REFERENCES Goals(ID),
+   FOREIGN KEY (ID, Semester)  REFERENCES Section(ID, Semester) ,
+   CONSTRAINT SectionGoals_pk PRIMARY KEY (GoalsID, ID, Semester)
+
 );
 CREATE TABLE CourseGoals(
    CourseName VARCHAR(25)  NOT NULL, 
