@@ -2,6 +2,7 @@ import React from 'react';
 import Favicon from 'react-favicon';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {Register, Login} from '../user/register.js'
+import {CurriculumPage, CoursePage, SectionPage, SpecificSectionPage} from '/Users/benjaminmilligan/Desktop/DatabaseFinal/DatabaseFinalProject/frontend/src/common/components.js';
 
 class NavBar extends React.Component {
 	constructor(props) {
@@ -56,6 +57,9 @@ class NavBar extends React.Component {
   				</nav>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+		  <Route path="/course" component={CoursePage} />
+		  <Route path="/section" component={SectionPage} />
+		  <Route path="/specific-section" component={SpecificSectionPage} />
 
   			</div>
       </Router>

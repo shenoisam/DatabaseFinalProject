@@ -188,3 +188,129 @@ export class Button extends React.Component {
 		return <button disabled={disabled} className={className} {...props}>{buttonText}</button>;
 	}
 }
+
+
+// HERE IS OUR 4 MAIN PAGES
+export class CurriculumPage extends React.Component {
+	render() {
+		return (
+			<div>
+
+			</div>
+		);
+	}
+}
+
+export class CoursePage extends React.Component {
+	render() {
+		return (
+			<div>
+
+			</div>
+		);
+	}
+}
+
+export class SectionPage extends React.Component {
+	render() {
+		return (
+			<div>
+
+			</div>
+		);
+	}
+}
+
+export class SpecificSectionPage extends React.Component {
+	render() {
+		return (
+			<div>
+
+			</div>
+		);
+	}
+}
+
+
+
+
+export class ListCurriculum extends React.Component {
+	render() {
+		return (
+			<div>
+				
+			</div>
+		);
+	}
+}
+
+export class ListTopics extends React.Component {
+	render() {
+		return (
+			<div>
+				
+			</div>
+		);
+	}
+}
+
+export class ListCourses extends React.Component {
+	render() {
+		return (
+			<div>
+				
+			</div>
+		);
+	}
+}
+
+export class EditTopics extends React.Component {
+	render() {
+		return (
+			<div>
+				
+			</div>
+		);
+	}
+}
+
+export class EditCourse extends React.Component {
+	render() {
+		return (
+			<div>
+				
+			</div>
+		);
+	}
+}
+
+export class EditCurriculum extends React.Component {
+	render() {
+		return (
+			<div>
+				
+			</div>
+		);
+	}
+}
+
+export class EditGoals extends React.Component {
+	render() {
+		return (
+			<div>
+
+			</div>
+		);
+	}
+}
+
+export class ListComments extends React.Component {
+	render() {
+		return (
+			<div>
+
+			</div>
+		);
+	}
+}
+
