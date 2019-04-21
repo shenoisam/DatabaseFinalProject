@@ -15,23 +15,15 @@ CREATE TABLE Curriculum(
     HeadPerson       VARCHAR (25) NOT NULL,
     MinimumHours     int NOT NULL,
     MaxTopicsCovered INT NOT NULL,
-<<<<<<< HEAD
-    MinGoalValid     INT NOT NULL,
-=======
     GoalCredHours    INT NOT NULL,
 
->>>>>>> db65492af7c3f20d47d3cc7af7dcb49261800dab
     FOREIGN KEY (HeadPerson)  REFERENCES Person(ID)
     
 );
 CREATE TABLE Courses(
    CourseName          Varchar (25)  NOT NULL Primary Key, 
    SubjectCode         VarChar (25)  Not NULL, 
-<<<<<<< HEAD
    CourseNumber        INT           NOT NULL ,
-=======
-   CourseNumber        int   NOT NULL,
->>>>>>> 2b9ded38f95894f2c12565fd5b7e9e36cd0cfb51
    CreditHours         INT           NOT NULL, 
    CourseDescription   VARCHAR(45)   NOT NULL, 
    CONSTRAINT UC_Courses UNIQUE (SubjectCode, CourseNumber)
