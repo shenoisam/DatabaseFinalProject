@@ -22,7 +22,7 @@ CREATE TABLE Curriculum(
 CREATE TABLE Courses(
    CourseName          Varchar (25)  NOT NULL Primary Key, 
    SubjectCode         VarChar (25)  Not NULL, 
-   CourseNumber        VarChar(25)   NOT NULL,
+   CourseNumber        int   NOT NULL,
    CreditHours         INT           NOT NULL, 
    CourseDescription   VARCHAR(45)   NOT NULL, 
    CONSTRAINT UC_Courses UNIQUE (SubjectCode, CourseNumber)
