@@ -15,7 +15,7 @@ CREATE TABLE Curriculum(
     HeadPerson VARCHAR (25) NOT NULL,
     MinimumHours int NOT NULL,
     MaxTopicsCovered INT NOT NULL,
-
+    MinGoalValid     INT NOT NULL,
     FOREIGN KEY (HeadPerson)  REFERENCES Person(ID)
     
 );
