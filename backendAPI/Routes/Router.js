@@ -47,6 +47,9 @@ router.post('/UpdateTopic',Topics.UpdateTopics,routes.update)
 router.post('/UpdateCourses',Courses.UpdateCourses,routes.update)
 
 
-
+//Other stuff 
+router.post('/CurriculumRequiredCourses',CurCourse.GetRequiredCourses,routes.query)
+router.post('/CurriculumOptionalCourses',CurCourse.GetOptionalCourses,routes.query)
+router.post('/GoalValid',)
 
 module.exports = router

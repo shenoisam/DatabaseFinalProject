@@ -51,7 +51,7 @@ var UpdateCurriculum = function(req,res,next){
 var GoalValid = function(req,res,next){
 	res.locals.sql = "Goals.ID"
     res.locals.table = "Goals,Curriculum"
-    res.locals.rmStr = " Goals.Curriculum = Curriculum.Name AND Curriculum.Name = ? AND Curriculum.MinGoalValid > (Select Sum(Course.CreditHours) FROM Course, CourseGoals WHERE Courses.Name = CourseGoals.CourseName AND CourseGoals.GoalsId = Goals.Id"
+    res.locals.rmStr = " Goals.Curriculum = Curriculum.Name AND Curriculum.Name = ? AND Curriculum.GoalCredHours > (Select Sum(Course.CreditHours) FROM Course, CourseGoals WHERE Courses.Name = CourseGoals.CourseName AND CourseGoals.GoalsId = Goals.Id"
     res.locals.params = [req.body.Name]
 	next()
 	
