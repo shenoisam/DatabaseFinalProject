@@ -11,10 +11,11 @@ CREATE TABLE Person(
    Email     VARCHAR (25) NOT NULL UNIQUE 
 );
 CREATE TABLE Curriculum(
-    Name varchar (25) PRIMARY KEY NOT NULL,
-    HeadPerson VARCHAR (25) NOT NULL,
-    MinimumHours int NOT NULL,
+    Name             varchar (25) PRIMARY KEY NOT NULL,
+    HeadPerson       VARCHAR (25) NOT NULL,
+    MinimumHours     int NOT NULL,
     MaxTopicsCovered INT NOT NULL,
+    GoalCredHours    INT NOT NULL,
 
     FOREIGN KEY (HeadPerson)  REFERENCES Person(ID)
     
@@ -22,7 +23,7 @@ CREATE TABLE Curriculum(
 CREATE TABLE Courses(
    CourseName          Varchar (25)  NOT NULL Primary Key, 
    SubjectCode         VarChar (25)  Not NULL, 
-   CourseNumber        VarChar(25)   NOT NULL,
+   CourseNumber        INT           NOT NULL ,
    CreditHours         INT           NOT NULL, 
    CourseDescription   VARCHAR(45)   NOT NULL, 
    CONSTRAINT UC_Courses UNIQUE (SubjectCode, CourseNumber)
@@ -31,6 +32,7 @@ CREATE TABLE Courses(
 CREATE TABLE CurCourse (
    Curriculum VARCHAR (25) NOT NULL,
    CourseName VARCHAR (25) NOT NULL,
+   Required   bit          NOT NULL, 
    
    FOREIGN KEY (Curriculum)  REFERENCES Curriculum(Name),
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
@@ -62,7 +64,6 @@ CREATE TABLE Section(
    CourseName VARCHAR(25)  NOT NULL, 
    APlus      INT          , 
    A          INT          , 
-   AMinus     INT          , 
    BPlus      INT          , 
    B          INT          , 
    BMinus     INT          , 

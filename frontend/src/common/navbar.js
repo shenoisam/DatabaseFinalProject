@@ -1,6 +1,8 @@
 import React from 'react';
 import Favicon from 'react-favicon';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {Register, Login} from '../user/register.js'
+import {CurriculumPage, CoursePage, SectionPage, SpecificSectionPage} from './components.js';
 
 class NavBar extends React.Component {
 	constructor(props) {
@@ -37,6 +39,7 @@ class NavBar extends React.Component {
 
   						<ul className="navbar-nav" style={{float:'right'}}>
 
+							{/* if theyre logged in lets display their username */}
   							<li className="nav-item">
   								<a className="nav-link" href="/register">Register</a>
   							</li>
