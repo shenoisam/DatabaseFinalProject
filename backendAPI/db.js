@@ -6,7 +6,7 @@
 var mysql = require('mysql');
 var assert = require('assert')
 
-let _db; 
+let _db;
 
 function initDb(callback) {
     if (_db) {
@@ -23,10 +23,10 @@ function initDb(callback) {
         if (err) throw err;
         console.log("Connected!");
       });
-    
-     _db = db 
+
+     _db = db
     return callback(_db);
-	
+
 };
 
 function getDb() {
@@ -35,6 +35,6 @@ function getDb() {
 }
 
 module.exports = {
-    getDb, 
+    getDb,
     initDb
 }
