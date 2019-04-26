@@ -31,6 +31,7 @@ var query = function(req,res,next){
     _db.query(str,params, function(err,r2){
         if(err){
             console.log(err)
+            res.send({err:"Error with your query"})
         }
         res.send({r2})
     })
