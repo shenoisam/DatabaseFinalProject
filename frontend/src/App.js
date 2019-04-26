@@ -5,7 +5,7 @@ import {NavBar} from './common/navbar.js'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {CurriculumPage, CoursePage, SectionPage, SpecificSectionPage} from './common/components.js';
 
-class App extends Component {
+class Appp extends Component {
   render() {
     return (
       <Router>
@@ -23,4 +23,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Appp;

@@ -11,7 +11,6 @@ class NavBar extends React.Component {
 
 	render() {
 		return (
-      <Router>
   			<div>
   				<nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
   					<a className="navbar-brand" href="/">Database Final</a>
@@ -23,16 +22,19 @@ class NavBar extends React.Component {
 
   					<div className="collapse navbar-collapse" id="navbarSupportedContent">
   						<ul className="navbar-nav mr-auto">
-  							{/* <li className="nav-item active">
-  								<a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-  							</li> */}
+  							<li className="nav-item active">
+  								<a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+  							</li>
 
-                			{/* <li className="nav-item">
-  								<a className="nav-link" href="/course">Courses</a>
+  							<li className="nav-item">
+  								<a className="nav-link" href="/create">Create User</a>
+  							</li>
+                <li className="nav-item">
+  								<a className="nav-link" href="/courses">Courses</a>
   							</li>
   							<li className="nav-item">
-  								<a className="nav-link" href="/section">Sections</a>
-  							</li> */}
+  								<a className="nav-link" href="/sections">Sections</a>
+  							</li>
   						</ul>
 
   						<ul className="navbar-nav" style={{float:'right'}}>
@@ -53,11 +55,7 @@ class NavBar extends React.Component {
   						</ul>
   					</div>
   				</nav>
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-
   			</div>
-      </Router>
 		);
 	}
 }
