@@ -2,6 +2,7 @@
 var express = require('express') 
 var logger = require('morgan')
 var bodyParser = require('body-parser') 
+var cors = require ('cors');
 
 //Set up the database connection
 var db = require("./db.js") 
@@ -22,7 +23,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'))
 
-
+app.use(cors());
 
 
 //Routes
