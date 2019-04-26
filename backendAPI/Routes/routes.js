@@ -39,13 +39,17 @@ var query = function(req,res,next){
 var update = function (req,res,next){
    var str = "UPDATE " + res.locals.table + " SET " + res.locals.att + " WHERE " + res.locals.rmStr
    var params = res.locals.params
-
-   _db.query(str,params, function(err,r2){
-    if(err){
-        console.log(err)
-    }
-    res.send({r2})
-})
+   try{
+    _db.query(str,params, function(err,r2){
+        if(err){
+            console.log(err)
+        }
+        res.send({r2})
+    })
+   }catch(err){
+       res.send({err: "Incorrect data"})
+   }
+   
 
 }
 
