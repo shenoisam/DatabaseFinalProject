@@ -29,6 +29,10 @@ function initDb(callback) {
 	
 };
 
+function closeConnection(){
+    _db.end()
+}
+
 function getDb() {
     assert.ok(_db, "Db has not been initialized. Please called init first.");
     return _db;
