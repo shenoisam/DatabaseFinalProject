@@ -94,12 +94,22 @@ export class CurriculumPage extends React.Component {
 	render() {
 		return (
 			<div>
-				<div className="col-4">
-				</div>
-				<div className="col-4">
-					list of all curriculum
-				</div>
-				<div className="col-4">
+				<div className="row">
+					<div className="col-4">
+						<div className="card">
+							courses
+						</div>
+					</div>
+					<div className="col-4">
+						<div className="card">
+							topics
+						</div>
+					</div>
+					<div className="col-4">
+						<div className="card">
+							goals
+						</div>
+					</div>
 				</div>
 			</div>
 		);
