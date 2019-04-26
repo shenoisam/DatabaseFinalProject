@@ -27,6 +27,8 @@ const PrimaryLayout = () => (
     <Route path="/create" exact component={Pages.CreateUser} />
     <Route path="/courses" exact component={Pages.Courses} />
     <Route path="/sections" exact component={Pages.Sections} />
+    <Route path="/curriculum" exact component={Pages.CurriculumPage} />
+    
     </main>
   </div>
 )
