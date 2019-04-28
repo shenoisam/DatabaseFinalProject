@@ -17,7 +17,7 @@ const reducers = {
 const reducer = combineReducers(reducers);
 
 const store = createStore(reducer);
-sessionService.initSessionService(store);
+sessionService.initSessionService(store, { driver: 'COOKIES' });
 
 class Register extends React.Component {
 	constructor(props) {
@@ -31,6 +31,8 @@ class Register extends React.Component {
 			fName:'',
 			lName:''
     }
+
+		 sessionService.loadSession().then(currentSession => console.log(currentSession)).catch(err => console.log(err)) 
 	}
 
 	handleInputChange(event) {
@@ -56,10 +58,6 @@ class Register extends React.Component {
 
 		console.log(parsed);
 		sessionService.saveSession(parsed);
-
-		loadSession
-		.then(currentSession => console.log(currentSession))
-		.catch(err => console.log(err))
 
 		this.state.id = parsed;
 		this.setState(this.state);
