@@ -29,12 +29,23 @@ function initDb(callback) {
 
 };
 
+function closeConnection(){
+    _db.end()
+}
+
 function getDb() {
     assert.ok(_db, "Db has not been initialized. Please called init first.");
     return _db;
 }
 
 module.exports = {
+<<<<<<< HEAD
     getDb,
     initDb
 }
+=======
+    getDb, 
+    initDb,
+    closeConnection
+}
+>>>>>>> 1c81fbdbab783970fe0a2fa7e767caf32975932c

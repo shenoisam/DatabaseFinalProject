@@ -10,4 +10,8 @@ How to run this project
       - Run npm start on either one of the websites to start up the websites.
       - You must have the backend website running in order for the frontend website to work 
 
+TODO
+      - If incorrect query, server shouldn't crash 
+      - 
+
 
