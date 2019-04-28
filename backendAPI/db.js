@@ -40,5 +40,6 @@ function getDb() {
 
 module.exports = {
     getDb, 
-    initDb
+    initDb,
+    closeConnection
 }

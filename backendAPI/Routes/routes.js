@@ -14,14 +14,20 @@ var encryption = require(__dirname+'/passwordEncryption')
 var insertData = function(req,res, next){
    var sql = res.locals.sql 
    var val = res.locals.val
-  
-    _db.query(sql, [val], function (err, result) {
-        if (err) throw err;
-        console.log("Number of records inserted: " + result.affectedRows);
-        //Send a user token for indentification?
-        next()
+   console.log("Hello World")
+
+    _db.query(sql,val, function(err,r2){
+        
+        if(err){
+            db.closeConnection()
+            db.initDb(function(db){})
+            res.send({err: "Incorrect data"})
+        }else {
+            next()
         }
-   );
+    
+    })
+   
 }
 
 
@@ -30,25 +36,30 @@ var query = function(req,res,next){
     var params = res.locals.params
     _db.query(str,params, function(err,r2){
         if(err){
-            console.log(err)
-            res.send({err:"Error with your query"})
+            db.closeConnection()
+            db.initDb(function(db){})
+            res.send({err: "Incorrect data"})
+        }else {
+            res.send({r2})
         }
-        res.send({r2})
+     
     })
 }
 var update = function (req,res,next){
    var str = "UPDATE " + res.locals.table + " SET " + res.locals.att + " WHERE " + res.locals.rmStr
    var params = res.locals.params
-   try{
+
     _db.query(str,params, function(err,r2){
         if(err){
-            console.log(err)
+            db.closeConnection()
+            db.initDb(function(db){})
+            res.send({err: "Incorrect data"})
+        }else {
+            res.send({r2})
         }
-        res.send({r2})
+     
     })
-   }catch(err){
-       res.send({err: "Incorrect data"})
-   }
+
    
 
 }
