@@ -39,13 +39,7 @@ function getDb() {
 }
 
 module.exports = {
-<<<<<<< HEAD
     getDb,
-    initDb
-}
-=======
-    getDb, 
     initDb,
     closeConnection
 }
->>>>>>> 1c81fbdbab783970fe0a2fa7e767caf32975932c
