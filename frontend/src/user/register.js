@@ -47,7 +47,6 @@ class Register extends React.Component {
   // When the form is being submitted
 	async onSubmit (event) {
 		event.preventDefault();
-
 		const parsed = await ky.post('http://localhost:8888/CreateUser',{json: {
 			Email:this.state.email,
 			Password:this.state.password,
@@ -59,6 +58,7 @@ class Register extends React.Component {
 			sessionService.saveSession(parsed);
 			this.state.id = parsed;
 			this.setState(this.state);
+			window.location.reload();
 		}
 	};
 
@@ -138,14 +138,11 @@ class Login extends React.Component {
 			Password:this.state.password,
 		}}).json();
 
-		console.log(parsed.r2[0]);
-		console.log(this.state.password);
-		console.log(this.state.email);
-
 		if(parsed.r2[0]){
 			sessionService.saveSession(parsed.r2[0].ID);
 			this.state.id = parsed;
 			this.setState(this.state);
+			window.location.reload();
 		}
 	};
 

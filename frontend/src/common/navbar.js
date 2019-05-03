@@ -7,6 +7,7 @@ import { combineReducers } from 'redux';
 import { sessionReducer } from 'redux-react-session';
 import { sessionService } from 'redux-react-session';
 import {Redirect} from 'react-router-dom';
+import ky from 'ky';
 
 const reducers = {
 	session: sessionReducer
@@ -20,13 +21,23 @@ class NavBar extends React.Component {
 		super(props);
 		this.state = {
       id:'',
+			fName:'',
+			lName:'',
     }
 	}
 
-	componentDidMount(){
-		sessionService.loadSession().then(curr => {
+	async componentDidMount(){
+		sessionService.loadSession().then(async curr => {
 			this.state.id = curr;
 			this.setState(this.state);
+			const parsed = await ky.post('http://localhost:8888/GetUserById',{json: {
+				ID:this.state.id,
+			}}).json();
+			this.state.fName = parsed.r2[0].FirstName;
+			this.state.lName = parsed.r2[0].LastName;
+			this.setState(this.state);
+			console.log(parsed);
+
 		}).catch(err =>
 			console.log(err)
 		);
@@ -43,6 +54,7 @@ class NavBar extends React.Component {
 		);
 		this.state.id = '';
 		this.setState(this.state);
+		window.location.reload();
 		return ;
 	};
 
@@ -75,6 +87,9 @@ class NavBar extends React.Component {
 							</ul>
 
 							<ul className="navbar-nav" style={{float:'right'}}>
+								<li className="nav-item">
+									<a className="nav-link" >Welcome, {this.state.fName} {this.state.lName} </a>
+								</li>
 								<li className="nav-item">
 									<a className="nav-link" onClick={this.LogoutClick} > Log Out</a>
 								</li>
