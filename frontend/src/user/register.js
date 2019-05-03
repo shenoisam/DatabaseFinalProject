@@ -57,14 +57,17 @@ class Register extends React.Component {
 			LastName:this.state.lName,
 		}}).json();
 
-		console.log(parsed);
-		sessionService.saveSession(parsed);
-
-		this.state.id = parsed;
-		this.setState(this.state);
+		if(!parsed.err){
+			sessionService.saveSession(parsed);
+			this.state.id = parsed;
+			this.setState(this.state);
+		}
 	};
 
 	render() {
+		if(this.state.id)
+			return <Redirect to='/'/>;
+
 		return (
       <div>
         <form name="form" onSubmit={this.onSubmit}>
