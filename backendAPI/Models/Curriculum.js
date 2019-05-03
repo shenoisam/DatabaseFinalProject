@@ -12,13 +12,13 @@ var CreateCurriculum = function (req,res,next){
 }
 
 var GetAllCurriculums = function(req,res,next){
-    res.locals.sql = "*"
+    res.locals.select = "*"
     res.locals.table = "Curriculum"
     next();
 
 }
 var GetCurriculum = function(req,res,next){
-    res.locals.sql = "*"
+    res.locals.select = "*"
     res.locals.table = "Curriculum"
     res.locals.rmStr = " Name = ?"
     res.locals.params = [req.body.Name]
@@ -54,7 +54,7 @@ var UpdateCurriculum = function(req,res,next){
 }
 
 var GoalValid = function(req,res,next){
-	res.locals.sql = "Goals.ID"
+	res.locals.select = "Goals.ID"
     res.locals.table = "Goals,Curriculum"
     res.locals.rmStr = " Goals.Curriculum = Curriculum.Name AND Curriculum.Name = ? AND Curriculum.GoalCredHours > (Select Sum(Course.CreditHours) FROM Course, CourseGoals WHERE Courses.Name = CourseGoals.CourseName AND CourseGoals.GoalsId = Goals.Id"
     res.locals.params = [req.body.Name]
