@@ -47,7 +47,7 @@ export class CreateCurriculum extends React.Component {
 
 	async onSubmit (event) {
 		event.preventDefault();
-        if (this.state.HeadPerson){
+      if (this.state.HeadPerson){
 			const parsed = await ky.post('http://localhost:8888/CreateCurriculum',{json: {
 			Name: this.state.Name,
 			MinimumHours: this.state.MinimumHours,
@@ -95,10 +95,10 @@ export class CreateCurriculum extends React.Component {
 				{this.state.message}Welcome to the Database Dorks !<br/>
 
 				<form name="form" onSubmit={this.onSubmit}>
-        			<input placeholder="Name" name="Name" checked={this.state.Name} onChange={this.handleInputChange} />
-        			<input placeholder ="MinimumHours"name="MinimumHours" checked={this.state.MinimumHours} onChange={this.handleInputChange} />
-					<input placeholder ="MaxTopicsCovered" name="MaxTopicsCovered" checked={this.state.MaxTopicsCovered} onChange={this.handleInputChange} />
-					<input placeholder ="GoalCredHours" name="GoalCredHours" checked={this.state.GoalCredHours} onChange={this.handleInputChange} />
+        			<input placeholder="Name" name="Name" checked={this.state.Name} onChange={this.handleInputChange} required/>
+        			<input placeholder ="MinimumHours"name="MinimumHours" checked={this.state.MinimumHours} onChange={this.handleInputChange} required/>
+					<input placeholder ="MaxTopicsCovered" name="MaxTopicsCovered" checked={this.state.MaxTopicsCovered} onChange={this.handleInputChange} required/>
+					<input placeholder ="GoalCredHours" name="GoalCredHours" checked={this.state.GoalCredHours} onChange={this.handleInputChange} required/>
         			<button> Create Curriculum </button>
         		</form >
 				{temp}
