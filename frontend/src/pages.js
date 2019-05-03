@@ -4,7 +4,6 @@ import {CoursePage} from './curriculum/coursePage.js'
 import {SectionsPage} from './curriculum/sectionPage.js'
 import {CurriculumPagee} from './curriculum/curriculumPage.js'
 import {Register, Login} from './user/register.js'
-import ky from 'ky';
 
 export class RegisterPage extends React.Component {
 	render() {
