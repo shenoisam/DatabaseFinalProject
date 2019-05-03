@@ -17,10 +17,10 @@ var insertData = function(req,res, next){
    console.log("Hello World")
 
     _db.query(sql,val, function(err,r2){
-        
+        console.log(sql)
+        console.log(val)
         if(err){
-            db.closeConnection()
-            db.initDb(function(db){})
+            console.log(err)
             res.send({err: "Incorrect data"})
         }else {
             next()
@@ -32,12 +32,12 @@ var insertData = function(req,res, next){
 
 
 var query = function(req,res,next){
-    var str = "SELECT " + res.locals.select + " FROM " + res.locals.table + " WHERE " + res.locals.rmStr
+    console.log(res.locals.params)
+    var str = "SELECT " +res.locals.select + " FROM " + res.locals.table + " WHERE id = ?"// + res.locals.rmStr
     var params = res.locals.params
-    _db.query(str,params, function(err,r2){
+    _db.query(str,["ooasdzfwscadac"], function(err,r2){
         if(err){
-            db.closeConnection()
-            db.initDb(function(db){})
+            console.log(err)
             res.send({err: "Incorrect data"})
         }else {
             res.send({r2})
@@ -51,8 +51,6 @@ var update = function (req,res,next){
 
     _db.query(str,params, function(err,r2){
         if(err){
-            db.closeConnection()
-            db.initDb(function(db){})
             res.send({err: "Incorrect data"})
         }else {
             res.send({r2})
