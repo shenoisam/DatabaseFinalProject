@@ -11,7 +11,12 @@ var CreateCurriculum = function (req,res,next){
 	
 }
 
+var GetAllCurriculums = function(req,res,next){
+    res.locals.sql = "*"
+    res.locals.table = "Curriculum"
+    next();
 
+}
 var GetCurriculum = function(req,res,next){
     res.locals.sql = "*"
     res.locals.table = "Curriculum"
@@ -57,4 +62,4 @@ var GoalValid = function(req,res,next){
 	
 	
 }
-module.exports = {CreateCurriculum,GetCurriculum,UpdateCurriculum,GoalValid}
+module.exports = {CreateCurriculum,GetCurriculum,UpdateCurriculum,GoalValid,GetAllCurriculums}
