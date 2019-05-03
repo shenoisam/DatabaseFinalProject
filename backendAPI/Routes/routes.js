@@ -17,8 +17,6 @@ var insertData = function(req,res, next){
    console.log("Hello World")
 
     _db.query(sql,val, function(err,r2){
-        console.log(sql)
-        console.log(val)
         if(err){
             console.log(err)
             res.send({err: "Incorrect data"})
