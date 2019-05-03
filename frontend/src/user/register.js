@@ -1,6 +1,4 @@
 import React from 'react';
-import * as Validation from '../alloy/utils/validation';
-import * as Bessemer from '../alloy/bessemer/components';
 import ky from 'ky';
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';

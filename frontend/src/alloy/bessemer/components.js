@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import ReactSelect from 'react-select';
 import * as ReduxForm from 'redux-form';
-
 import * as Utils from '../utils/core-utils';
 import * as Validation from '../utils/validation';
 
