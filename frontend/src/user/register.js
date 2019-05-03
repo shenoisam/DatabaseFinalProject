@@ -10,6 +10,7 @@ import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import { sessionReducer } from 'redux-react-session';
 import { sessionService } from 'redux-react-session';
+import {Redirect} from 'react-router-dom';
 
 const reducers = {
 	session: sessionReducer
@@ -32,7 +33,7 @@ class Register extends React.Component {
 			lName:''
     }
 
-		 sessionService.loadSession().then(currentSession => console.log(currentSession)).catch(err => console.log(err)) 
+		 sessionService.loadSession().then(currentSession => console.log(currentSession)).catch(err => console.log(err))
 	}
 
 	handleInputChange(event) {
@@ -79,11 +80,64 @@ class Register extends React.Component {
 }
 
 class Login extends React.Component {
+	constructor(props) {
+		super(props);
+		this.onSubmit = this.onSubmit.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = {
+      id:'',
+			email:'',
+			pass:'',
+    }
+	}
+
+	componentDidMount(){
+		sessionService.loadSession().then(curr => {
+			this.state.id = curr;
+			this.setState(this.state);
+		}).catch(err =>
+			console.log(err)
+		);
+	}
+
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  // When the form is being submitted
+	async onSubmit (event) {
+		event.preventDefault();
+
+		const parsed = await ky.post('http://localhost:8888/LoginUser',{json: {
+			Email:this.state.email,
+			Password:this.state.password,
+		}}).json();
+
+		if(parsed.r2[0]){
+			sessionService.saveSession(parsed.r2[0].ID);
+			this.state.id = parsed;
+			this.setState(this.state);
+		}
+	};
+
 	render() {
+		if(this.state.id)
+			return <Redirect to='/'/>;
+
 		return (
-     <div>
-        <span> Hey Login Page </span>
-      </div>
+			<div>
+				<form name="form" onSubmit={this.onSubmit}>
+				<input name="email" checked={this.state.email} onChange={this.handleInputChange} />
+				<input name="password" checked={this.state.password} onChange={this.handleInputChange} />
+				<button> Submit </button>
+				</form >
+			</div>
     	);
     }
   }
