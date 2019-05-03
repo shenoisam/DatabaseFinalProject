@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Validation from '../alloy/utils/validation';
+import * as Bessemer from '../alloy/bessemer/components';
 import ky from 'ky';
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
@@ -78,25 +79,25 @@ class Register extends React.Component {
 						<div className="input-group-prepend">
 							<span className="input-group-text"><i className="fas fa-user"></i></span>
 						</div>
-						<input name="email" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email"/>
+						<input name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,14}$" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email" required/>
 					</div>
 					<div className="input-group form-group">
 						<div className="input-group-prepend">
 							<span className="input-group-text"><i className="fas fa-key"></i></span>
 						</div>
-						<input name="password" type="password" checked={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Password"/>
+						<input name="password" type="password" pattern=".{6,64}" checked={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Password" required/>
 					</div>
 					<div className="input-group form-group">
 						<div className="input-group-prepend">
 							<span className="input-group-text"><i className="fas"></i></span>
 						</div>
-						<input name="firstName" checked={this.state.firstName} onChange={this.handleInputChange} className="form-control" placeholder="firstName"/>
+						<input name="firstName" pattern="[^()\{\}/><\][\\\x22,;|]+" title="Please enter in valid characters." checked={this.state.firstName} onChange={this.handleInputChange} className="form-control" placeholder="firstName" required/>
 					</div>
 					<div className="input-group form-group">
 						<div className="input-group-prepend">
 							<span className="input-group-text"><i className="fas"></i></span>
 						</div>
-						<input name="lastName" checked={this.state.lastName} onChange={this.handleInputChange} className="form-control" placeholder="lastName"/>
+						<input name="lastName" pattern="[^()\{\}/><\][\\\x22,;|]+" title="Please enter in valid characters." checked={this.state.lastName} onChange={this.handleInputChange} className="form-control" placeholder="lastName" required/>
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Register</button>
 				</form>
@@ -164,13 +165,13 @@ class Login extends React.Component {
 						<div className="input-group-prepend">
 							<span className="input-group-text"><i className="fas fa-user"></i></span>
 						</div>
-						<input name="email" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email"/>
+						<input name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,14}$" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email" required/>
 					</div>
 					<div className="input-group form-group">
 						<div className="input-group-prepend">
 							<span className="input-group-text"><i className="fas fa-key"></i></span>
 						</div>
-						<input name="password" type="password" checked={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Password"/>
+						<input name="password" type="password" checked={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Password" required/>
 					</div>
 					<button className="btn float-right login_btn" style={{border:'1px solid'}}>Login</button>
 				</form>
