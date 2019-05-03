@@ -4,7 +4,7 @@ var CreateCurriculumTopics = function(req,res,next){
 	var Id = req.body.ID
 	
 	res.locals.val = [[Name,Id]]
-	res.locals.sql    = "INSERT INTO CurriculumTopics VALUES ?"
+	res.locals.sql    = "INSERT INTO CurriculumTopics VALUES (?,?)"
 	
 }
 var GetCurriculumTopics = function(req,res,next){

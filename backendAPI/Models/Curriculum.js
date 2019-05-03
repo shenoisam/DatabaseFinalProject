@@ -4,9 +4,10 @@ var CreateCurriculum = function (req,res,next){
     var h = req.body.HeadPerson 
     var m = req.body.MinimumHours 
     var t = req.body.MaxTopicsCovered 
+    var g = req.body.GoalCredHours
 	
-	res.locals.val = [[n,h,m,t]]
-    res.locals.sql = "INSERT INTO Curriculum VALUES ?"
+	res.locals.val = [n,h,m,t,g]
+    res.locals.sql = "INSERT INTO Curriculum VALUES (?,?,?,?,?)"
     next()
 	
 }
