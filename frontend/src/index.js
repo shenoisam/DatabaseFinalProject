@@ -1,19 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import {NavBar} from './common/navbar.js';
-import createLogger from 'redux-logger';
-import {Register, Login} from './user/register.js';
-import logo from './logo.svg';
 import * as Pages from './pages.js';
-import Cookies from 'universal-cookie';
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form';
-import * as Utils from './alloy/utils/core-utils';
 
 const PrimaryLayout = () => (
   <div className="primary-layout">

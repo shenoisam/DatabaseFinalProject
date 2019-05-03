@@ -1,10 +1,5 @@
 import React from 'react';
-import Favicon from 'react-favicon';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import * as Bessemer from '../alloy/bessemer/components';
 import * as Validation from '../alloy/utils/validation';
-import * as ReduxForm from 'redux-form';
-import { connect } from 'react-redux';
 import ky from 'ky';
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
@@ -36,8 +31,9 @@ class Register extends React.Component {
 
 	componentDidMount(){
 		sessionService.loadSession().then(curr => {
-			this.state.id = curr;
-			this.setState(this.state);
+			this.setState({
+	      id: curr
+	    });
 		}).catch(err =>
 			console.log(err)
 		);
@@ -62,13 +58,6 @@ class Register extends React.Component {
 			FirstName:this.state.firstName,
 			LastName:this.state.lastName,
 		}}).json();
-
-		console.log(this.state.email);
-		console.log(this.state.password);
-		console.log(this.state.firstName);
-		console.log(this.state.lastName);
-		console.log(parsed);
-		console.log(parsed.id);
 
 		if(!parsed.err){
 			sessionService.saveSession(parsed.id);
@@ -130,8 +119,9 @@ class Login extends React.Component {
 
 	componentDidMount(){
 		sessionService.loadSession().then(curr => {
-			this.state.id = curr;
-			this.setState(this.state);
+			this.setState({
+	      id: curr
+	    });
 		}).catch(err =>
 			console.log(err)
 		);
@@ -156,8 +146,9 @@ class Login extends React.Component {
 
 		if(parsed.r2[0]){
 			sessionService.saveSession(parsed.r2[0].ID);
-			this.state.id = parsed;
-			this.setState(this.state);
+			this.setState({
+	      id: parsed
+	    });
 			window.location.reload();
 		}
 	};

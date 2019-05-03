@@ -1,6 +1,5 @@
 import React from 'react';
 import ky from 'ky';
-import { sessionReducer } from 'redux-react-session';
 import { sessionService } from 'redux-react-session';
 
 export class CreateCurriculum extends React.Component {

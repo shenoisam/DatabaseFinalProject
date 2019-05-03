@@ -1,19 +1,8 @@
 import React from 'react';
-import * as RegisterLogin from './user/register';
-import {NavBar} from './common/navbar.js'
 import {CreateCurriculum} from './curriculum/createCurriculum.js'
 import {Register, Login} from './user/register.js'
-import {
-	Button,
-	Form,
-	FormGroup,
-	Label,
-	Input,
-	FormText
-} from 'reactstrap';
+import {Button} from 'reactstrap';
 import ky from 'ky';
-import { sessionReducer } from 'redux-react-session';
-import { sessionService } from 'redux-react-session';
 
 export class RegisterPage extends React.Component {
 	render() {
