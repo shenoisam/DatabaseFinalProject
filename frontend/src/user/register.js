@@ -28,12 +28,10 @@ class Register extends React.Component {
     this.state = {
       id:'',
 			email:'',
-			pass:'',
+			password:'',
 			fName:'',
 			lName:''
     }
-
-		 sessionService.loadSession().then(currentSession => console.log(currentSession)).catch(err => console.log(err))
 	}
 
 	handleInputChange(event) {
@@ -70,13 +68,33 @@ class Register extends React.Component {
 
 		return (
       <div>
-        <form name="form" onSubmit={this.onSubmit}>
-        <input name="email" checked={this.state.email} onChange={this.handleInputChange} />
-        <input name="password" checked={this.state.password} onChange={this.handleInputChange} />
-        <input name="fName" checked={this.state.fName} onChange={this.handleInputChange} />
-				<input name="lName" checked={this.state.lName} onChange={this.handleInputChange} />
-        <button> Submit </button>
-        </form >
+				<form name="form" onSubmit={this.onSubmit}>
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-user"></i></span>
+						</div>
+						<input name="email" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email"/>
+					</div>
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-key"></i></span>
+						</div>
+						<input name="password" type="password" checked={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Password"/>
+					</div>
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-key"></i></span>
+						</div>
+						<input name="fName" checked={this.state.fName} onChange={this.handleInputChange} className="form-control" placeholder="FirstName"/>
+					</div>
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-key"></i></span>
+						</div>
+						<input name="lName" checked={this.state.lName} onChange={this.handleInputChange} className="form-control" placeholder="LastName"/>
+					</div>
+					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Register</button>
+				</form>
       </div>
     	);
   }
@@ -90,7 +108,7 @@ class Login extends React.Component {
     this.state = {
       id:'',
 			email:'',
-			pass:'',
+			password:'',
     }
 	}
 
@@ -107,7 +125,6 @@ class Login extends React.Component {
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-
     this.setState({
       [name]: value
     });
@@ -116,11 +133,14 @@ class Login extends React.Component {
   // When the form is being submitted
 	async onSubmit (event) {
 		event.preventDefault();
-
 		const parsed = await ky.post('http://localhost:8888/LoginUser',{json: {
 			Email:this.state.email,
 			Password:this.state.password,
 		}}).json();
+
+		console.log(parsed.r2[0]);
+		console.log(this.state.password);
+		console.log(this.state.email);
 
 		if(parsed.r2[0]){
 			sessionService.saveSession(parsed.r2[0].ID);
@@ -136,13 +156,23 @@ class Login extends React.Component {
 		return (
 			<div>
 				<form name="form" onSubmit={this.onSubmit}>
-				<input name="email" checked={this.state.email} onChange={this.handleInputChange} />
-				<input name="password" checked={this.state.password} onChange={this.handleInputChange} />
-				<button> Submit </button>
-				</form >
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-user"></i></span>
+						</div>
+						<input name="email" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email"/>
+					</div>
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-key"></i></span>
+						</div>
+						<input name="password" type="password" checked={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Password"/>
+					</div>
+					<button className="btn float-right login_btn" style={{border:'1px solid'}}>Login</button>
+				</form>
 			</div>
-    	);
-    }
-  }
+			);
+		}
+	}
 
 export { Register,Login };
