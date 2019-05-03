@@ -10,6 +10,9 @@ import {
 	Input, 
 	FormText
 } from 'reactstrap';
+import ky from 'ky';
+import { sessionReducer } from 'redux-react-session';
+import { sessionService } from 'redux-react-session';
 
 export class Home extends React.Component {
 	constructor(props){
@@ -61,6 +64,11 @@ export class LoginPage extends React.Component {
 }
 
 export class Courses extends React.Component {
+
+	componentDidMount() {
+		alert('worked');
+	}
+
 	render() {
 		return (
 			<div className="container padded">
@@ -68,6 +76,7 @@ export class Courses extends React.Component {
 					<div className="col-12">
 						<h2>Courses</h2>
 						<hr />
+						list all courses
 					</div>
 				</div>
 			</div>
@@ -91,23 +100,45 @@ export class Sections extends React.Component {
 }
 
 export class CurriculumPage extends React.Component {
+
+
+	async componentDidMount() {
+
+
+		/*const parsed = await ky.post('http://localhost:8888/GetCourses',{json: {
+			//Email:this.state.email,
+			//Password:this.state.password,
+			//FirstName:this.state.fName,
+			//LastName:this.state.lName,
+		}}).json(); */
+	}
+
 	render() {
 		return (
-			<div>
+			<div className="container-padded">
 				<div className="row">
 					<div className="col-4">
-						<div className="card">
+						<div className="card CurriculumCard">
 							courses
 						</div>
-					</div>
-					<div className="col-4">
-						<div className="card">
-							topics
+						<div>
+							<Button color="secondary">Courses</Button>
 						</div>
 					</div>
 					<div className="col-4">
-						<div className="card">
+						<div className="card CurriculumCard">
+							topics
+						</div>
+						<div>
+							<Button color="secondary">Topics</Button>
+						</div>
+					</div>
+					<div className="col-4">
+						<div className="card CurriculumCard">
 							goals
+						</div>
+						<div>
+							<Button color="secondary">Goals</Button>
 						</div>
 					</div>
 				</div>
