@@ -33,10 +33,11 @@ class NavBar extends React.Component {
 			const parsed = await ky.post('http://localhost:8888/GetUserById',{json: {
 				ID:this.state.id,
 			}}).json();
+			console.log(parsed);
 			this.state.fName = parsed.r2[0].FirstName;
 			this.state.lName = parsed.r2[0].LastName;
 			this.setState(this.state);
-			console.log(parsed);
+
 
 		}).catch(err =>
 			console.log(err)

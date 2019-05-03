@@ -29,9 +29,18 @@ class Register extends React.Component {
       id:'',
 			email:'',
 			password:'',
-			fName:'',
-			lName:''
+			firstName:'',
+			lastName:''
     }
+	}
+
+	componentDidMount(){
+		sessionService.loadSession().then(curr => {
+			this.state.id = curr;
+			this.setState(this.state);
+		}).catch(err =>
+			console.log(err)
+		);
 	}
 
 	handleInputChange(event) {
@@ -50,12 +59,19 @@ class Register extends React.Component {
 		const parsed = await ky.post('http://localhost:8888/CreateUser',{json: {
 			Email:this.state.email,
 			Password:this.state.password,
-			FirstName:this.state.fName,
-			LastName:this.state.lName,
+			FirstName:this.state.firstName,
+			LastName:this.state.lastName,
 		}}).json();
 
+		console.log(this.state.email);
+		console.log(this.state.password);
+		console.log(this.state.firstName);
+		console.log(this.state.lastName);
+		console.log(parsed);
+		console.log(parsed.id);
+
 		if(!parsed.err){
-			sessionService.saveSession(parsed);
+			sessionService.saveSession(parsed.id);
 			this.state.id = parsed;
 			this.setState(this.state);
 			window.location.reload();
@@ -83,15 +99,15 @@ class Register extends React.Component {
 					</div>
 					<div className="input-group form-group">
 						<div className="input-group-prepend">
-							<span className="input-group-text"><i className="fas fa-key"></i></span>
+							<span className="input-group-text"><i className="fas"></i></span>
 						</div>
-						<input name="fName" checked={this.state.fName} onChange={this.handleInputChange} className="form-control" placeholder="FirstName"/>
+						<input name="firstName" checked={this.state.firstName} onChange={this.handleInputChange} className="form-control" placeholder="firstName"/>
 					</div>
 					<div className="input-group form-group">
 						<div className="input-group-prepend">
-							<span className="input-group-text"><i className="fas fa-key"></i></span>
+							<span className="input-group-text"><i className="fas"></i></span>
 						</div>
-						<input name="lName" checked={this.state.lName} onChange={this.handleInputChange} className="form-control" placeholder="LastName"/>
+						<input name="lastName" checked={this.state.lastName} onChange={this.handleInputChange} className="form-control" placeholder="lastName"/>
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Register</button>
 				</form>
