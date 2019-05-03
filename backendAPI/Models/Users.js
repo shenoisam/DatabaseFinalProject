@@ -11,16 +11,17 @@ var createUser  = function(req,res,next){
    var Email             = req.body.Email 
    var id                = ran.genRandomString(15) + d  
    
-   res.locals.val = [[id,FirstName,LastName,Email,Password,"TEMP"]]
+   res.locals.val = [id,FirstName,LastName,Email,Password,"TEMP"]
    res.locals.id = id
-   res.locals.sql = "INSERT INTO Person (ID, FirstName,LastName,Email, Password,Salt) VALUES ?"
+   res.locals.sql = "INSERT INTO Person (ID, FirstName,LastName,Email, Password,Salt) VALUES (?,?,?,?,?,?)"
 	
 	next()
 }
 var LoginUser = function(req,res,next){
+
    res.locals.select = "*"
    res.locals.table = "Person"
-   res.locals.rmStr = "WHERE Email = ? AND Password = ?"
+   res.locals.rmStr = "Email = ? AND Password = ?"
    res.locals.params = [req.body.Email, req.body.Password]
    next()
 

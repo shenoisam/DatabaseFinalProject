@@ -31,9 +31,9 @@ var insertData = function(req,res, next){
 
 var query = function(req,res,next){
     console.log(res.locals.params)
-    var str = "SELECT " +res.locals.select + " FROM " + res.locals.table + " WHERE id = ?"// + res.locals.rmStr
+    var str = "SELECT " +res.locals.select + " FROM " + res.locals.table + " WHERE " + res.locals.rmStr
     var params = res.locals.params
-    _db.query(str,["ooasdzfwscadac"], function(err,r2){
+    _db.query(str,params, function(err,r2){
         if(err){
             console.log(err)
             res.send({err: "Incorrect data"})
