@@ -1,6 +1,4 @@
 
-
-
 var CreateTopic = function(req,res,next){
 	var ID      = req.body.ID
 	var Units   = req.body.Units
@@ -8,7 +6,7 @@ var CreateTopic = function(req,res,next){
 	var Name    = req.body.Name 
 	var SA      = req.body.SubjectArea
 	
-	res.locals.sql    = "INSERT INTO Topics VALUES ?"
+	res.locals.sql    = "INSERT INTO Topics VALUES (?,?,?,?,?)"
     res.locals.val = [[ID,Units,Level,Name,SA]]
 	next()
 	

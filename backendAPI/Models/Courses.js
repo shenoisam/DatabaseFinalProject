@@ -6,7 +6,7 @@ var CreateCourses = function(req,res,next){
    var CreditHours       = req.body.CreditHours 
    var CourseDescription = req.body.CourseDescription
    
-   res.locals.sql  = "INSERT INTO Courses VALUES ?"
+   res.locals.sql  = "INSERT INTO Courses VALUES (?,?,?,?,?)"
    res.locals.val = [[Name,SubjectCode, CourseNumber,CreditHours,CourseDescription]]
    next();
    
