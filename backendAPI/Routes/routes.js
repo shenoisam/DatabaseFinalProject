@@ -19,7 +19,7 @@ var insertData = function(req,res, next){
     _db.query(sql,val, function(err,r2){
         if(err){
             console.log(err)
-            res.send({err: "Incorrect data"})
+            res.send({err: err.code})
         }else {
             next()
         }
@@ -38,7 +38,7 @@ var query = function(req,res,next){
     _db.query(str,params, function(err,r2){
         if(err){
             console.log(err)
-            res.send({err: "Incorrect data"})
+            res.send({err: err.code})
         }else {
             res.send({r2})
         }
@@ -51,7 +51,7 @@ var update = function (req,res,next){
 
     _db.query(str,params, function(err,r2){
         if(err){
-            res.send({err: "Incorrect data"})
+            res.send({err: err.code})
         }else {
             res.send({r2})
         }

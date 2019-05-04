@@ -19,10 +19,18 @@ var GetAllSections = function(req,res,next){
 var GetSection = function(req,res,next){
    res.locals.select = "*"
    res.locals.table = "Section"
-   res.locals.rmStr = "ID = ? AND Semester = ?"
-   res.locals.params = [req.body.ID,req.body.Semester]
+   res.locals.rmStr = "ID = ? AND Semester = ? AND Year = ? AND CourseName = ?"
+   res.locals.params = [req.body.ID,req.body.Semester,req.body.Year, req.body.CourseName]
    next()
 }
+
+var GetSectionByCourseNameYearSemester = function(req,res,next){
+    res.locals.select = "Sum(APlus), Sum(A), Sum(AMinus),Sum(BPlus), Sum(B), Sum(BMinus),Sum(CPlus), Sum(C), Sum(CMinus),Sum(DPlus), Sum(D), Sum(DMinus),Sum(F), Sum(I), Sum(W),"
+    res.locals.table = "Section"
+    res.locals.rmStr = "(Semester = ? OR Semester = ? OR Semester = ? OR Semester = ?) AND Year > ? AND Year < ? AND CourseName = ?"
+    res.locals.params = [req.body.Spring,req.body.Summer,req.body.Fall,req.body.Winter,req.body.YearLower,req.body.YearUpper, req.body.CourseName]
+    next()
+ }
 var UpdateSection = function(req,res,next){
    res.locals.table = "Section"
 
@@ -47,4 +55,4 @@ var UpdateSection = function(req,res,next){
        res.send({err: "ERROR! Attributes and Lengths don't match up"})
    }
 }
-module.exports = {CreateSection,GetSection,UpdateSection,GetAllSections}
+module.exports = {CreateSection,GetSection,UpdateSection,GetAllSections,GetSectionByCourseNameYearSemester}
