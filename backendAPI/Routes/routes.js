@@ -28,7 +28,6 @@ var insertData = function(req,res, next){
    
 }
 
-
 var query = function(req,res,next){
     console.log(res.locals.params)
     var str = "SELECT " +res.locals.select + " FROM " + res.locals.table;

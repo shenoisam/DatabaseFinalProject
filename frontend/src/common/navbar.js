@@ -26,6 +26,7 @@ class NavBar extends React.Component {
 	async componentDidMount(){
 		sessionService.loadSession().then(async curr => {
 			this.state.id = curr;
+			console.log(curr)
 			this.setState(this.state);
 			const parsed = await ky.post('http://localhost:8888/GetUserById',{json: {
 				ID:this.state.id,
