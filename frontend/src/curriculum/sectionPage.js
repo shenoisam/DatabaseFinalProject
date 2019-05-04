@@ -1,6 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
 import ky from 'ky';
 import * as Components from '../common/components.js';
+=======
+>>>>>>> 4a679f5b21150e230d16797524ba0900c9ec2115
 
 export class SectionsPage extends React.Component {
 	constructor(props){
