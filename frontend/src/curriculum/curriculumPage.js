@@ -1,7 +1,5 @@
 import React from 'react';
 import ky from 'ky';
-import {Button} from 'reactstrap';
-import _ from 'lodash';
 
 export class CurriculumPagee extends React.Component {
 	// basically list all curriculum in the database

@@ -1,17 +1,17 @@
-/* 
-  Author: Sam Shenoi 
-  Description: This file contains the API endpoints for the backend API. 
+/*
+  Author: Sam Shenoi
+  Description: This file contains the API endpoints for the backend API.
   Date Created: 5/3/2019
-  
-  NOTES: 
+
+  NOTES:
    (FK: table) - this attribute is a foreign key that refers to this table. Please keep in mind when designing
 */
 
-//Node Packages to include 
+//Node Packages to include
 var express = require('express')
 var router = express.Router()
 
-//Models for each of the tables in the database. Contain functions that match with that table.  
+//Models for each of the tables in the database. Contain functions that match with that table.
 var Users           = require('./../Models/Users.js')
 var CourseGoals     = require('./../Models/CourseGoals.js')
 var Courses         = require('./../Models/Courses.js')
@@ -28,13 +28,13 @@ var routes          = require('./routes.js')
 /*******************************************************************************************/
 
 /*
-    description: This function creates a user in the database 
-    parameters: 
-          - Password:  The users password 
+    description: This function creates a user in the database
+    parameters:
+          - Password:  The users password
           - FirstName: The users firstname
           - LastName:  The users lastname
-          - Email:     The users email 
-    return: 
+          - Email:     The users email
+    return:
           - JSobj
              - If everything runs smoothly, returns new users Id for storage {r2: id}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -43,10 +43,10 @@ router.post('/CreateUser',Users.createUser,routes.insertData,routes.sendUserId)
 
 /*
     description: This function Creates Course Goals in the database
-    parameters: 
+    parameters:
           - CourseName: the course name (FK: Course)
           - GoalsID:  The goal id       (FK: Goals)
-    return: 
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -55,13 +55,13 @@ router.post('/CreateCourseGoals',CourseGoals.CreateCourseGoal,routes.insertData,
 
 /*
     description: This function creates Course in the database
-    parameters: 
+    parameters:
           - CourseName
-          - SubjectCode 
-          - CourseNumber  
-          - CreditHours 
+          - SubjectCode
+          - CourseNumber
+          - CreditHours
           - CourseDescription
-    return: 
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -69,13 +69,13 @@ router.post('/CreateCourseGoals',CourseGoals.CreateCourseGoal,routes.insertData,
 router.post('/CreateCourses',Courses.CreateCourses,routes.insertData,routes.end)
 
 /*
-    description: This function creates SectionGoal in the database. It stores the grade distribution for the goal 
-                 for this section. 
-    parameters: 
+    description: This function creates SectionGoal in the database. It stores the grade distribution for the goal
+                 for this section.
+    parameters:
           - ID       : Section Id                                         (FK: section)
           - Semester : Semester this that this section was offered        (FK: section)
           - GoalsID  : Id of the Goal that is being graded                (FK: goals)
-          - GAPlus   : # of A+ for the goal 
+          - GAPlus   : # of A+ for the goal
           - GA       : # of A for the goal
           - GAMinus  : # of A- for the goal
           - GBPlus   : # of B+ for the goal
@@ -90,7 +90,7 @@ router.post('/CreateCourses',Courses.CreateCourses,routes.insertData,routes.end)
           - GF       : # of F for the goal
           - GW       : # of W for the goal
           - GI       : # of I for the goal
-    return: 
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -99,10 +99,10 @@ router.post('/CreateSectionGoal',SectionGoal.CreateSectionGoal,routes.insertData
 
 /*
     description: This function creates Course in the database
-    parameters: 
+    parameters:
           - CourseName : Name of the Course being referenced (FK : Courses)
           - Curriculum : Curriculum Being references         (FK : Curriculum)
-    return: 
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -112,10 +112,10 @@ router.post('/CreateCurCourse',CurCourse.CreateCurCourse,routes.insertData,route
 
 /*
     description: This function creates Curriculum Topics
-    parameters: 
+    parameters:
           - Name : Name of the Curriculum being referenced (FK : Curriculum)
           - ID   : Id of Topic being references            (FK : Topic)
-    return: 
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -123,14 +123,14 @@ router.post('/CreateCurCourse',CurCourse.CreateCurCourse,routes.insertData,route
 router.post('/CreateCurriculumTopics',CurriclumTopics.CreateCurriculumTopics,routes.insertData,routes.end)
 
 /*
-    description: This function creates a Curriculum 
-    parameters: 
+    description: This function creates a Curriculum
+    parameters:
           - Name             - name of the curriculum
           - HeadPerson       - Head person id of this curriculum                        (FK: Person)
-          - MinimumHours     - INTEGER: Minimum Hours covered in each course 
+          - MinimumHours     - INTEGER: Minimum Hours covered in each course
           - MaxTopicsCovered - INTEGER: Maximum Topics covered in each course
-          - GoalCredHours    - INTEGER: How many credit hours can be applied to a goal 
-    return: 
+          - GoalCredHours    - INTEGER: How many credit hours can be applied to a goal
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -139,11 +139,11 @@ router.post('/CreateCurriculum',Curriclum.CreateCurriculum,routes.insertData,rou
 
 /*
     description: This function creates Goals
-    parameters: 
+    parameters:
           - ID               - id of the goal
-          - Description      - Description of the Goal                     
+          - Description      - Description of the Goal
           - Curriculum       - curriculum assoicated with this goal   (FK: Curriculum)
-    return: 
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -152,29 +152,28 @@ router.post('/CreateGoals',Goals.CreateGoals,routes.insertData,routes.end)
 
 /*
     description: This function creates Sections
-    parameters: 
+    parameters:
           - ID       : Section Id
-          - Year     : Get the year that this section is offered                                        
-          - Semester : Semester this that this section was offered        
+          - Semester : Semester this that this section was offered
           - NumStu   : Total number of students
-          - Comment1 : Comment 1 
+          - Comment1 : Comment 1
           - Comment2 : Comment 2
-          - APlus   : # of A+ for the section 
-          - A       : # of A for the section
-          - AMinus  : # of A- for the section
-          - BPlus   : # of B+ for the section
-          - B       : # of B for the section
-          - BMinus  : # of B- for the section
-          - CPlus   : # of C+ for the section
-          - C       : # of C for the section
-          - CMinus  : # of C- for the section
-          - DPlus   : # of D+ for the section
-          - D       : # of D for the section
-          - DMinus  : # of D- for the section
-          - F       : # of F for the section
-          - W       : # of W for the section
-          - I       : # of I for the section
-    return: 
+          - GAPlus   : # of A+ for the section
+          - GA       : # of A for the section
+          - GAMinus  : # of A- for the section
+          - GBPlus   : # of B+ for the section
+          - GB       : # of B for the section
+          - GBMinus  : # of B- for the section
+          - GCPlus   : # of C+ for the section
+          - GC       : # of C for the section
+          - GCMinus  : # of C- for the section
+          - GDPlus   : # of D+ for the section
+          - GD       : # of D for the section
+          - GDMinus  : # of D- for the section
+          - GF       : # of F for the section
+          - GW       : # of W for the section
+          - GI       : # of I for the section
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -183,13 +182,13 @@ router.post('/CreateSection',Section.CreateSection,routes.insertData,routes.end)
 
 /*
     description: This function creates Topics
-    parameters: 
-          - ID          : Topic ID 
+    parameters:
+          - ID          : Topic ID
       	  - Units       : DECIMAL units covered
-	      - Level       : Level (1-4) 
+	      - Level       : Level (1-4)
 	      - Name        : Name of Topic
 	      - SubjectArea : Subject Area
-    return: 
+    return:
           - JSobj
              - If everything runs smoothly, returns empty object {}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -200,10 +199,10 @@ router.post('/CreateTopic',Topics.CreateTopic,routes.insertData,routes.end)
 
 /*
     description: This function logins in a user
-    parameters: 
+    parameters:
           - Email              - email of the user
-          - Password           - password of the user                 
-    return: 
+          - Password           - password of the user
+    return:
           - JSobj
              - If everything runs smoothly, returns JSON object {r2: [{Person}]}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -212,9 +211,9 @@ router.post('/LoginUser',Users.LoginUser,routes.query)
 
 /*
     description: This function gets user by ID
-    parameters: 
-          - ID            - ID of user           
-    return: 
+    parameters:
+          - ID            - ID of user
+    return:
           - JSobj
              - If everything runs smoothly, returns JSON object {r2: [{Person}]}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -222,10 +221,10 @@ router.post('/LoginUser',Users.LoginUser,routes.query)
 router.post('/GetUserById',Users.GetUserById,routes.query)
 
 /*
-    description: This function gets a curiculum 
-    parameters: 
-          - Name           - Name of the curriculum         
-    return: 
+    description: This function gets a curiculum
+    parameters:
+          - Name           - Name of the curriculum
+    return:
           - JSobj
              - If everything runs smoothly, returns JSON object {r2: [{Curriculum}]}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -234,8 +233,8 @@ router.post('/GetCurriculum',Curriclum.GetCurriculum,routes.query)
 
 /*
     description: This function gets all of the curriclums
-    parameters:        
-    return: 
+    parameters:
+    return:
           - JSobj
              - If everything runs smoothly, returns JSON object {r2: [{Curriculum}]}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -244,9 +243,9 @@ router.post('/GetAllCurriculums',Curriclum.GetAllCurriculums,routes.query)
 
 /*
     description: This function gets a specific goal
-    parameters:  
-         - ID - the id of the goal looking for      
-    return: 
+    parameters:
+         - ID - the id of the goal looking for
+    return:
           - JSobj
              - If everything runs smoothly, returns JSON object {r2: [{Goal}]}
              - otherwise returns an err object {err : "Something went wrong"}
@@ -255,29 +254,29 @@ router.post('/GetGoals',Goals.GetGoals,routes.query)
 
 /*
   description: This function gets a section
-  parameters: 
+  parameters:
         - ID         - the ID of the section
-        - Semester   - the semester for this section 
+        - Semester   - the semester for this section
         - Year       - The year that this section was offered
         - CourseName - The course name associated with this section
-  return: 
+  return:
 */
 router.post('/GetSection',Section.GetSection,routes.query)
 
 /*
   description: This function gets a section
-  parameters: 
+  parameters:
         - Spring     - if we are looking for section with Spring, enter spring otherwise enter ?
         - Summer     - if we are looking for section with Summer, enter summer otherwise enter ?
         - Fall       - if we are looking for section with Fall, enter fall otherwise enter ?
         - Winter     - if we are looking for section with winter, enter spring otherwise enter ?
-        - YearLower  - The lower range of the year we are looking for 
-        - YearUpper  - The upper range of the year we are looking for 
+        - YearLower  - The lower range of the year we are looking for
+        - YearUpper  - The upper range of the year we are looking for
         - CourseName - The name of the course we are looking for
   return: 
         - Returns an array with the sum of all of the tuples that match these conditions for the grade distribution. 
 */
-router.post('/GetSectionByCourseNameYearSemester', Section.etSectionByCourseNameYearSemester,routes.query)
+router.post('/GetSectionByCourseNameYearSemester', Section.GetSectionByCourseNameYearSemester,routes.query)
 
 /*
   description: This function gets all sections for a particular course
@@ -327,7 +326,7 @@ router.post('/GetSectionGoal',SectionGoal.GetSectionGoal,routes.query)
 router.post('/GetCurCourse',CurCourse.GetCurCourses,routes.query)
 router.post('/GetCurriculumTopics',CurriclumTopics.GetCurriculumTopics,routes.query)
 
-//Update all of the different types of data 
+//Update all of the different types of data
 router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)
 router.post('/UpdateGoals',Goals.UpdateGoals,routes.update)
 router.post('/UpdateSection',Section.UpdateSection,routes.update)
@@ -335,12 +334,12 @@ router.post('/UpdateTopic',Topics.UpdateTopics,routes.update)
 router.post('/UpdateCourses',Courses.UpdateCourses,routes.update)
 
 
-//Other stuff 
+//Other stuff
 router.post('/CurriculumRequiredCourses',CurCourse.GetRequiredCourses,routes.query)
 router.post('/CurriculumOptionalCourses',CurCourse.GetOptionalCourses,routes.query)
 router.post('/GoalValid',Curriclum.GoalValid,routes.query)
 
 /*******************************************************************************************/
 
-//Export this file 
+//Export this file
 module.exports = router
