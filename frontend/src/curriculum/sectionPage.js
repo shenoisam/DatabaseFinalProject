@@ -8,13 +8,14 @@ export class SectionsPage extends React.Component {
 		this.state = {
 			courses: [],
 			goals: [],
-			topics: []
+			topics: [],
+			flag:false,
 		};
 	}
 
 	async componentDidMount() {
 		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
-			CourseName: "Test",
+			CourseName: "MyCourse",
 			Spring : "Spring", 
 			Summer : "Summer",
 			Winter: "Winter",
@@ -23,16 +24,22 @@ export class SectionsPage extends React.Component {
 			YearLower: 1900
 
 		}}).json();
-		console.log("test:", parsed)
+		console.log("test:", parsed.r2)
 		this.state.courses = parsed.r2
+		this.state.flag = true;
+		this.setState(this.state)
 	}
 
 	render() {
 		return (
-			<div className="container padded">
-				<h2>Sections</h2>
-				<hr />
-				<BarExample data = {this.state.courses}/>
+			<div> 
+				{this.state.flag && 
+				<div className="container padded">
+					<h2>Sections</h2>
+					<hr />
+					<BarExample data = {this.state.courses}/>
+				</div>
+				}
 			</div>
 		);
 	}
