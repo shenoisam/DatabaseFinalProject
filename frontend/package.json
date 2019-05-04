@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
     "dompurify": "^1.0.10",
     "font-awesome": "^4.7.0",
     "ky": "^0.9.1",
