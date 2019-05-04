@@ -74,6 +74,7 @@ export class CreateSection extends React.Component {
 		console.log(this.state.NumStu);
     console.log(this.state.Comment1);
     console.log(this.state.Comment2);
+    console.log(this.state.APlus);
     console.log(parsed);
 		//window.location.reload();
 	};
