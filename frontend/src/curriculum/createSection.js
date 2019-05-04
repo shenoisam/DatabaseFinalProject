@@ -1,5 +1,6 @@
 import React from 'react';
 import ky from 'ky';
+import * as Bessemer from '../alloy/bessemer/components.js'
 import { sessionService } from 'redux-react-session';
 
 export class CreateSection extends React.Component {
@@ -8,10 +9,12 @@ export class CreateSection extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.state = {
-			Semester: '',
+      Year: '2019',
+			Semester: 'Fall',
 			NumStu: '',
       Comment1: '',
 			Comment2: '',
+      CourseName: '',
 			APlus: 0,
       A: 0,
       AMinus: 0,
@@ -27,6 +30,8 @@ export class CreateSection extends React.Component {
       F: 0,
       W: 0,
       I: 0,
+      error:'',
+      errorCourse:'',
 		};
 	}
 
@@ -47,36 +52,62 @@ export class CreateSection extends React.Component {
 		});
 	}
 
+  semesterChange(e){
+		if (e != null) {
+			this.state.Semester = e;
+			this.setState(this.state);
+		}
+	};
+
+  yearChange(e){
+		if (e != null) {
+			this.state.Year = e;
+			this.setState(this.state);
+		}
+	};
+
 	async onSubmit (event) {
 		event.preventDefault();
 		const parsed = await ky.post('http://localhost:8888/CreateSection',{json: {
+      Year: this.state.Year,
 			Semester: this.state.Semester,
 			NumStu: this.state.NumStu,
 		  Comment1: this.state.Comment1,
 			Comment2: this.state.Comment2,
-      APlus: this.state.GAPlus,
-			A: this.state.GA,
-      AMinus: this.state.GAMinus,
-      BPlus: this.state.GBPlus,
-			B: this.state.GB,
-      BMinus: this.state.GBMinus,
-      CPlus: this.state.GCPlus,
-			C: this.state.GC,
-      CMinus: this.state.GCMinus,
-      DPlus: this.state.GDPlus,
-			D: this.state.GD,
-      DMinus: this.state.GDMinus,
-      F: this.state.GF,
-			W: this.state.GW,
-      I: this.state.GI,
-		}}).json();
-		console.log(this.state.Semester);
-		console.log(this.state.NumStu);
-    console.log(this.state.Comment1);
-    console.log(this.state.Comment2);
-    console.log(this.state.APlus);
+      CourseName: this.state.CourseName,
+      APlus: this.state.APlus,
+			A: this.state.A,
+      AMinus: this.state.AMinus,
+      BPlus: this.state.BPlus,
+			B: this.state.B,
+      BMinus: this.state.BMinus,
+      CPlus: this.state.CPlus,
+			C: this.state.C,
+      CMinus: this.state.CMinus,
+      DPlus: this.state.DPlus,
+			D: this.state.D,
+      DMinus: this.state.DMinus,
+      F: this.state.F,
+			W: this.state.W,
+      I: this.state.I,
+		}}).json().catch(err => {
+      console.log(err)
+    });
+
     console.log(parsed);
-		//window.location.reload();
+
+    if(parsed.r2){
+			this.state.error = '';
+      this.state.errorCourse = '';
+			this.setState(this.state);
+		}
+		else {
+			this.state.error = 'Incorrect Data. Try Again!';
+      this.state.errorCourse = this.state.CourseName;
+			this.setState(this.state);
+		}
+    this.render();
+		window.location.reload();
 	};
 
 	render() {
@@ -84,10 +115,25 @@ export class CreateSection extends React.Component {
 			<div>
 				<form name="form" onSubmit={this.onSubmit}>
 					<div className="input-group form-group">
-					<div className="input-group-prepend">
-						<span className="input-group-text"><i className="fas fa-user"></i></span>
+  					<div className="input-group-prepend">
+  						<span className="input-group-text"><i className="fas fa-user"></i></span>
+  					</div>
+            <Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Semester"
+            className='col-6'
+                   friendlyName="Semester" placeholder={this.state.Semester}
+                   options={semesterOptions} value={this.state.Semester}
+                   onChange={opt => this.semesterChange(opt)}/>
+            <Bessemer.Select className="form-control" style={{backgroundColor:'black',width:'35%'}} name="Year"
+            className='col-5'
+                  friendlyName="Year" placeholder={this.state.Year}
+                  options={yearOptions} value={this.state.Year}
+                  onChange={opt => this.yearChange(opt)}/>
 					</div>
-						<input placeholder="FALL16" name="Semester"  className="form-control" checked={this.state.Semester} onChange={this.handleInputChange} required/>
+          <div className="input-group form-group">
+					<div className="input-group-prepend">
+						<span className="input-group-text"><i className="fas fa-key"></i></span>
+					</div>
+						<input placeholder ="Course Name for Section" name="CourseName"  className="form-control" checked={this.state.CourseName} onChange={this.handleInputChange} required/>
 					</div>
 					<div className="input-group form-group">
 					<div className="input-group-prepend">
@@ -124,7 +170,22 @@ export class CreateSection extends React.Component {
           <input placeholder="I" type="number" name="I" checked={this.state.I} onChange={this.handleInputChange} />
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Create Section</button>
 				</form>
+        {this.state.error && <p> No course named : {this.state.errorCourse} was found </p>}
 			</div>
 		);
 	}
 }
+// Semester options
+export const semesterOptions = [
+	{label: 'Spring', value: 'Spring'},
+	{label: 'Summer', value: 'Summer'},
+	{label: 'Fall', value: 'Fall'},
+  {label: 'Winter', value: 'Winter'}
+];
+// Years options
+export const yearOptions = [
+	{label: '2019', value: '2019'},
+	{label: '2020', value: '2020'},
+	{label: '2021', value: '2021'},
+  {label: '2022', value: '2022'}
+];
