@@ -30,5 +30,11 @@ var GetOptionalCourses = function(req,res,next){
 	res.locals.params = [req.body.Curriculum]
 	next()
 }
+var GetCurriculumCourses = function(req,res,next){
+	res.locals.select = "*"
+	res.locals.table = "CurCourses Courses"
+	res.locals.rmStr = "CurCourse.Curriculum = ? AND CurCourse.CourseName = Courses.CourseName GROUP BY Required"
+	res.locals.params = [req.body.Curriculum]
+}
 
-module.exports = {CreateCurCourse,GetCurCourses,GetRequiredCourses,GetOptionalCourses}
+module.exports = {CreateCurCourse,GetCurCourses,GetRequiredCourses,GetOptionalCourses,GetCurriculumCourses}

@@ -41,6 +41,7 @@ var routes          = require('./routes.js')
 */
 router.post('/CreateUser',Users.createUser,routes.insertData,routes.sendUserId)
 
+
 /*
     description: This function Creates Course Goals in the database
     parameters:
@@ -52,6 +53,7 @@ router.post('/CreateUser',Users.createUser,routes.insertData,routes.sendUserId)
              - otherwise returns an err object {err : "Something went wrong"}
 */
 router.post('/CreateCourseGoals',CourseGoals.CreateCourseGoal,routes.insertData,routes.end)
+
 
 /*
     description: This function creates Course in the database
@@ -67,6 +69,7 @@ router.post('/CreateCourseGoals',CourseGoals.CreateCourseGoal,routes.insertData,
              - otherwise returns an err object {err : "Something went wrong"}
 */
 router.post('/CreateCourses',Courses.CreateCourses,routes.insertData,routes.end)
+
 
 /*
     description: This function creates SectionGoal in the database. It stores the grade distribution for the goal
@@ -97,6 +100,7 @@ router.post('/CreateCourses',Courses.CreateCourses,routes.insertData,routes.end)
 */
 router.post('/CreateSectionGoal',SectionGoal.CreateSectionGoal,routes.insertData,routes.end)
 
+
 /*
     description: This function creates Course in the database
     parameters:
@@ -122,6 +126,7 @@ router.post('/CreateCurCourse',CurCourse.CreateCurCourse,routes.insertData,route
 */
 router.post('/CreateCurriculumTopics',CurriclumTopics.CreateCurriculumTopics,routes.insertData,routes.end)
 
+
 /*
     description: This function creates a Curriculum
     parameters:
@@ -137,6 +142,7 @@ router.post('/CreateCurriculumTopics',CurriclumTopics.CreateCurriculumTopics,rou
 */
 router.post('/CreateCurriculum',Curriclum.CreateCurriculum,routes.insertData,routes.end)
 
+
 /*
     description: This function creates Goals
     parameters:
@@ -149,6 +155,7 @@ router.post('/CreateCurriculum',Curriclum.CreateCurriculum,routes.insertData,rou
              - otherwise returns an err object {err : "Something went wrong"}
 */
 router.post('/CreateGoals',Goals.CreateGoals,routes.insertData,routes.end)
+
 
 /*
     description: This function creates Sections
@@ -180,6 +187,7 @@ router.post('/CreateGoals',Goals.CreateGoals,routes.insertData,routes.end)
 */
 router.post('/CreateSection',Section.CreateSection,routes.insertData,routes.end)
 
+
 /*
     description: This function creates Topics
     parameters:
@@ -194,6 +202,7 @@ router.post('/CreateSection',Section.CreateSection,routes.insertData,routes.end)
              - otherwise returns an err object {err : "Something went wrong"}
 */
 router.post('/CreateTopic',Topics.CreateTopic,routes.insertData,routes.end)
+
 
 //Get from the inserted diagrams
 
@@ -210,6 +219,17 @@ router.post('/CreateTopic',Topics.CreateTopic,routes.insertData,routes.end)
 router.post('/LoginUser',Users.LoginUser,routes.query)
 
 /*
+ description: This function gets all the courses from the database
+    parameters:
+
+    return:
+          - JSobj
+             - If everything runs smoothly, returns course object {}
+             - otherwise returns an err object {err : "Something went wrong"}
+*/
+router.post('/GetAllCourses',Courses.GetAllCourses )
+
+/*
     description: This function gets user by ID
     parameters:
           - ID            - ID of user
@@ -219,6 +239,7 @@ router.post('/LoginUser',Users.LoginUser,routes.query)
              - otherwise returns an err object {err : "Something went wrong"}
 */
 router.post('/GetUserById',Users.GetUserById,routes.query)
+
 
 /*
     description: This function gets a curiculum
@@ -231,6 +252,7 @@ router.post('/GetUserById',Users.GetUserById,routes.query)
 */
 router.post('/GetCurriculum',Curriclum.GetCurriculum,routes.query)
 
+
 /*
     description: This function gets all of the curriclums
     parameters:
@@ -240,6 +262,7 @@ router.post('/GetCurriculum',Curriclum.GetCurriculum,routes.query)
              - otherwise returns an err object {err : "Something went wrong"}
 */
 router.post('/GetAllCurriculums',Curriclum.GetAllCurriculums,routes.query)
+
 
 /*
     description: This function gets a specific goal
@@ -252,6 +275,7 @@ router.post('/GetAllCurriculums',Curriclum.GetAllCurriculums,routes.query)
 */
 router.post('/GetGoals',Goals.GetGoals,routes.query)
 
+
 /*
   description: This function gets a section
   parameters:
@@ -262,6 +286,7 @@ router.post('/GetGoals',Goals.GetGoals,routes.query)
   return:
 */
 router.post('/GetSection',Section.GetSection,routes.query)
+
 
 /*
   description: This function gets a section
@@ -278,6 +303,7 @@ router.post('/GetSection',Section.GetSection,routes.query)
 */
 router.post('/GetSectionByCourseNameYearSemester', Section.GetSectionByCourseNameYearSemester,routes.query)
 
+
 /*
   description: This function gets all sections for a particular course
   parameters:
@@ -286,6 +312,7 @@ router.post('/GetSectionByCourseNameYearSemester', Section.GetSectionByCourseNam
       - Gets all of the sections corresponding to the course
 */
 router.post('/GetAllSections',Section.GetAllSectionsForCourse,routes.query)
+
 
 /*
   description: This function gets all of the topics
@@ -296,6 +323,7 @@ router.post('/GetAllSections',Section.GetAllSectionsForCourse,routes.query)
 */
 router.post('/GetTopic',Topics.GetTopic,routes.query)
 
+
 /*
   description: This function gets all of the course goals
   parameters:
@@ -305,6 +333,8 @@ router.post('/GetTopic',Topics.GetTopic,routes.query)
       - Returns a course goal
 */
 router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
+
+
 /*
   description: This function gets all of the courses
   parameters:
@@ -314,17 +344,48 @@ router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
 */
 router.post('/GetCourses',Courses.GetCourses,routes.query)
 
+
 /*
   description: This function gets all the goals of a particular section
-  parameters:
-      - CourseName      - The name of the course that
-      - Topic           -
-  return:
-      - Returns a list of all the courses for a specific curriculum
+  parameters: 
+      - CourseName      - The name of the course the section belongs to
+      - Topic           - The topics associated with that course
+  return: 
+      - Returns the goal of the section 
 */
 router.post('/GetSectionGoal',SectionGoal.GetSectionGoal,routes.query)
+
+
+/*
+  description: This function gets the current course 
+  parameters: 
+      - Curriculum      - The curriculum that will be associated with the courses
+      - CourseName      - The name of the course 
+  return: 
+      - Returns the courses associated with the curriculum
+*/
 router.post('/GetCurCourse',CurCourse.GetCurCourses,routes.query)
+
+
+/*
+  description: This function gets all the topics inside of the curriculum  
+  parameters: 
+      - ID        - The ID of the topic needed
+      - Name      - the Name of the topic needed
+  return: 
+      - Returns the topics associated with that curriculum
+*/
 router.post('/GetCurriculumTopics',CurriclumTopics.GetCurriculumTopics,routes.query)
+
+/*
+  description: This function returns all of the courses from a curriculum ordered by if it is required or not 
+  parameters: 
+      - Curriculum       - The name of the curriculum
+
+  return: 
+      - Returns the courses associated with that curriculum
+*/
+router.post('/GetCurriculumCourses',CurCourse.GetCurriculumCourses,routes.query)
 
 //Update all of the different types of data
 router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)
@@ -335,7 +396,24 @@ router.post('/UpdateCourses',Courses.UpdateCourses,routes.update)
 
 
 //Other stuff
+/*
+  description: This function gets all the required courses for a curriculum
+  parameters: 
+      - ID        - The ID of the topic needed
+      - Name      - the Name of the topic needed
+  return: 
+      - Returns the topics associated with that curriculum
+*/
 router.post('/CurriculumRequiredCourses',CurCourse.GetRequiredCourses,routes.query)
+
+/*
+  description: This function gets all the optional courses for a curriculum
+  parameters: 
+      - ID        - The ID of the topic needed
+      - Name      - the Name of the topic needed
+  return: 
+      - Returns the topics associated with that curriculum
+*/
 router.post('/CurriculumOptionalCourses',CurCourse.GetOptionalCourses,routes.query)
 router.post('/GoalValid',Curriclum.GoalValid,routes.query)
 
