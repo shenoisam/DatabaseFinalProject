@@ -5,7 +5,7 @@ var CreateGoals = function(req,res,next){
 	var Cur         = req.body.Curriculum 
 	
 	res.locals.sql    = "INSERT INTO Goals VALUES (?,?,?)"
-    res.locals.val = [[ID,Description,Cur]]
+    res.locals.val = [ID,Description,Cur]
 	next()
 	
 }

@@ -153,7 +153,8 @@ router.post('/CreateGoals',Goals.CreateGoals,routes.insertData,routes.end)
 /*
     description: This function creates Sections
     parameters: 
-          - ID       : Section Id                                        
+          - ID       : Section Id
+          - Year     : Get the year that this section is offered                                        
           - Semester : Semester this that this section was offered        
           - NumStu   : Total number of students
           - Comment1 : Comment 1 
@@ -252,6 +253,7 @@ router.post('/GetAllCurriculums',Curriclum.GetAllCurriculums,routes.query)
 */
 router.post('/GetGoals',Goals.GetGoals,routes.query)
 router.post('/GetSection',Section.GetSection,routes.query)
+router.post('/GetAllSections',Section.GetAllSections,routes.query)
 router.post('/GetTopic',Topics.GetTopic,routes.query)
 router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
 router.post('/GetCourses',Courses.GetCourses,routes.query)
