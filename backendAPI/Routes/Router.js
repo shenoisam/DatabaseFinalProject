@@ -227,7 +227,7 @@ router.post('/LoginUser',Users.LoginUser,routes.query)
              - If everything runs smoothly, returns course object {}
              - otherwise returns an err object {err : "Something went wrong"}
 */
-router.post('/GetAllCourses',Courses.GetAllCourses,routes.query )
+router.post('/GetAllCourses',Courses.GetAllCourses,routes.query)
 
 /*
     description: This function gets user by ID
@@ -387,11 +387,13 @@ router.post('/GetCurriculumTopics',CurriclumTopics.GetCurriculumTopics,routes.qu
 */
 router.post('/GetCurriculumCourses',CurCourse.GetCurriculumCourses,routes.query)
 
+router.post('/GetCoursesNotInCurriculum',CurCourse.CoursesNotInCurriculum ,routes.query)
+
 //Update all of the different types of data
 
 /*
   description: This function updates the curriculums 
-  
+
 */
 router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)
 router.post('/UpdateGoals',Goals.UpdateGoals,routes.update)
