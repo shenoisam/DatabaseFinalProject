@@ -4,6 +4,12 @@ import ReactSelect from 'react-select';
 import * as ReduxForm from 'redux-form';
 import * as Utils from './../alloy/utils/core-utils';
 import * as Validation from './../alloy/utils/validation';
+import * as Recharts from 'recharts'
+const {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} = Recharts;
+
+
+
+
 
 function buildReduxValidator(validator, props) {
 	return value => validator.spec(value) ? undefined : validator.error(props, value);
@@ -188,3 +194,81 @@ export class Button extends React.Component {
 		return <button disabled={disabled} className={className} {...props}>{buttonText}</button>;
 	}
 }
+
+
+var data = [
+	{name: 'A+',  pv: 2400},
+	{name: 'A',  pv: 3800},
+	{name: 'A-',  pv: 3800},
+	{name: 'B+',  pv: 3800},
+	{name: 'B',  pv: 1398},
+	{name: 'B-',  pv: 3800},
+	{name: 'C+',  pv: 3800},
+	{name: 'C',  pv: 9800},
+	{name: 'C-',  pv: 3800},
+	{name: 'D+',  pv: 3800},
+	{name: 'D',  pv: 3908},
+	{name: 'D-',  pv: 3800},
+	{name: 'F',  pv: 3800},
+	{name: 'W',  pv: 3800},
+	{name: 'I',  pv: 3800},
+];
+
+
+
+
+export class BarExample extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			myData: [],
+			rendered: false,
+		};
+	}
+
+	async componentDidMount(){
+		console.log("YEET", this.props.data);
+		this.state.myData = Object.values(this.props.data[0])
+		this.setState(this.state);
+		
+
+		console.log("MOUNT", this.state.myData);
+		this.state.rendered = true;
+		this.setState(this.state)
+	}
+  
+	render() {
+
+		const dataTemp = [];
+		for(let i = 0; i < this.state.myData.length; i++){
+			data[i].pv = this.state.myData[i];
+			console.log("LOOP", this.state.myData[i]);
+		}
+
+		console.log("HELP", this.state.myData);
+
+
+	  return (
+		<div>
+			{this.state.rendered &&
+			  <BarChart width={600} height={300} data={data}
+					margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+				<CartesianGrid strokeDasharray="3 3"/>
+				<XAxis dataKey="name"/>
+				<YAxis/>
+				<Tooltip/>
+				<Legend />
+				<Bar dataKey="pv" fill="#8884d8" />
+				
+			 </BarChart>
+			}
+		</div>
+	  );
+	}
+  }
+
+
+
+
+
+
