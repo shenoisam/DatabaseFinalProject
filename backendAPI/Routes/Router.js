@@ -275,7 +275,7 @@ router.post('/GetSection',Section.GetSection,routes.query)
         - CourseName - The name of the course we are looking for
   return:
 */
-router.post('/GetSectionByCourseName', Section.GetSectionByCourseNameYearSemester,routes.query)
+router.post('/GetSectionByCourseNameYearSemester', Section.GetSectionByCourseNameYearSemester,routes.query)
 
 /*
   description: This function gets all sections offered
@@ -286,7 +286,7 @@ router.post('/GetSectionByCourseName', Section.GetSectionByCourseNameYearSemeste
         - CourseName - The course name associated with this section
   return:
 */
-router.post('/GetAllSections',Section.GetAllSections,routes.query)
+router.post('/GetSectionByCourseName',Section.GetAllSections,routes.query)
 router.post('/GetTopic',Topics.GetTopic,routes.query)
 router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
 router.post('/GetCourses',Courses.GetCourses,routes.query)
