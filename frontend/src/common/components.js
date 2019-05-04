@@ -4,6 +4,12 @@ import ReactSelect from 'react-select';
 import * as ReduxForm from 'redux-form';
 import * as Utils from './../alloy/utils/core-utils';
 import * as Validation from './../alloy/utils/validation';
+import * as Recharts from 'recharts'
+const {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} = Recharts;
+
+
+
+
 
 function buildReduxValidator(validator, props) {
 	return value => validator.spec(value) ? undefined : validator.error(props, value);
@@ -190,49 +196,52 @@ export class Button extends React.Component {
 }
 
 
-export class SectionChart extends React.Component {
-	render (){
-		return (
-			<div>
-				<canvas id="myChart" width="400" height="400"></canvas>
-				var ctx = document.getElementById('myChart').getContext('2d');
-				var myChart = new Chart(ctx, {
-					type: 'bar',
-					data: {
-						labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-						datasets: [{
-							label: '# of Votes',
-							data: [12, 19, 3, 5, 2, 3],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 1
-						}]
-					},
-					options: {
-						scales: {
-							yAxes: [{
-								ticks: {
-									beginAtZero: true
-								}
-							}]
-						}
-					}
-				});
-			</div>
-		);
+const data = [
+	{name: 'Page A',  pv: 2400, amt: 2400},
+	{name: 'Page B',  pv: 1398, amt: 2210},
+	{name: 'Page C', pv: 9800, amt: 2290},
+	{name: 'Page D',  pv: 3908, amt: 2000},
+	{name: 'Page E',  pv: 4800, amt: 2181},
+	{name: 'Page F',  pv: 3800, amt: 2500},
+	{name: 'Page G',  pv: 4300, amt: 2100},
+];
+
+
+
+
+export class BarExample extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			none: '',
+			data 
+		};
 	}
-}
+
+	componentDidMount(){
+		console.log(data);
+		
+	}
+  
+	render() {
+	  return (
+		<div>
+			  <BarChart width={600} height={300} data={data}
+					margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+				<CartesianGrid strokeDasharray="3 3"/>
+				<XAxis dataKey="name"/>
+				<YAxis/>
+				<Tooltip/>
+				<Legend />
+				<Bar dataKey="pv" fill="#8884d8" />
+				
+			 </BarChart>
+		</div>
+	  );
+	}
+  }
+
+
+
+
+
