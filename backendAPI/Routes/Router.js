@@ -273,37 +273,33 @@ router.post('/GetSection',Section.GetSection,routes.query)
         - YearLower  - The lower range of the year we are looking for
         - YearUpper  - The upper range of the year we are looking for
         - CourseName - The name of the course we are looking for
-  return: 
-        - Returns an array with the sum of all of the tuples that match these conditions for the grade distribution. 
+  return:
+        - Returns an array with the sum of all of the tuples that match these conditions for the grade distribution.
 */
 router.post('/GetSectionByCourseNameYearSemester', Section.GetSectionByCourseNameYearSemester,routes.query)
 
 /*
   description: This function gets all sections for a particular course
-  parameters: 
+  parameters:
       - CourseName  - the course name of the course whos sections we are looking for
-  return: 
+  return:
       - Gets all of the sections corresponding to the course
 */
 router.post('/GetAllSections',Section.GetAllSectionsForCourse,routes.query)
 
 /*
   description: This function gets all of the topics
-  parameters: 
-      - ID      - id of the topic being searched for 
-  return: 
-      - Topic tuple corresponding to ID 
+  parameters:
+      - ID      - id of the topic being searched for
+  return:
+      - Topic tuple corresponding to ID
 */
-<<<<<<< HEAD
-router.post('/GetSectionByCourseName',Section.GetAllSections,routes.query)
-=======
->>>>>>> ebf1aa53925a1ba73288d844bd7e2e9db0a78df0
 router.post('/GetTopic',Topics.GetTopic,routes.query)
 
 /*
   description: This function gets all of the course goals
-  parameters: 
-      - ID              - id of the topic being searched for 
+  parameters:
+      - ID              - id of the topic being searched for
       - CourseName      - the name of the course being searched for
   return: 
       - Returns a course goal
@@ -311,20 +307,20 @@ router.post('/GetTopic',Topics.GetTopic,routes.query)
 router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
 /*
   description: This function gets all of the courses
-  parameters: 
+  parameters:
       - CourseName      - the name of a course that matches the course name
-  return: 
-      - Returns a list of all the courses for a specific curriculum  
+  return:
+      - Returns a list of all the courses for a specific curriculum
 */
 router.post('/GetCourses',Courses.GetCourses,routes.query)
 
 /*
   description: This function gets all the goals of a particular section
-  parameters: 
-      - CourseName      - The name of the course that 
+  parameters:
+      - CourseName      - The name of the course that
       - Topic           -
-  return: 
-      - Returns a list of all the courses for a specific curriculum  
+  return:
+      - Returns a list of all the courses for a specific curriculum
 */
 router.post('/GetSectionGoal',SectionGoal.GetSectionGoal,routes.query)
 router.post('/GetCurCourse',CurCourse.GetCurCourses,routes.query)
