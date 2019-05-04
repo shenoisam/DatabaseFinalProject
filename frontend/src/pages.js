@@ -43,6 +43,8 @@ export class Home extends React.Component {
 			<div className="container padded">
 				<div className="row">
 					<div className="col-12">
+						<h2>Create Curriculum </h2>
+						<hr />
             <CreateCurriculum/>
 					</div>
 				</div>
