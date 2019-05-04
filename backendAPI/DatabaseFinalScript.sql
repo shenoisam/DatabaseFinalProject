@@ -80,7 +80,7 @@ CREATE TABLE Section(
    
    
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
-   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester,Year) 
+   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester,Year,CourseName) 
    
 );
 CREATE TABLE SectionGoal(

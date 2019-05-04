@@ -11,6 +11,8 @@ var CreateSection = function(req,res,next){
 
   next()
 }
+
+
 var GetSection = function(req,res,next){
    res.locals.select = "*"
    res.locals.table = "Section"
