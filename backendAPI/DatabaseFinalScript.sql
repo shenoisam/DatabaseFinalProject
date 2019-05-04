@@ -80,11 +80,13 @@ CREATE TABLE Section(
    
    
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
-   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester,Year) 
+   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester,Year,CourseName) 
    
 );
 CREATE TABLE SectionGoal(
    ID         INT          NOT NULL, Check(ID>99 AND ID < 1000),
+   Year       VarChar(25)  NOT NULL,
+   CourseName VARCHAR(25)  NOT NULL,  
    Semester   VARCHAR(25)  NOT NULL, 
    GoalsID    VarChar(25)  NOT NULL, 
    GAPlus     INT          , 
@@ -104,8 +106,8 @@ CREATE TABLE SectionGoal(
    GI         INT          ,
 
    FOREIGN KEY (GoalsID)       REFERENCES Goals(ID),
-   FOREIGN KEY (ID, Semester)  REFERENCES Section(ID, Semester) ,
-   CONSTRAINT SectionGoals_pk PRIMARY KEY (GoalsID, ID, Semester)
+   FOREIGN KEY (ID, Semester,Year,CourseName)  REFERENCES Section(ID, Semester,Year, CourseName),
+   CONSTRAINT SectionGoals_pk PRIMARY KEY (GoalsID, ID, Semester,Year, CourseName)
 
 );
 CREATE TABLE CourseGoals(

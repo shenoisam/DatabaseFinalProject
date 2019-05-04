@@ -14,7 +14,7 @@ var encryption = require(__dirname+'/passwordEncryption')
 var insertData = function(req,res, next){
    var sql = res.locals.sql 
    var val = res.locals.val
-   console.log("Hello World")
+   console.log(sql,val)
 
     _db.query(sql,val, function(err,r2){
         if(err){

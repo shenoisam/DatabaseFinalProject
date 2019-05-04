@@ -2,11 +2,18 @@ var ran = require('./../Routes/passwordEncryption.js')
 
 var CreateSection = function(req,res,next){
   var id          = (Math.floor(Math.random() * 1000)) + 99
-  res.locals.val  = [id, req.body.Semester, req.body.NumStu,req.body.Comment1, req.body.Comment2 ,req.body.CourseName,req.body.APlus , req.body.A,req.body.AMinus,req.body.BPlus,req.body.B ,req.body.BMinus,req.body.CPlus,req.body.C,req.body.CMinus,req.body.DPlus,req.body.D,req.body.DMinus,req.body.F,req.body.W,req.body.I]
-  res.locals.sql  = "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+  res.locals.val  = [id,req.body.Year, req.body.Semester, req.body.NumStu,req.body.Comment1, req.body.Comment2 ,req.body.CourseName,req.body.APlus , req.body.A,req.body.AMinus,req.body.BPlus,req.body.B ,req.body.BMinus,req.body.CPlus,req.body.C,req.body.CMinus,req.body.DPlus,req.body.D,req.body.DMinus,req.body.F,req.body.W,req.body.I]
+  res.locals.sql  = "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 
   next()
 }
+
+var GetAllSections = function(req,res,next){
+    res.locals.select = "*"
+    res.locals.table = "Section"
+    next()
+ }
+
 var GetSection = function(req,res,next){
    res.locals.select = "*"
    res.locals.table = "Section"
@@ -38,4 +45,4 @@ var UpdateSection = function(req,res,next){
        res.send({err: "ERROR! Attributes and Lengths don't match up"})
    }
 }
-module.exports = {CreateSection,GetSection,UpdateSection}
+module.exports = {CreateSection,GetSection,UpdateSection,GetAllSections}
