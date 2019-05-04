@@ -57,6 +57,7 @@ CREATE TABLE Goals(
 
 CREATE TABLE Section(
    ID         INT          NOT NULL, Check(ID>99 AND ID < 1000),
+   Year       VarChar(25)  NOT NULL, 
    Semester   VARCHAR(25)  NOT NULL, 
    NumStu     INT          NOT NULL,
    Comment1   VARCHAR(45)  NOT NULL, 
@@ -79,7 +80,7 @@ CREATE TABLE Section(
    
    
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
-   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester) 
+   CONSTRAINT Sections_pk PRIMARY KEY (ID, Semester,Year) 
    
 );
 CREATE TABLE SectionGoal(

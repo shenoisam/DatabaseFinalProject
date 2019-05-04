@@ -158,21 +158,21 @@ router.post('/CreateGoals',Goals.CreateGoals,routes.insertData,routes.end)
           - NumStu   : Total number of students
           - Comment1 : Comment 1 
           - Comment2 : Comment 2
-          - GAPlus   : # of A+ for the section 
-          - GA       : # of A for the section
-          - GAMinus  : # of A- for the section
-          - GBPlus   : # of B+ for the section
-          - GB       : # of B for the section
-          - GBMinus  : # of B- for the section
-          - GCPlus   : # of C+ for the section
-          - GC       : # of C for the section
-          - GCMinus  : # of C- for the section
-          - GDPlus   : # of D+ for the section
-          - GD       : # of D for the section
-          - GDMinus  : # of D- for the section
-          - GF       : # of F for the section
-          - GW       : # of W for the section
-          - GI       : # of I for the section
+          - APlus   : # of A+ for the section 
+          - A       : # of A for the section
+          - AMinus  : # of A- for the section
+          - BPlus   : # of B+ for the section
+          - B       : # of B for the section
+          - BMinus  : # of B- for the section
+          - CPlus   : # of C+ for the section
+          - C       : # of C for the section
+          - CMinus  : # of C- for the section
+          - DPlus   : # of D+ for the section
+          - D       : # of D for the section
+          - DMinus  : # of D- for the section
+          - F       : # of F for the section
+          - W       : # of W for the section
+          - I       : # of I for the section
     return: 
           - JSobj
              - If everything runs smoothly, returns empty object {}
