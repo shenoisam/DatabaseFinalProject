@@ -254,42 +254,39 @@ router.post('/GetGoals',Goals.GetGoals,routes.query)
 
 /*
   description: This function gets a section
-  parameters: 
+  parameters:
         - ID         - the ID of the section
-        - Semester   - the semester for this section 
+        - Semester   - the semester for this section
         - Year       - The year that this section was offered
         - CourseName - The course name associated with this section
-  return: 
+  return:
 */
 router.post('/GetSection',Section.GetSection,routes.query)
-<<<<<<< HEAD
-=======
 
 /*
   description: This function gets a section
-  parameters: 
+  parameters:
         - Spring     - if we are looking for section with Spring, enter spring otherwise enter ?
         - Summer     - if we are looking for section with Summer, enter summer otherwise enter ?
         - Fall       - if we are looking for section with Fall, enter fall otherwise enter ?
         - Winter     - if we are looking for section with winter, enter spring otherwise enter ?
-        - YearLower  - The lower range of the year we are looking for 
-        - YearUpper  - The upper range of the year we are looking for 
+        - YearLower  - The lower range of the year we are looking for
+        - YearUpper  - The upper range of the year we are looking for
         - CourseName - The name of the course we are looking for
-  return: 
+  return:
 */
-router.post('/GetSectionByCourseName', Section.etSectionByCourseNameYearSemester,routes.query)
+router.post('/GetSectionByCourseName', Section.GetSectionByCourseNameYearSemester,routes.query)
 
 /*
   description: This function gets all sections offered
-  parameters: 
+  parameters:
         - ID         - the ID of the section
-        - Semester   - the semester for this section 
+        - Semester   - the semester for this section
         - Year       - The year that this section was offered
         - CourseName - The course name associated with this section
-  return: 
+  return:
 */
 router.post('/GetAllSections',Section.GetAllSections,routes.query)
->>>>>>> 319ea6ca66fa41d43ac5968dd99c6a8a9e6de193
 router.post('/GetTopic',Topics.GetTopic,routes.query)
 router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
 router.post('/GetCourses',Courses.GetCourses,routes.query)
