@@ -1,6 +1,7 @@
 import React from 'react';
 import {CreateCurriculum} from './curriculum/createCurriculum.js'
 import {CreateCourse} from './curriculum/createCourse.js'
+import {CreateSection} from './curriculum/createSection.js'
 import {CoursePage} from './curriculum/coursePage.js'
 import {SectionsPage} from './curriculum/sectionPage.js'
 import {CurriculumPagee} from './curriculum/curriculumPage.js'
@@ -56,6 +57,7 @@ export class Home extends React.Component {
 						<br/>
 						<h2>Create Section </h2>
 						<hr />
+						<CreateSection/>
 						<br/>
 						<br/>
 					</div>

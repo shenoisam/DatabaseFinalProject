@@ -13,15 +13,12 @@ export class CreateCourse extends React.Component {
       CourseNumber: '',
 			CreditHours: '',
 			CourseDescription: '',
-      HeadPerson: '',
 		};
 	}
 
 	async componentDidMount() {
 		sessionService.loadSession().then(curr => {
 			console.log("UserID: ", curr)
-			this.state.HeadPerson = curr;
-			this.setState(this.state);
 		}).catch(err =>
 			console.log(err)
 		);
@@ -38,22 +35,14 @@ export class CreateCourse extends React.Component {
 
 	async onSubmit (event) {
 		event.preventDefault();
-		if (this.state.HeadPerson){
-			const parsed = await ky.post('http://localhost:8888/CreateCourses',{json: {
-				CourseName: this.state.CourseName,
-				SubjectCode: this.state.SubjectCode,
-			  CourseNumber: this.state.CourseNumber,
-				CreditHours: this.state.CreditHours,
-        CourseDescription: this.state.CourseDescription,
-				HeadPerson: this.state.HeadPerson
-			}}).json();
-			console.log(this.state.CourseName);
-			console.log(this.state.SubjectCode);
-      console.log(parsed);
-			window.location.reload();
-		}else {
-			console.log(this.state.HeadPerson)
-		}
+		const parsed = await ky.post('http://localhost:8888/CreateCourses',{json: {
+			CourseName: this.state.CourseName,
+			SubjectCode: this.state.SubjectCode,
+		  CourseNumber: this.state.CourseNumber,
+			CreditHours: this.state.CreditHours,
+      CourseDescription: this.state.CourseDescription,
+		}}).json();
+		window.location.reload();
 	};
 
 	render() {
