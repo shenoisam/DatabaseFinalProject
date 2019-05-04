@@ -1,7 +1,5 @@
 import React from 'react';
 import ky from 'ky';
-import {Button} from 'reactstrap';
-import _ from 'lodash';
 
 export class CoursePage extends React.Component {
 	// basically asks a user to display one course at a time
@@ -36,7 +34,7 @@ export class CoursePage extends React.Component {
 			CourseName: this.state.CourseName
 		}}).json();
 
-		if(parsed.r2.length == 1){
+		if(parsed.r2.length === 1){
 			this.state.error = '';
 			this.state.SubjectCode = parsed.r2[0].SubjectCode;
 			this.state.CourseNumber = parsed.r2[0].CourseNumber;

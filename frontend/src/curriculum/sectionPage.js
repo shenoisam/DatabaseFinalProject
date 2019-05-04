@@ -1,5 +1,4 @@
 import React from 'react';
-import ky from 'ky';
 
 export class SectionsPage extends React.Component {
 	constructor(props){

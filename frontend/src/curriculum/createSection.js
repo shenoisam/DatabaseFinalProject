@@ -54,15 +54,17 @@ export class CreateSection extends React.Component {
 
   semesterChange(e){
 		if (e != null) {
-			this.state.Semester = e;
-			this.setState(this.state);
+      this.setState({
+        Semester: e
+      });
 		}
 	};
 
   yearChange(e){
 		if (e != null) {
-			this.state.Year = e;
-			this.setState(this.state);
+      this.setState({
+        Year: e
+      });
 		}
 	};
 
@@ -97,14 +99,16 @@ export class CreateSection extends React.Component {
     console.log(parsed);
 
     if(parsed.r2){
-			this.state.error = '';
-      this.state.errorCourse = '';
-			this.setState(this.state);
+      this.setState({
+	      error: '',
+        errorCourse: ''
+	    });
 		}
 		else {
-			this.state.error = 'Incorrect Data. Try Again!';
-      this.state.errorCourse = this.state.CourseName;
-			this.setState(this.state);
+      this.setState({
+	      error: 'Incorrect Data. Try Again!',
+        errorCourse: this.state.CourseName
+	    });
 		}
     this.render();
 		window.location.reload();
