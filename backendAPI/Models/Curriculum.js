@@ -63,4 +63,6 @@ var GoalValid = function(req,res,next){
 
 
 }
+
+
 module.exports = {CreateCurriculum,GetCurriculum,UpdateCurriculum,GoalValid,GetAllCurriculums}
