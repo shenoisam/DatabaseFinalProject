@@ -252,7 +252,41 @@ router.post('/GetAllCurriculums',Curriclum.GetAllCurriculums,routes.query)
              - otherwise returns an err object {err : "Something went wrong"}
 */
 router.post('/GetGoals',Goals.GetGoals,routes.query)
+
+/*
+  description: This function gets a section
+  parameters: 
+        - ID         - the ID of the section
+        - Semester   - the semester for this section 
+        - Year       - The year that this section was offered
+        - CourseName - The course name associated with this section
+  return: 
+*/
 router.post('/GetSection',Section.GetSection,routes.query)
+
+/*
+  description: This function gets a section
+  parameters: 
+        - Spring     - if we are looking for section with Spring, enter spring otherwise enter ?
+        - Summer     - if we are looking for section with Summer, enter summer otherwise enter ?
+        - Fall       - if we are looking for section with Fall, enter fall otherwise enter ?
+        - Winter     - if we are looking for section with winter, enter spring otherwise enter ?
+        - YearLower  - The lower range of the year we are looking for 
+        - YearUpper  - The upper range of the year we are looking for 
+        - CourseName - The name of the course we are looking for
+  return: 
+*/
+router.post('/GetSectionByCourseName', Section.etSectionByCourseNameYearSemester,routes.query)
+
+/*
+  description: This function gets all sections offered
+  parameters: 
+        - ID         - the ID of the section
+        - Semester   - the semester for this section 
+        - Year       - The year that this section was offered
+        - CourseName - The course name associated with this section
+  return: 
+*/
 router.post('/GetAllSections',Section.GetAllSections,routes.query)
 router.post('/GetTopic',Topics.GetTopic,routes.query)
 router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
