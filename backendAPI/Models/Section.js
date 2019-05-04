@@ -1,13 +1,9 @@
 var ran = require('./../Routes/passwordEncryption.js')
 
 var CreateSection = function(req,res,next){
-  var d = new Date();
-  d = d.getDay() + "" + d.getHours() + "" + d.getMilliseconds() +"" + d.getMonth()
-  var id                = ran.genRandomString(15) + d
-  res.locals.id = id
-
-  res.locals. val = [id, req.body.Semester, req.body.NumStu,req.body.Comment1, req.body.Comment2 ,req.body.CourseName,req.body.APlus , req.body.A,req.body.AMinus,req.body.BPlus,req.body.B ,req.body.BMinus,req.body.CPlus,req.body.C,req.body.CMinus,req.body.DPlus,req.body.D,req.body.DMinus,req.body.F,req.body.W,req.body.I]
-  res.locals.sql    = "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+  var id          = (Math.floor(Math.random() * 1000)) + 99
+  res.locals.val  = [id, req.body.Semester, req.body.NumStu,req.body.Comment1, req.body.Comment2 ,req.body.CourseName,req.body.APlus , req.body.A,req.body.AMinus,req.body.BPlus,req.body.B ,req.body.BMinus,req.body.CPlus,req.body.C,req.body.CMinus,req.body.DPlus,req.body.D,req.body.DMinus,req.body.F,req.body.W,req.body.I]
+  res.locals.sql  = "INSERT INTO Section VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 
   next()
 }
