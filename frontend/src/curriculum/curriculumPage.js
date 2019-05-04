@@ -66,16 +66,13 @@ export class CurriculumPagee extends React.Component {
 		}
 		this.setState(this.state)
 
-		if(parsed2.err === null){
-			for (var i = 0; i < parsed2.r2.length; i++) {
-				for (var j = 0; j < this.state.Courses.length; j++) {
-					console.log(this.state.Courses[i].CourseName)
-					console.log(parsed2.r2[j].Curriculum)
-					if(this.state.Courses[i].CourseName === parsed2.r2[j].CourseName)
-						this.state.Course[i] = ''
-				}
-			}
+		if(parsed2.r2){
+			this.state.Courses = this.state.Courses.filter(function(e){
+				return parsed2.r2.indexOf(e) < -1;
+			})
 		}
+
+		console.log(this.state.Courses)
 		this.setState(this.state)
 		this.render()
 	}
