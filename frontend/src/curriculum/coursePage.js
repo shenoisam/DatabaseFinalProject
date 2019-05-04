@@ -61,7 +61,7 @@ export class CoursePage extends React.Component {
 	render() {
 		if(!this.state.SubjectCode){
 			return (
-				<div className="d-lg-flex flex-lg-wrap justify-content-lg-start">
+				<div className="d-lg-flex flex-lg-wrap justify-content-lg-start" style={{marginTop:'20px'}}>
 					<div className="col-lg-12" >
 						<form name="form" onSubmit={this.onSubmit}>
 							<input placeholder="Search for a course" name="CourseName"  className="form-control" checked={this.state.CourseName} onChange={this.handleInputChange} required/>
@@ -74,7 +74,7 @@ export class CoursePage extends React.Component {
 		}
 		else{
 			return (
-				<div className="d-lg-flex flex-lg-wrap justify-content-lg-start">
+				<div className="d-lg-flex flex-lg-wrap justify-content-lg-start" style={{marginTop:'20px'}}>
 					<div className="col-lg-12" >
 						<form name="form" onSubmit={this.onSubmit}>
 							<input placeholder="Search for a course" name="CourseName"  className="form-control" checked={this.state.CourseName} onChange={this.handleInputChange} required/>
@@ -84,7 +84,7 @@ export class CoursePage extends React.Component {
 							<p className="col-md-2"> Course Name: {this.state.SubjectCode}{this.state.CourseNumber} </p>
 							<p className="col-md-2"> Credit Hours : {this.state.CreditHours}	</p>
 							<p className="col-md-6"> Course Description : {this.state.CourseDescription}	</p>
-							<p className="col-md-2"> </p>
+							<p className="col--md-2"> </p>
 						</div>
 					</div>
 				</div>

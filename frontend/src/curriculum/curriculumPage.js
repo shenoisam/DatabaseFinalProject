@@ -13,7 +13,7 @@ export class CurriculumPagee extends React.Component {
 			HeadPerson: '',
 			MinimumHours: '',
 			MaxTopicsCovered: '',
-			GoalCredHour: ''
+			GoalCredHour: '',
 		};
 	}
 
@@ -39,7 +39,6 @@ export class CurriculumPagee extends React.Component {
 						<p className="col-2"> Goal Credit Hours : {curriculum["GoalCredHours"]}	</p>
 						<p className="col-2"> </p>
 						<button className="col-md-2" style={{float:'right'}}> View Curriculum </button>
-
 					</div>
 				</div>
 			))}
