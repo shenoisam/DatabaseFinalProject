@@ -12,6 +12,12 @@ res.locals.val = [Name,SubjectCode, CourseNumber,CreditHours,CourseDescription]
 
 
 }
+var GetAllCourses = function (req,res,next){
+   res.locals.select = "*"
+	res.locals.table = "Courses"
+
+	next()
+}
 var GetCourses = function(req,res,next){
    res.locals.select = "*"
 	res.locals.table = "Courses"
@@ -46,4 +52,4 @@ var UpdateCourses = function(req,res,next){
    }
 }
 
-module.exports = {CreateCourses,GetCourses,UpdateCourses}
+module.exports = {CreateCourses,GetCourses,UpdateCourses,GetAllCourses }

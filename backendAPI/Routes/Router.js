@@ -218,6 +218,16 @@ router.post('/CreateTopic',Topics.CreateTopic,routes.insertData,routes.end)
 */
 router.post('/LoginUser',Users.LoginUser,routes.query)
 
+/*
+ description: This function gets all the courses from the database
+    parameters:
+
+    return:
+          - JSobj
+             - If everything runs smoothly, returns course object {}
+             - otherwise returns an err object {err : "Something went wrong"}
+*/
+router.post('/GetAllCourses',Courses.GetAllCourses )
 
 /*
     description: This function gets user by ID
