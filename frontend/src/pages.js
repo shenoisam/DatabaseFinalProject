@@ -46,6 +46,11 @@ export class Home extends React.Component {
 						<h2>Create Curriculum </h2>
 						<hr />
             <CreateCurriculum/>
+						<br/>
+						<br/>
+						<h2> All Curriclums </h2>
+						<hr />
+						<CurriculumPagee/>
 					</div>
 				</div>
 			</div>

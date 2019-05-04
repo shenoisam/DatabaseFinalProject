@@ -1,46 +1,49 @@
 import React from 'react';
+import ky from 'ky';
 import {Button} from 'reactstrap';
+import _ from 'lodash';
 
 export class CurriculumPagee extends React.Component {
-	async componentDidMount() {
+	// basically list all curriculum in the database
+	constructor(props){
+		super(props);
+		this.state = {
+			curriculums: [],
+			Name: '',
+			HeadPerson: '',
+			MinimumHours: '',
+			MaxTopicsCovered: '',
+			GoalCredHour: ''
+		};
+	}
 
-		/*const parsed = await ky.post('http://localhost:8888/GetCourses',{json: {
-			//Email:this.state.email,
-			//Password:this.state.password,
-			//FirstName:this.state.fName,
-			//LastName:this.state.lName,
-		}}).json(); */
+	async componentDidMount() {
+		let i = 0;
+		const parsed = await ky.post('http://localhost:8888/GetAllCurriculums',{json: {
+		}}).json();
+		console.log(parsed);
+		for (i = 0; i < parsed.r2.length; i++) {
+			this.state.curriculums[i] = parsed.r2[i];
+		}
+		this.setState(this.state);
 	}
 
 	render() {
 		return (
-			<div className="container-padded">
-				<div className="row">
-					<div className="col-4">
-						<div className="card CurriculumCard">
-							courses
-						</div>
-						<div>
-							<Button color="secondary">Courses</Button>
-						</div>
-					</div>
-					<div className="col-4">
-						<div className="card CurriculumCard">
-							topics
-						</div>
-						<div>
-							<Button color="secondary">Topics</Button>
-						</div>
-					</div>
-					<div className="col-4">
-						<div className="card CurriculumCard">
-							goals
-						</div>
-						<div>
-							<Button color="secondary">Goals</Button>
-						</div>
+			<div className="d-lg-flex flex-lg-wrap justify-content-lg-start">
+      {this.state.curriculums.map(curriculum => (
+        <div key={curriculum["Name"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
+					<div className="row">
+						<p className="col-2"> Name: {curriculum["Name"]}	</p>
+						<p className="col-2"> Minimum Hours : {curriculum["MinimumHours"]}	</p>
+						<p className="col-2"> Max Topics : {curriculum["MaxTopicsCovered"]}	</p>
+						<p className="col-2"> Goal Credit Hours : {curriculum["GoalCredHours"]}	</p>
+						<p className="col-2"> </p>
+						<button className="col-md-2" style={{float:'right'}}> View Curriculum </button>
+
 					</div>
 				</div>
+			))}
 			</div>
 		);
 	}
