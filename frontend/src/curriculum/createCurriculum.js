@@ -6,9 +6,9 @@ export class CreateCurriculum extends React.Component {
 	// basically list all curriculum in the database
 	constructor(props){
 		super(props);
-		this.onSubmit = this.onSubmit.bind(this);
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.state = {
+			this.onSubmit = this.onSubmit.bind(this);
+			this.handleInputChange = this.handleInputChange.bind(this);
+			this.state = {
 			curriculums: [],
 			Name: 'empty',
 			HeadPerson: '',
@@ -16,10 +16,10 @@ export class CreateCurriculum extends React.Component {
 			MaxTopicsCovered: 'ihatechicken',
 			GoalCredHour: 'none'
 		};
-
 	}
 
 	async componentDidMount() {
+<<<<<<< HEAD
 
 		sessionService.loadSession().then(curr => {
 
@@ -32,35 +32,48 @@ export class CreateCurriculum extends React.Component {
 		}}).json();
         console.log(parsed)
 		this.state.curriculums = parsed;
+=======
+	sessionService.loadSession().then(curr => {
+	console.log("UserID: ", curr)
+	this.state.HeadPerson = curr.id;
+	this.setState(this.state);
+	console.log(curr)
+	}).catch(err =>
+	console.log(err)
+	);
+	const parsed = await ky.post('http://localhost:8888/GetAllCurriculums',{json: {
+	}}).json();
+>>>>>>> fc1233bdd02a3438efc453f08eaa57a926a7f880
 
+	this.state.curriculums = parsed;
 	}
 
 	handleInputChange(event) {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
+	const target = event.target;
+	const value = target.value;
+	const name = target.name;
 
-		this.setState({
-		[name]: value
-		});
-  }
+	this.setState({
+	[name]: value
+	});
+	}
 
 	async onSubmit (event) {
-		event.preventDefault();
-      if (this.state.HeadPerson){
-			const parsed = await ky.post('http://localhost:8888/CreateCurriculum',{json: {
-			Name: this.state.Name,
-			MinimumHours: this.state.MinimumHours,
-			MaxTopicsCovered: this.state.MaxTopicsCovered,
-			GoalCredHours: this.state.GoalCredHours,
-			HeadPerson: this.state.HeadPerson
-			}}).json();
-			console.log("Sent the data: ",parsed);
-			if(!parsed.err){
-				sessionService.saveSession(parsed);
-				this.state.id = parsed;
-				this.setState(this.state);
-		}
+	event.preventDefault();
+	if (this.state.HeadPerson){
+	const parsed = await ky.post('http://localhost:8888/CreateCurriculum',{json: {
+	Name: this.state.Name,
+	MinimumHours: this.state.MinimumHours,
+	MaxTopicsCovered: this.state.MaxTopicsCovered,
+	GoalCredHours: this.state.GoalCredHours,
+	HeadPerson: this.state.HeadPerson
+	}}).json();
+	console.log("Sent the data: ",parsed);
+	if(!parsed.err){
+	sessionService.saveSession(parsed);
+	this.state.id = parsed;
+	this.setState(this.state);
+	}
 
 
 		}else {

@@ -77,7 +77,7 @@ class Register extends React.Component {
 						<div className="input-group-prepend">
 							<span className="input-group-text"><i className="fas fa-user"></i></span>
 						</div>
-						<input name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,14}$" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email" required/>
+						<input name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,25}$" checked={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email" required/>
 					</div>
 					<div className="input-group form-group">
 						<div className="input-group-prepend">
