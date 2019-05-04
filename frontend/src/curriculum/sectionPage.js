@@ -10,16 +10,23 @@ export class SectionsPage extends React.Component {
 			goals: [],
 			topics: [],
 			flag:false,
+			CourseName: "",
+			Spring: "",
+			Summer: "",
+			Winter: "",
+			Fall: "",
+			YearUpper: 3000, 
+			YearLower: 1900
 		};
 	}
 
 	async componentDidMount() {
 		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
-			CourseName: "MyCourse",
-			Spring : "Spring", 
-			Summer : "Summer",
-			Winter: "Winter",
-			Fall: "Fall",
+			CourseName: this.state.CourseName,
+			Spring : this.state.Spring, 
+			Summer : this.state.Summer,
+			Winter: this.state.Winter,
+			Fall: this.state.Fall,
 			YearUpper: 3000,
 			YearLower: 1900
 
