@@ -123,12 +123,12 @@ export class CreateSection extends React.Component {
   						<span className="input-group-text"><i className="fas fa-user"></i></span>
   					</div>
             <Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Semester"
-            className='col-6'
+            			className='col-6'
                    friendlyName="Semester" placeholder={this.state.Semester}
                    options={semesterOptions} value={this.state.Semester}
                    onChange={opt => this.semesterChange(opt)}/>
             <Bessemer.Select className="form-control" style={{backgroundColor:'black',width:'35%'}} name="Year"
-            className='col-5'
+            			className='col-5'
                   friendlyName="Year" placeholder={this.state.Year}
                   options={yearOptions} value={this.state.Year}
                   onChange={opt => this.yearChange(opt)}/>
