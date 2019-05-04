@@ -337,19 +337,11 @@ router.post('/GetCourses',Courses.GetCourses,routes.query)
 
 /*
   description: This function gets all the goals of a particular section
-<<<<<<< HEAD
   parameters: 
       - CourseName      - The name of the course the section belongs to
       - Topic           - The topics associated with that course
   return: 
       - Returns the goal of the section 
-=======
-  parameters:
-      - CourseName      - The name of the course that
-      - Topic           -
-  return:
-      - Returns a list of all the courses for a specific curriculum
->>>>>>> 4f3babc0d0d6f80477b54dcf4c96cb72cb8198d6
 */
 router.post('/GetSectionGoal',SectionGoal.GetSectionGoal,routes.query)
 
