@@ -9,6 +9,7 @@
     "dompurify": "^1.0.10",
     "font-awesome": "^4.7.0",
     "ky": "^0.9.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",

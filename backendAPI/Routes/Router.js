@@ -227,7 +227,7 @@ router.post('/LoginUser',Users.LoginUser,routes.query)
              - If everything runs smoothly, returns course object {}
              - otherwise returns an err object {err : "Something went wrong"}
 */
-router.post('/GetAllCourses',Courses.GetAllCourses )
+router.post('/GetAllCourses',Courses.GetAllCourses,routes.query)
 
 /*
     description: This function gets user by ID
@@ -329,7 +329,7 @@ router.post('/GetTopic',Topics.GetTopic,routes.query)
   parameters:
       - ID              - id of the topic being searched for
       - CourseName      - the name of the course being searched for
-  return: 
+  return:
       - Returns a course goal
 */
 router.post('/GetCourseGoals',CourseGoals.GetCourseGoal,routes.query)
@@ -347,42 +347,42 @@ router.post('/GetCourses',Courses.GetCourses,routes.query)
 
 /*
   description: This function gets all the goals of a particular section
-  parameters: 
+  parameters:
       - CourseName      - The name of the course the section belongs to
       - Topic           - The topics associated with that course
-  return: 
-      - Returns the goal of the section 
+  return:
+      - Returns the goal of the section
 */
 router.post('/GetSectionGoal',SectionGoal.GetSectionGoal,routes.query)
 
 
 /*
-  description: This function gets the current course 
-  parameters: 
+  description: This function gets the current course
+  parameters:
       - Curriculum      - The curriculum that will be associated with the courses
-      - CourseName      - The name of the course 
-  return: 
+      - CourseName      - The name of the course
+  return:
       - Returns the courses associated with the curriculum
 */
 router.post('/GetCurCourse',CurCourse.GetCurCourses,routes.query)
 
 
 /*
-  description: This function gets all the topics inside of the curriculum  
-  parameters: 
+  description: This function gets all the topics inside of the curriculum
+  parameters:
       - ID        - The ID of the topic needed
       - Name      - the Name of the topic needed
-  return: 
+  return:
       - Returns the topics associated with that curriculum
 */
 router.post('/GetCurriculumTopics',CurriclumTopics.GetCurriculumTopics,routes.query)
 
 /*
-  description: This function returns all of the courses from a curriculum ordered by if it is required or not 
-  parameters: 
+  description: This function returns all of the courses from a curriculum ordered by if it is required or not
+  parameters:
       - Curriculum       - The name of the curriculum
 
-  return: 
+  return:
       - Returns the courses associated with that curriculum
 */
 router.post('/GetCurriculumCourses',CurCourse.GetCurriculumCourses,routes.query)
@@ -398,20 +398,20 @@ router.post('/UpdateCourses',Courses.UpdateCourses,routes.update)
 //Other stuff
 /*
   description: This function gets all the required courses for a curriculum
-  parameters: 
+  parameters:
       - ID        - The ID of the topic needed
       - Name      - the Name of the topic needed
-  return: 
+  return:
       - Returns the topics associated with that curriculum
 */
 router.post('/CurriculumRequiredCourses',CurCourse.GetRequiredCourses,routes.query)
 
 /*
   description: This function gets all the optional courses for a curriculum
-  parameters: 
+  parameters:
       - ID        - The ID of the topic needed
       - Name      - the Name of the topic needed
-  return: 
+  return:
       - Returns the topics associated with that curriculum
 */
 router.post('/CurriculumOptionalCourses',CurCourse.GetOptionalCourses,routes.query)
