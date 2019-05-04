@@ -21,7 +21,6 @@ export class CurriculumPagee extends React.Component {
 		let i = 0;
 		const parsed = await ky.post('http://localhost:8888/GetAllCurriculums',{json: {
 		}}).json();
-		console.log(parsed);
 		for (i = 0; i < parsed.r2.length; i++) {
 			this.state.curriculums[i] = parsed.r2[i];
 		}

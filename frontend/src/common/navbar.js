@@ -26,7 +26,6 @@ class NavBar extends React.Component {
 	async componentDidMount(){
 		sessionService.loadSession().then(async curr => {
 			this.state.id = curr;
-			console.log(curr)
 			this.setState(this.state);
 			const parsed = await ky.post('http://localhost:8888/GetUserById',{json: {
 				ID:this.state.id,
@@ -50,7 +49,6 @@ class NavBar extends React.Component {
     });
 		this.setState(this.state);
 		window.location.reload();
-		return ;
 	};
 
 	render() {
@@ -87,7 +85,7 @@ class NavBar extends React.Component {
 									<a className="nav-link" >Welcome, {this.state.fName} {this.state.lName} </a>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="/" onClick={this.LogoutClick} > Log Out</a>
+									<a className="nav-link" href="/login" onClick={this.LogoutClick} > Log Out</a>
 								</li>
 
 							</ul>
@@ -100,7 +98,7 @@ class NavBar extends React.Component {
 			return (
 				<div>
 					<nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
-						<a className="navbar-brand" href="/">Database Final</a>
+						<a className="navbar-brand" href="/login">Database Final</a>
 						<button className="navbar-toggler" type="button" data-toggle="collapse"
 								data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 								aria-expanded="false" aria-label="Toggle navigation">

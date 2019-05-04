@@ -50,10 +50,9 @@ export class CreateCurriculum extends React.Component {
 				HeadPerson: this.state.HeadPerson
 			}}).json();
 			window.location.reload();
-	}else {
-		console.log(this.state.HeadPerson)
-	}
-	//window.location.reload();
+		}else {
+			console.log(this.state.HeadPerson)
+		}
 	};
 
 	render() {

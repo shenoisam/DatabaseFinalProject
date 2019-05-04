@@ -48,7 +48,7 @@ export class Home extends React.Component {
             <CreateCurriculum/>
 						<br/>
 						<br/>
-						<h2> All Curriclums </h2>
+						<h2> All Curriculums </h2>
 						<hr />
 						<CurriculumPagee/>
 					</div>
@@ -57,6 +57,23 @@ export class Home extends React.Component {
 		);
 	}
 }
+
+export class CurriculumPage extends React.Component {
+	render() {
+		return (
+			<div className="container padded">
+				<div className="row">
+					<div className="col-12">
+						<h2> All Curriculums </h2>
+						<hr />
+						<CurriculumPagee/>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
 
 export class Courses extends React.Component {
 	render() {
@@ -79,20 +96,6 @@ export class Sections extends React.Component {
 				<div className="row">
 					<div className="col-12">
 						<SectionsPage/>
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
-
-export class CurriculumPage extends React.Component {
-	render() {
-		return (
-			<div className="container padded">
-				<div className="row">
-					<div className="col-12">
-						<CurriculumPagee/>
 					</div>
 				</div>
 			</div>
