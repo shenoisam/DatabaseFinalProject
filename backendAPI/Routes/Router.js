@@ -388,6 +388,11 @@ router.post('/GetCurriculumTopics',CurriclumTopics.GetCurriculumTopics,routes.qu
 router.post('/GetCurriculumCourses',CurCourse.GetCurriculumCourses,routes.query)
 
 //Update all of the different types of data
+
+/*
+  description: This function updates the curriculums 
+  
+*/
 router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)
 router.post('/UpdateGoals',Goals.UpdateGoals,routes.update)
 router.post('/UpdateSection',Section.UpdateSection,routes.update)
