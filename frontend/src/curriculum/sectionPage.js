@@ -1,9 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD
-import ky from 'ky';
-import * as Components from '../common/components.js';
-=======
->>>>>>> 4a679f5b21150e230d16797524ba0900c9ec2115
+import {BarExample} from "./../common/components.js"
+import ky from 'ky'
 
 export class SectionsPage extends React.Component {
 	constructor(props){
@@ -16,6 +13,18 @@ export class SectionsPage extends React.Component {
 	}
 
 	async componentDidMount() {
+		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
+			CourseName: "Test",
+			Spring : "Spring", 
+			Summer : "Summer",
+			Winter: "Winter",
+			Fall: "Fall",
+			YearUpper: 3000,
+			YearLower: 1900
+
+		}}).json();
+		console.log("test:", parsed)
+		this.state.courses = parsed.r2
 	}
 
 	render() {
@@ -23,7 +32,7 @@ export class SectionsPage extends React.Component {
 			<div className="container padded">
 				<h2>Sections</h2>
 				<hr />
-				<Components.BarExample />
+				<BarExample data = {this.state.courses}/>
 			</div>
 		);
 	}
