@@ -1,5 +1,6 @@
 import React from 'react';
 import {CreateCurriculum} from './curriculum/createCurriculum.js'
+import {CreateCourse} from './curriculum/createCourse.js'
 import {CoursePage} from './curriculum/coursePage.js'
 import {SectionsPage} from './curriculum/sectionPage.js'
 import {CurriculumPagee} from './curriculum/curriculumPage.js'
@@ -48,9 +49,15 @@ export class Home extends React.Component {
             <CreateCurriculum/>
 						<br/>
 						<br/>
-						<h2> All Curriculums </h2>
+						<h2>Create Course </h2>
 						<hr />
-						<CurriculumPagee/>
+						<CreateCourse/>
+						<br/>
+						<br/>
+						<h2>Create Section </h2>
+						<hr />
+						<br/>
+						<br/>
 					</div>
 				</div>
 			</div>

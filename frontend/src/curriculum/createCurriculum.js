@@ -8,7 +8,6 @@ export class CreateCurriculum extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.state = {
-			curriculums: [],
 			Name: '',
 			HeadPerson: '',
 			MinimumHours: '',
@@ -25,9 +24,6 @@ export class CreateCurriculum extends React.Component {
 		}).catch(err =>
 			console.log(err)
 		);
-		const parsed = await ky.post('http://localhost:8888/GetAllCurriculums',{json: {
-		}}).json();
-		this.state.curriculums = parsed;
 	}
 
 	handleInputChange(event) {
