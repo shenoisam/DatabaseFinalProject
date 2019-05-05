@@ -415,6 +415,7 @@ router.post('/DeleteSectionFromCourse', Section.DeleteSection,routes.del)
 router.post('/DeleteGoal', Goals.DeleteGoal,routes.del)
 router.post('/RemoveTopicromCurriculum', CurriclumTopics.DeleteCurriculumTopic,routes.del)
 
+router.post('/CreditsUsedToCover', CourseGoals.CreditsUsedToCover,routes.query)
 
 //Update all of the different types of data
 

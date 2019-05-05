@@ -15,5 +15,13 @@
 	res.locals.params = [req.body.GoalsID, req.body.CourseName]
 	next()
  }
+
+ var CreditsUsedToCover = function(req,res,next){
+	res.locals.select = "Sum(Courses.CreditHours)"
+	res.locals.table = "Courses, CourseGoals"
+	res.locals.rmStr = "Courses.CourseName = CourseGoals.CourseName AND CourseGoals.GoalsID = ?"
+	res.locals.params = [req.body.GoalsID]
+	next()
+ }
  
- module.exports = {CreateCourseGoal,GetCourseGoal}
+ module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover}
