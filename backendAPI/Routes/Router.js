@@ -390,6 +390,7 @@ router.post('/GetCurriculumCourses',CurCourse.GetCurriculumCourses,routes.query)
 router.post('/GetCoursesNotInCurriculum',CurCourse.CoursesNotInCurriculum ,routes.query)
 
 router.post('/RemoveCourseFromCurriculum', CurCourse.DeleteRelationship,routes.del)
+router.post('/DeleteSectionFromCourse', Section.DeleteSection,routes.del)
 
 //Update all of the different types of data
 

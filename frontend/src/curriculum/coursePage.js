@@ -29,16 +29,16 @@ export class CoursePage extends React.Component {
 			[name]: value
 		});
 	}
-	async RemoveSectionFromCourse(ID,sem,year,CourseName){
+	async DeleteSectionFromCourse(ID,sem,year,CourseName){
 		// Adds a course to a curriculum
 
-		const parsed = await ky.post('http://localhost:8888/RemoveSectionFromCourse',{json: {
+		const parsed = await ky.post('http://localhost:8888/DeleteSectionFromCourse',{json: {
 			ID:ID,
 			CourseName:CourseName,
 			Semester: sem,
 			Year: year
 		}}).json();
-		console.log(parsed)
+		window.location.reload()
 
 	}
 	
@@ -124,7 +124,7 @@ export class CoursePage extends React.Component {
 													<div className="row">
 														<p className="col-3"> ID: {section["ID"]}	</p>
 														<p className="col-6"> Semester : {section["Semester"]+' '+section["Year"]}	</p>
-														<button className="col-md-2" style={{float:'right'}} onClick={(e) => {this.clickedCourse(section["ID"],section["Semester"],section["Year"],section["CourseName"]);}} > Delete Section  </button>
+														<button className="col-md-2" style={{float:'right',background:"red"}} onClick={(e) => {this.DeleteSectionFromCourse(section["ID"],section["Semester"],section["Year"],section["CourseName"]);}} > Delete Section  </button>
 													</div>
 												</div>
 											))}

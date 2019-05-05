@@ -141,18 +141,18 @@ export class SectionsPage extends React.Component {
 
 // Semester options
 export const semesterOptions = [
-	{label: 'Yes', value: 'Spring'},
-	{label: 'No', value: 'No'},
+	{label: 'YES Spring', value: 'Spring'},
+	{label: 'No Spring', value: 'No'},
 ];
 export const semesterOptions1 = [
-	{label: 'Yes', value: 'Summer'},
-	{label: 'No', value: 'No'},
+	{label: 'Yes Summer', value: 'Summer'},
+	{label: 'No Summer', value: 'No'},
 ];
 export const semesterOptions2 = [
-	{label: 'Yes', value: 'Fall'},
-	{label: 'No', value: 'No'},
+	{label: 'Yes Fall', value: 'Fall'},
+	{label: 'No Fall', value: 'No'},
 ];
 export const semesterOptions3 = [
-	{label: 'Yes', value: 'Winter'},
-	{label: 'No', value: 'No'},
+	{label: 'Yes Winter', value: 'Winter'},
+	{label: 'No Winter', value: 'No'},
 ];

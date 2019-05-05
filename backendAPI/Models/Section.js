@@ -58,4 +58,10 @@ var UpdateSection = function(req,res,next){
        res.send({err: "ERROR! Attributes and Lengths don't match up"})
    }
 }
-module.exports = {CreateSection,GetSection,UpdateSection, GetAllSectionsForCourse ,GetSectionByCourseNameYearSemester}
+var DeleteSection = function(req,res,next){
+    res.locals.table = "Section"
+	res.locals.rmStr = "Year= ? AND CourseName = ? AND Semester = ? AND ID = ?"
+	res.locals.params = [req.body.Year,req.body.CourseName, req.body.Semester, req.body.ID]
+	next()
+}
+module.exports = {CreateSection,GetSection,UpdateSection, GetAllSectionsForCourse ,GetSectionByCourseNameYearSemester,DeleteSection}
