@@ -49,5 +49,11 @@ var UpdateGoals = function(req,res,next){
         res.send({err: "ERROR! Attributes and Lengths don't match up"})
     }
 }
+var DeleteGoal = function(req,res,next){
+    res.locals.table = "Goals"
+	res.locals.rmStr = "ID = ?"
+	res.locals.params = [req.body.ID]
+	next()
+}
 
-module.exports = {CreateGoals,GetGoals,UpdateGoals,GetGoalsInCurriculum}
+module.exports = {CreateGoals,GetGoals,UpdateGoals,GetGoalsInCurriculum,DeleteGoal}

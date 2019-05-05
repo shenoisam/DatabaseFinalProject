@@ -406,6 +406,7 @@ router.post('/RemoveCourseFromCurriculum', CurCourse.DeleteRelationship,routes.d
 
 router.post('/DeleteSectionFromCourse', Section.DeleteSection,routes.del)
 
+router.post('/DeleteGoal', Goals.DeleteGoal,routes.del)
 router.post('/RemoveTopicromCurriculum', CurriclumTopics.DeleteCurriculumTopic,routes.del)
 
 

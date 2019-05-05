@@ -172,6 +172,17 @@ export class CurriculumPagee extends React.Component {
 		this.updateComp(nameCur)
 	}
 
+	async RemoveGoal(nameCur, gid){
+		// Adds a course to a curriculum
+
+		const parsed = await ky.post('http://localhost:8888/DeleteGoal',{json: {
+			ID:gid,
+
+		}}).json();
+
+		this.updateComp(nameCur)
+	}
+
 	render() {
 		return (
 			<div className="d-lg-flex flex-lg-wrap justify-content-lg-start">
@@ -240,13 +251,15 @@ export class CurriculumPagee extends React.Component {
 								<label> Goals </label>
 								{this.state.Goals.map(goal => (
 									<div key={goal["ID"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
-										<div className="row">
-											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {goal["ID"]}	</p>
-											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
-											
-										</div>
+											<div className="row">
+												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {goal["ID"]}	</p>
+												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
+												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveGoal(curriculum["Name"],goal["ID"]);}} > Remove from Curriculum </button>
+												
+											</div>
+						
 									</div>
-								))}
+									))}
 							</div>
 						</div>
 					}
