@@ -32,7 +32,7 @@ export class SectionsPage extends React.Component {
 			Summer: "a",
 			Winter: "a",
 			Fall: "a",
-			YearUpper: 3000, 
+			YearUpper: 3000,
 			YearLower: 1900
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,8 +46,6 @@ export class SectionsPage extends React.Component {
 			[name]: value
 		});
 	}
-
-	
 
 	semester1Change(e){
 		if (e != null) {
@@ -78,18 +76,12 @@ export class SectionsPage extends React.Component {
 		}
 	};
 
-
-	
-
-
 	async onSubmit(event){
 		event.preventDefault();
 		
-		
-		
 		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
 			CourseName: this.state.CourseName,
-			Spring : this.state.Spring, 
+			Spring : this.state.Spring,
 			Summer : this.state.Summer,
 			Winter: this.state.Winter,
 			Fall: this.state.Fall,
@@ -97,21 +89,29 @@ export class SectionsPage extends React.Component {
 			YearLower: 1900
 
 		}}).json();
+<<<<<<< HEAD
 		var data = Object.values(parsed.r2[0])
 		console.log("The pulled data", data)
 		this.state.flag = true
 		for (var i = 0; i < data.length;i++){
 			this.state.courses[i].pv = data[i]
 			console.log("Sams test" , data[i])
+=======
+		if(parsed.r2){
+			var data = Object.values(parsed.r2[0])
+			console.log("The pulled data", data)
+			this.state.flag = true
+			for (var i = 0; i < data.length;i++){
+				this.state.courses[i].pv = data[i]
+			}
+			console.log(this.state.courses)
+>>>>>>> 0b6a8dbd9a53f51025032fe0ce0d8074e7b61f6b
 		}
-		console.log(this.state.courses)
-	
-	
 	}
 
 	render() {
 		return (
-			<div> 
+			<div>
 				<form name="form" onSubmit={this.onSubmit}>
 					<div className="input-group form-group">
 					<div className="input-group-prepend">
@@ -143,6 +143,7 @@ export class SectionsPage extends React.Component {
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
+<<<<<<< HEAD
 		       
 				<div className="container padded">
 					<h2>Sections</h2>
@@ -152,6 +153,17 @@ export class SectionsPage extends React.Component {
 				</div>
 			
 				
+=======
+		        {this.state.flag == true &&
+				<div className="container padded">
+					<h2>Sections</h2>
+					<hr />
+					<BarExample data = {this.state.courses}/>
+
+				</div>
+				}
+
+>>>>>>> 0b6a8dbd9a53f51025032fe0ce0d8074e7b61f6b
 			</div>
 		);
 	}

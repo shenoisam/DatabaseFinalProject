@@ -28,7 +28,7 @@ var GetSection = function(req,res,next){
 }
 
 var GetSectionByCourseNameYearSemester = function(req,res,next){
-    res.locals.select = "Sum(APlus), Sum(A), Sum(AMinus),Sum(BPlus), Sum(B), Sum(BMinus),Sum(CPlus), Sum(C), Sum(CMinus),Sum(DPlus), Sum(D), Sum(DMinus),Sum(F), Sum(I), Sum(W)"
+    res.locals.select = "Sum(APlus), Sum(A), Sum(AMinus), Sum(BPlus), Sum(B), Sum(BMinus), Sum(CPlus), Sum(C), Sum(CMinus), Sum(DPlus), Sum(D), Sum(DMinus), Sum(F), Sum(I), Sum(W)"
     res.locals.table = "Section"
     res.locals.rmStr = "(Semester = ? OR Semester = ? OR Semester = ? OR Semester = ?) AND Year > ? AND Year < ? AND CourseName = ?"
     res.locals.params = [req.body.Spring,req.body.Summer,req.body.Fall,req.body.Winter,req.body.YearLower,req.body.YearUpper, req.body.CourseName]
