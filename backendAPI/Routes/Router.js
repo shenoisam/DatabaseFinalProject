@@ -393,6 +393,8 @@ router.post('/GetCoursesNotInCurriculum',CurCourse.CoursesNotInCurriculum ,route
 
 /*
   description: This function updates the curriculums 
+  Parameters: 
+     - 
 
 */
 router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)

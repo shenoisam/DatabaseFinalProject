@@ -13,7 +13,7 @@ var CreateSection = function(req,res,next){
 var GetAllSectionsForCourse = function(req,res,next){
     res.locals.select = "*"
     res.locals.table = "Section"
-    res.locals.remStr = "CourseName = ?"
+    res.locals.rmStr = "CourseName = ?"
     res.locals.params = [req.body.CourseName]
 
     next()

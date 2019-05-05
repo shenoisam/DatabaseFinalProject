@@ -228,13 +228,17 @@ export class BarExample extends React.Component {
 
 	async componentDidMount(){
 		console.log("YEET", this.props.data);
-		this.state.myData = Object.values(this.props.data[0])
+		if (this.props.data){
+			this.state.myData = Object.values(this.props.data[0])
+			this.state.rendered = true;
+		}else {
+			this.state.myData = []
+		}
+	
 		this.setState(this.state);
 		
-
 		console.log("MOUNT", this.state.myData);
-		this.state.rendered = true;
-		this.setState(this.state)
+
 	}
   
 	render() {

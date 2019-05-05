@@ -27,9 +27,11 @@ export class CoursePage extends React.Component {
 			[name]: value
 		});
 	}
+	
 
 	async onSubmit (event) {
 		event.preventDefault();
+		
 
 		const parsed = await ky.post('http://localhost:8888/GetCourses',{json: {
 			CourseName: this.state.CourseName
@@ -68,8 +70,11 @@ export class CoursePage extends React.Component {
 
 		this.render();
 	};
-
+	/***************************************************/
+	// section cards need to be cleared when changing. 
+	/***************************************************/
 	render() {
+	    
 		if(!this.state.SubjectCode){
 			return (
 				<div className="d-lg-flex flex-lg-wrap justify-content-lg-start" style={{marginTop:'20px'}}>
@@ -98,17 +103,17 @@ export class CoursePage extends React.Component {
 							<p className="col--md-2"> </p>
 						</div>
 						<div className="row">
-							<div className="col-lg-6">
+							<div id="sections" className="col-lg-6" >
 								<label> Sections </label>
 								{this.state.sections.map(section => (
-					        <div key={section["ID"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'15px'}}>
-										<div className="row">
-											<p className="col-3"> ID: {section["ID"]}	</p>
-											<p className="col-6"> Semester : {section["Semester"]+' '+section["Year"]}	</p>
+										<div key={section["ID"]} className="col-lg-12 clear" style={{border:'1px solid',marginBottom:'15px'}}>
+													<div className="row">
+														<p className="col-3"> ID: {section["ID"]}	</p>
+														<p className="col-6"> Semester : {section["Semester"]+' '+section["Year"]}	</p>
+													</div>
+												</div>
+											))}
 										</div>
-									</div>
-								))}
-							</div>
 							<div className="col-lg-6"> BARRR </div>
 						</div>
 					</div>
