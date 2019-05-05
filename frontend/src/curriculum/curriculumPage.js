@@ -144,13 +144,13 @@ export class CurriculumPagee extends React.Component {
 								{this.state.Courses.map(course => (
 									<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
 										<div className="row">
-											<p className="col-lg-8"> Name: {course["CourseName"]}	</p>
-												<Bessemer.Select className="form-control" style={{backgroundColor:'black',width:'35%'}} name="Required"
+											<p className="col-lg-7"> Name: {course["CourseName"]}	</p>
+												<Bessemer.Select className="form-control" style={{backgroundColor:'black'}} name="Required"
 						            			className='col-5'
 						                  friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
 						                  options={requiredOptions} value={this.state.Required[course["CourseName"]]}
 						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>
-											<button className="col-lg-4" style={{float:'right'}} onClick={(e) => {this.addCurriculumAndCourse(curriculum["Name"],course["CourseName"]);}} > Add to Curriculum </button>
+														<button className="col-lg-12" style={{float:'right'}} onClick={(e) => {this.addCurriculumAndCourse(curriculum["Name"],course["CourseName"]);}} > Add to Curriculum </button>
 										</div>
 									</div>
 								))}
