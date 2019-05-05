@@ -378,6 +378,8 @@ router.post('/GetSectionGoal',SectionGoal.GetSectionGoal,routes.query)
 */
 router.post('/GetCurCourse',CurCourse.GetCurCourses,routes.query)
 
+router.post('/GetCourseCurriculums',CurCourse.GetCoursesCurriculum ,routes.query)
+
 
 /*
   description: This function gets all the topics inside of the curriculum
@@ -400,6 +402,10 @@ router.post('/GetCurriculumTopics',CurriclumTopics.GetCurriculumTopics,routes.qu
 router.post('/GetCurriculumCourses',CurCourse.GetCurriculumCourses,routes.query)
 
 router.post('/GetCoursesNotInCurriculum',CurCourse.CoursesNotInCurriculum ,routes.query)
+
+
+router.post('/GetPersonInCharge',Curriclum.GetPersonInCharge, routes.query)
+
 
 router.post('/RemoveCourseFromCurriculum', CurCourse.DeleteRelationship,routes.del)
 
@@ -426,24 +432,11 @@ router.post('/UpdateCourses',Courses.UpdateCourses,routes.update)
 
 
 //Other stuff
-/*
-  description: This function gets all the required courses for a curriculum
-  parameters:
-      - ID        - The ID of the topic needed
-      - Name      - the Name of the topic needed
-  return:
-      - Returns the topics associated with that curriculum
-*/
+
+
 router.post('/CurriculumRequiredCourses',CurCourse.GetRequiredCourses,routes.query)
 
-/*
-  description: This function gets all the optional courses for a curriculum
-  parameters:
-      - ID        - The ID of the topic needed
-      - Name      - the Name of the topic needed
-  return:
-      - Returns the topics associated with that curriculum
-*/
+
 router.post('/CurriculumOptionalCourses',CurCourse.GetOptionalCourses,routes.query)
 router.post('/GoalValid',Curriclum.GoalValid,routes.query)
 

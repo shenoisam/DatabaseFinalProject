@@ -54,15 +54,22 @@ var UpdateCurriculum = function(req,res,next){
 
 }
 
+//Want this to return 0 
 var GoalValid = function(req,res,next){
-	res.locals.select = "Goals.ID"
+	res.locals.select = "Count(*) AS NUMGOALNOTVALID"
     res.locals.table = "Goals,Curriculum"
-    res.locals.rmStr = " Goals.Curriculum = Curriculum.Name AND Curriculum.Name = ? AND Curriculum.GoalCredHours > (Select Sum(Course.CreditHours) FROM Course, CourseGoals WHERE Courses.Name = CourseGoals.CourseName AND CourseGoals.GoalsId = Goals.Id"
+    res.locals.rmStr = " Goals.Curriculum = Curriculum.Name AND Curriculum.Name = ? AND Curriculum.GoalCredHours > (Select Sum(Courses.CreditHours) FROM Courses, CourseGoals WHERE Courses.CourseName = CourseGoals.CourseName AND CourseGoals.GoalsId = Goals.Id)"
     res.locals.params = [req.body.Name]
 	next()
+}
 
-
+var GetPersonInCharge = function(req,res,next){
+    res.locals.select = "Person.FirstName, Person.LastName"
+    res.locals.table = "Person, Curriculum"
+    res.locals.rmStr = "Person.ID = Curriculum.HeadPerson AND Name = ?"
+    res.locals.params = [req.body.Name]
+	next()
 }
 
 
-module.exports = {CreateCurriculum,GetCurriculum,UpdateCurriculum,GoalValid,GetAllCurriculums}
+module.exports = {CreateCurriculum,GetCurriculum,UpdateCurriculum,GoalValid,GetAllCurriculums,GetPersonInCharge}

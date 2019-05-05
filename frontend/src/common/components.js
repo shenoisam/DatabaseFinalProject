@@ -228,7 +228,7 @@ export class BarExample extends React.Component {
 	}
 
 	async componentDidMount(){
-		console.log(this.props.flag)
+
 		if (this.props.flag == true){
 			console.log(this.props.data)
 			data = this.state.myData= this.props.data
