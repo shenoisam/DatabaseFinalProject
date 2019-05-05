@@ -37,5 +37,12 @@ var GetCurriculumCourses = function(req,res,next){
 	res.locals.params = [req.body.Curriculum]
 	next()
 }
+var CoursesNotInCurriculum = function(req,res,next){
+	res.locals.select = "*"
+	res.locals.table = "Courses"
+	res.locals.rmStr = "CourseName NOT IN (SELECT CourseName FROM CurCourse WHERE CurCourse.Curriculum = ? AND CurCourse.CourseName = Courses.CourseName)"
+	res.locals.params = [req.body.Curriculum]
+	next()
+}
 
-module.exports = {CreateCurCourse,GetCurCourses,GetRequiredCourses,GetOptionalCourses,GetCurriculumCourses}
+module.exports = {CreateCurCourse,GetCurCourses,GetRequiredCourses,GetOptionalCourses,GetCurriculumCourses,CoursesNotInCurriculum }

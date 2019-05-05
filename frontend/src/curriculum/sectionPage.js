@@ -89,8 +89,6 @@ export class SectionsPage extends React.Component {
 		}}).json();
 		this.state.courses = parsed
 		this.state.rendered = true
-
-
 	}
 
 	render() {
