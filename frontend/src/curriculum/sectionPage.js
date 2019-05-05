@@ -1,7 +1,8 @@
 import React from 'react';
-import {BarExample} from "./../common/components.js"
-import * as Bessemer from '../alloy/bessemer/components.js'
-import ky from 'ky'
+import {BarExample} from "./../common/components.js";
+import * as Bessemer from '../alloy/bessemer/components.js';
+import ky from 'ky';
+
 
 export class SectionsPage extends React.Component {
 	constructor(props){
@@ -26,7 +27,7 @@ export class SectionsPage extends React.Component {
 			],
 			goals: [],
 			topics: [],
-			flag:false,
+			flag:true,
 			CourseName: "a",
 			Spring: "a",
 			Summer: "a",
@@ -100,7 +101,25 @@ export class SectionsPage extends React.Component {
 		}
 	}
 
+	
+
 	render() {
+
+		const myArray = [];
+		for(let i = 0; i < this.state.courses.length; i++){
+			myArray.push(
+				<div>
+					<div>
+						{this.state.courses[i].name}
+					</div>
+					<div>
+						{this.state.courses[i].pv}
+					</div>
+					
+				</div>
+			)
+		}
+
 		return (
 			<div>
 				<form name="form" onSubmit={this.onSubmit}>
@@ -134,13 +153,26 @@ export class SectionsPage extends React.Component {
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
-		        {this.state.flag == true &&
-				<div className="container padded">
-					<h2>Sections</h2>
-					<hr />
-					<BarExample data = {this.state.courses}/>
 
-				</div>
+
+				
+				{this.state.flag == true &&
+					<div className="container padded">
+
+						{/* display info in a chart */}
+						{myArray.length === 0 &&
+							<div>
+								No Sections During This Semester
+							</div>
+						}
+						{myArray.length !== 0 &&
+							<div>
+								{myArray}
+							</div>
+						}
+						
+
+					</div>
 				}
 
 			</div>
