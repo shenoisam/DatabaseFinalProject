@@ -1,6 +1,5 @@
 import React from 'react';
 import ky from 'ky';
-import Checkbox from '../common/checkbox.js';
 import * as Bessemer from '../alloy/bessemer/components.js';
 
 export class CurriculumPagee extends React.Component {
@@ -37,7 +36,6 @@ export class CurriculumPagee extends React.Component {
 	handleCheckboxChange(e) {
       this.state.Required.set(e, !this.state.Required.get(e));
       this.setState(this.state);
-      console.log(e + ' set to ' + this.state.Required.get(e));
   }
 
 	setOtherCurriculumToFalse(name){
@@ -71,6 +69,7 @@ export class CurriculumPagee extends React.Component {
 		if(parsed2.r2){
 			for (let i = 0; i < parsed2.r2.length; i++) {
 				this.state.Courses[i] = parsed2.r2[i]
+				console.log(this.state.Courses[i]);
 			}
 		}
 
@@ -95,13 +94,11 @@ export class CurriculumPagee extends React.Component {
 
 	async addCurriculumAndCourse(nameCur,nameCourse){
 		// Adds a course to a curriculum
-		console.log(this.state.Required[nameCourse]);
 		const parsed = await ky.post('http://localhost:8888/CreateCurCourse',{json: {
 			Curriculum:nameCur,
 			CourseName:nameCourse,
 			Required:this.state.Required[nameCourse]
 		}}).json();
-		console.log(parsed)
 		this.updateComp(nameCur)
 	}
 	async RemoveCourseFromCurriculum(nameCur,nameCourse){
@@ -136,21 +133,21 @@ export class CurriculumPagee extends React.Component {
 									{this.state.MyCourses.map(course => (
 										<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'5px'}}>
 											<div className="row">
-												<p className="col-lg-8"> Name: {course["CourseName"]}	</p>
-												<button className="col-lg-4" style={{float:'right',background:"red"}} onClick={(e) => {this.RemoveCourseFromCurriculum(curriculum["Name"],course["CourseName"]);}} > Remove from Curriculum </button>
+												<p className="col-lg-12" style={{paddingLeft:'0px', paddingRight:'0px'}}> Name: {course["CourseName"]}	</p>
+												<button className="col-lg-12" style={{float:'right',background:"red"}} onClick={(e) => {this.RemoveCourseFromCurriculum(curriculum["Name"],course["CourseName"]);}} > Remove from Curriculum </button>
 											</div>
 										</div>
 									))}
 								{this.state.Courses.map(course => (
 									<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
 										<div className="row">
-											<p className="col-lg-7"> Name: {course["CourseName"]}	</p>
-												<Bessemer.Select className="form-control" style={{backgroundColor:'black'}} name="Required"
-						            			className='col-5'
-						                  friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
+											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Name: {course["CourseName"]}	</p>
+											<span className="col-4" style={{paddingLeft:'0px', paddingRight:'0px'}} >
+												<Bessemer.Select name="Required" friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
 						                  options={requiredOptions} value={this.state.Required[course["CourseName"]]}
 						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>
-														<button className="col-lg-12" style={{float:'right'}} onClick={(e) => {this.addCurriculumAndCourse(curriculum["Name"],course["CourseName"]);}} > Add to Curriculum </button>
+											</span>
+											<button className="col-lg-12" style={{float:'right'}} onClick={(e) => {this.addCurriculumAndCourse(curriculum["Name"],course["CourseName"]);}} > Add to Curriculum </button>
 										</div>
 									</div>
 								))}
