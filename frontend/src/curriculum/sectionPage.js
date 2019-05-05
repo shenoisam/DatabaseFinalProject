@@ -89,14 +89,6 @@ export class SectionsPage extends React.Component {
 			YearLower: 1900
 
 		}}).json();
-<<<<<<< HEAD
-		var data = Object.values(parsed.r2[0])
-		console.log("The pulled data", data)
-		this.state.flag = true
-		for (var i = 0; i < data.length;i++){
-			this.state.courses[i].pv = data[i]
-			console.log("Sams test" , data[i])
-=======
 		if(parsed.r2){
 			var data = Object.values(parsed.r2[0])
 			console.log("The pulled data", data)
@@ -105,7 +97,6 @@ export class SectionsPage extends React.Component {
 				this.state.courses[i].pv = data[i]
 			}
 			console.log(this.state.courses)
->>>>>>> 0b6a8dbd9a53f51025032fe0ce0d8074e7b61f6b
 		}
 	}
 
@@ -143,17 +134,6 @@ export class SectionsPage extends React.Component {
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
-<<<<<<< HEAD
-		       
-				<div className="container padded">
-					<h2>Sections</h2>
-					<hr />
-					<BarExample data = {this.state.courses} flag = {this.state.flag}/>
-					
-				</div>
-			
-				
-=======
 		        {this.state.flag == true &&
 				<div className="container padded">
 					<h2>Sections</h2>
@@ -163,7 +143,6 @@ export class SectionsPage extends React.Component {
 				</div>
 				}
 
->>>>>>> 0b6a8dbd9a53f51025032fe0ce0d8074e7b61f6b
 			</div>
 		);
 	}

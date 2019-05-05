@@ -16,6 +16,7 @@ export class CurriculumPagee extends React.Component {
 			ShowingCurr:[],
 			Courses:[],
 			MyCourses:[],
+			MyTopics:[],
 			Topics:[],
 			Goals:[],
 			Required:[],
@@ -30,6 +31,7 @@ export class CurriculumPagee extends React.Component {
 			this.state.curriculums[i] = parsed.r2[i];
 			this.state.ShowingCurr[parsed.r2[i].Name] = false;
 		}
+		
 		this.setState(this.state);
 	}
 
@@ -60,6 +62,16 @@ export class CurriculumPagee extends React.Component {
 		this.state.Courses = []
 		this.setState(this.state)
 
+		const parsed3 = await ky.post('http://localhost:8888/GetTopicsInCurriculum',{json: {
+			Name: name
+		}}).json();
+		const parsed4 = await ky.post('http://localhost:8888/GetTopicsNotInCurriculum',{json: {
+			Name: name
+		}}).json();
+		this.state.MyTopics = []
+		this.state.Courses = []
+		this.setState(this.state)
+
 		if(parsed1.r2){
 			for (let i = 0; i < parsed1.r2.length; i++) {
 				this.state.MyCourses[i] = parsed1.r2[i]
@@ -70,6 +82,18 @@ export class CurriculumPagee extends React.Component {
 			for (let i = 0; i < parsed2.r2.length; i++) {
 				this.state.Courses[i] = parsed2.r2[i]
 				console.log(this.state.Courses[i]);
+			}
+		}
+		if(parsed3.r2){
+			for (let i = 0; i < parsed3.r2.length; i++) {
+				this.state.MyTopics[i] = parsed3.r2[i]
+			}
+		}
+
+		if(parsed4.r2){
+			for (let i = 0; i < parsed4.r2.length; i++) {
+				this.state.Topics[i] = parsed4.r2[i]
+		
 			}
 		}
 
@@ -92,6 +116,25 @@ export class CurriculumPagee extends React.Component {
 		}
 	};
 
+	async addCurriculumAndTopic(nameCur,topic){
+		// Adds a course to a curriculum
+		const parsed = await ky.post('http://localhost:8888/CreateCurriculumTopics',{json: {
+			Name:nameCur,
+			ID:topic,
+
+		}}).json();
+		this.updateComp(nameCur)
+	}
+	async RemoveTopicFromCurriculum(nameCur,topic){
+		// Adds a course to a curriculum
+
+		const parsed = await ky.post('http://localhost:8888/RemoveTopicromCurriculum',{json: {
+			Name:nameCur,
+			ID:topic,
+		}}).json();
+		console.log(parsed)
+		this.updateComp(nameCur)
+	}
 	async addCurriculumAndCourse(nameCur,nameCourse){
 		// Adds a course to a curriculum
 		const parsed = await ky.post('http://localhost:8888/CreateCurCourse',{json: {
@@ -134,7 +177,7 @@ export class CurriculumPagee extends React.Component {
 										<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'5px'}}>
 											<div className="row">
 												<p className="col-lg-12" style={{paddingLeft:'0px', paddingRight:'0px'}}> Name: {course["CourseName"]}	</p>
-												<button className="col-lg-12" style={{float:'right',background:"red"}} onClick={(e) => {this.RemoveCourseFromCurriculum(curriculum["Name"],course["CourseName"]);}} > Remove from Curriculum </button>
+												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveCourseFromCurriculum(curriculum["Name"],course["CourseName"]);}} > Remove from Curriculum </button>
 											</div>
 										</div>
 									))}
@@ -152,8 +195,28 @@ export class CurriculumPagee extends React.Component {
 									</div>
 								))}
 							</div>
+
+							
 							<div className="col-lg-4">
 								<label> Topics </label>
+								{this.state.MyTopics.map(topic => (
+										<div key={topic["ID"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'5px'}}>
+											<div className="row">
+											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Name: {topic["Name"]}	</p>
+											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {topic["ID"]}	</p>
+												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveTopicFromCurriculum(curriculum["Name"],topic["ID"]);}} > Remove from Curriculum </button>
+											</div>
+										</div>
+									))}
+								{this.state.Topics.map(topic => (
+									<div key={topic["ID"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
+										<div className="row">
+											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Name: {topic["Name"]}	</p>
+											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {topic["ID"]}	</p>
+											<button className="col-lg-12" style={{float:'right'}} onClick={(e) => {this.addCurriculumAndTopic(curriculum["Name"],topic["ID"]);}} > Add to Curriculum </button>
+										</div>
+									</div>
+								))}
 							</div>
 							<div className="col-lg-4">
 								<label> Goals </label>

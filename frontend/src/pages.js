@@ -2,9 +2,11 @@ import React from 'react';
 import {CreateCurriculum} from './curriculum/createCurriculum.js'
 import {CreateCourse} from './curriculum/createCourse.js'
 import {CreateSection} from './curriculum/createSection.js'
+import {CreateTopic} from './curriculum/createTopic.js'
 import {CoursePage} from './curriculum/coursePage.js'
 import {SectionsPage} from './curriculum/sectionPage.js'
 import {CurriculumPagee} from './curriculum/curriculumPage.js'
+
 import {Register, Login} from './user/register.js'
 
 export class RegisterPage extends React.Component {
@@ -47,7 +49,7 @@ export class Home extends React.Component {
 					<div className="col-12">
 						<h2>Create Curriculum </h2>
 						<hr />
-            <CreateCurriculum/>
+                        <CreateCurriculum/>
 						<br/>
 						<br/>
 						<h2>Create Course </h2>
@@ -58,6 +60,11 @@ export class Home extends React.Component {
 						<h2>Create Section </h2>
 						<hr />
 						<CreateSection/>
+						<br/>
+						<br/>
+						<h2>Create Topic </h2>
+						<hr />
+						<CreateTopic/>
 						<br/>
 						<br/>
 					</div>

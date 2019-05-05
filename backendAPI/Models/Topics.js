@@ -7,10 +7,12 @@ var CreateTopic = function(req,res,next){
 	var SA      = req.body.SubjectArea
 	
 	res.locals.sql    = "INSERT INTO Topics VALUES (?,?,?,?,?)"
-    res.locals.val = [[ID,Units,Level,Name,SA]]
+    res.locals.val = [ID,Units,Level,Name,SA]
 	next()
 	
 }
+
+
 var GetTopic = function(req,res,next){
 	res.locals.select = "*"
 	res.locals.table = "Topics"
