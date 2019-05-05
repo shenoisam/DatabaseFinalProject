@@ -16,6 +16,13 @@ var GetGoals = function(req,res,next){
    res.locals.params = [req.body.ID]
    next()
 }
+var GetGoalsInCurriculum = function(req,res,next){  
+   res.locals.select = "*"
+   res.locals.table = "Goals"
+   res.locals.rmStr = "Curriculum = ?"
+   res.locals.params = [req.body.Curriculum]
+   next()
+}
 var UpdateGoals = function(req,res,next){
     res.locals.table = "Goals"
     
@@ -43,4 +50,4 @@ var UpdateGoals = function(req,res,next){
     }
 }
 
-module.exports = {CreateGoals,GetGoals,UpdateGoals}
+module.exports = {CreateGoals,GetGoals,UpdateGoals,GetGoalsInCurriculum}

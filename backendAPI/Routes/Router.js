@@ -275,6 +275,8 @@ router.post('/GetAllCurriculums',Curriclum.GetAllCurriculums,routes.query)
 */
 router.post('/GetGoals',Goals.GetGoals,routes.query)
 
+router.post('/GetGoalsInCurriculum',Goals.GetGoalsInCurriculum,routes.query)
+
 
 /*
   description: This function gets a section

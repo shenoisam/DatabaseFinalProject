@@ -51,6 +51,9 @@ export class CurriculumPagee extends React.Component {
 	}
 
 	async updateComp(name){
+
+
+		//Pull data for the various components
 		const parsed1 = await ky.post('http://localhost:8888/GetCurriculumCourses',{json: {
 			Curriculum: name
 		}}).json();
@@ -65,9 +68,16 @@ export class CurriculumPagee extends React.Component {
 		const parsed3 = await ky.post('http://localhost:8888/GetTopicsInCurriculum',{json: {
 			Name: name
 		}}).json();
+
 		const parsed4 = await ky.post('http://localhost:8888/GetTopicsNotInCurriculum',{json: {
 			Name: name
 		}}).json();
+
+		const parsed5= await ky.post('http://localhost:8888/GetGoalsInCurriculum',{json: {
+			Curriculum: name
+		}}).json();
+
+
 		this.state.MyTopics = []
 		this.state.Courses = []
 		this.setState(this.state)
@@ -93,6 +103,13 @@ export class CurriculumPagee extends React.Component {
 		if(parsed4.r2){
 			for (let i = 0; i < parsed4.r2.length; i++) {
 				this.state.Topics[i] = parsed4.r2[i]
+		
+			}
+		}
+
+		if(parsed5.r2){
+			for (let i = 0; i < parsed5.r2.length; i++) {
+				this.state.Goals[i] = parsed5.r2[i]
 		
 			}
 		}
@@ -218,8 +235,18 @@ export class CurriculumPagee extends React.Component {
 									</div>
 								))}
 							</div>
+
 							<div className="col-lg-4">
 								<label> Goals </label>
+								{this.state.Goals.map(goal => (
+									<div key={goal["ID"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
+										<div className="row">
+											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {goal["ID"]}	</p>
+											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
+											
+										</div>
+									</div>
+								))}
 							</div>
 						</div>
 					}

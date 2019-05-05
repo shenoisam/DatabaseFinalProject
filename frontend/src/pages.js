@@ -2,6 +2,7 @@ import React from 'react';
 import {CreateCurriculum} from './curriculum/createCurriculum.js'
 import {CreateCourse} from './curriculum/createCourse.js'
 import {CreateSection} from './curriculum/createSection.js'
+import {CreateGoal} from './curriculum/createGoal.js'
 import {CreateTopic} from './curriculum/createTopic.js'
 import {CoursePage} from './curriculum/coursePage.js'
 import {SectionsPage} from './curriculum/sectionPage.js'
@@ -65,6 +66,11 @@ export class Home extends React.Component {
 						<h2>Create Topic </h2>
 						<hr />
 						<CreateTopic/>
+						<br/>
+						<br/>
+						<h2>Create Goal </h2>
+						<hr />
+						<CreateGoal/>
 						<br/>
 						<br/>
 					</div>
