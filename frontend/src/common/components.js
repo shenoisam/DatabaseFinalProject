@@ -220,33 +220,29 @@ var data = [
 export class BarExample extends React.Component {
 	constructor(props){
 		super(props);
+	
 		this.state = {
-			myData: [],
+			myData: data,
 			rendered: false,
 		};
 	}
 
 	async componentDidMount(){
-		
-		if (this.props.data){
-			data = this.state.data= this.props.data
-			this.state.rendered = true;
+		console.log(this.props.flag)
+		if (this.props.flag == true){
+			console.log(this.props.data)
+			data = this.state.myData= this.props.data
 			
-		}else {
-			this.state.myData = []
+			
 		}
 		
-	    
+	    this.state.rendered = true;
 		this.setState(this.state);
 		
 
 	}
   
 	render() {
-       
-		
-       
-	
 
 	  return (
 		<div>
@@ -258,7 +254,7 @@ export class BarExample extends React.Component {
 				<YAxis/>
 				<Tooltip/>
 				<Legend />
-				<Bar dataKey="pv" fill="#8884d8" />
+				<Bar dataKey='pv' fill="#8884d8"   />
 				
 			 </BarChart>
 			}

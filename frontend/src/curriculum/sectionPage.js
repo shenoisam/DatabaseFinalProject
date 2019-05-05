@@ -26,7 +26,7 @@ export class SectionsPage extends React.Component {
 			],
 			goals: [],
 			topics: [],
-			flag:true,
+			flag:false,
 			CourseName: "a",
 			Spring: "a",
 			Summer: "a",
@@ -102,6 +102,7 @@ export class SectionsPage extends React.Component {
 		this.state.flag = true
 		for (var i = 0; i < data.length;i++){
 			this.state.courses[i].pv = data[i]
+			console.log("Sams test" , data[i])
 		}
 		console.log(this.state.courses)
 	
@@ -142,14 +143,14 @@ export class SectionsPage extends React.Component {
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
-		        {this.state.flag == true && 
+		       
 				<div className="container padded">
 					<h2>Sections</h2>
 					<hr />
-					<BarExample data = {this.state.courses}/>
+					<BarExample data = {this.state.courses} flag = {this.state.flag}/>
 					
 				</div>
-				}
+			
 				
 			</div>
 		);
