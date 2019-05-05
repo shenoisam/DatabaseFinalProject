@@ -96,7 +96,8 @@ export class CreateSection extends React.Component {
       console.log(err)
     });
 
-    console.log(parsed);
+    console.log(parsed)
+		console.log(this.state)
 
     if(parsed.r2){
       this.setState({
@@ -111,7 +112,6 @@ export class CreateSection extends React.Component {
 	    });
 		}
     this.render();
-		window.location.reload();
 	};
 
 	render() {
@@ -174,7 +174,7 @@ export class CreateSection extends React.Component {
           <input placeholder="I" type="number" name="I" checked={this.state.I} onChange={this.handleInputChange} />
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Create Section</button>
 				</form>
-        {this.state.error && <p> No course named : {this.state.errorCourse} was found </p>}
+        {this.state.error && <p> Error for {this.state.errorCourse}, make sure count is correct and course exists </p>}
 			</div>
 		);
 	}
