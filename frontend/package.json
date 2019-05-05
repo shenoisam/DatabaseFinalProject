@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "canvasjs": "^1.8.1",
     "chart.js": "^2.8.0",
     "chartjs-plugin-annotation": "^0.5.7",
     "dompurify": "^1.0.10",
