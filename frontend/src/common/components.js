@@ -227,30 +227,29 @@ export class BarExample extends React.Component {
 	}
 
 	async componentDidMount(){
-		console.log("YEET", this.props.data);
+		
 		if (this.props.data){
 			this.state.myData = Object.values(this.props.data[0])
 			this.state.rendered = true;
 		}else {
 			this.state.myData = []
 		}
-	
+		console.log(data)
+		for(let i = 0; i < this.state.myData.length; i++){
+			data[i].pv = this.state.myData[i];
+			
+		}
+	    
 		this.setState(this.state);
 		
-		console.log("MOUNT", this.state.myData);
 
 	}
   
 	render() {
-
-		const dataTemp = [];
-		for(let i = 0; i < this.state.myData.length; i++){
-			data[i].pv = this.state.myData[i];
-			console.log("LOOP", this.state.myData[i]);
-		}
-
-		console.log("HELP", this.state.myData);
-
+       
+		
+        console.log("data: ",data)
+	
 
 	  return (
 		<div>

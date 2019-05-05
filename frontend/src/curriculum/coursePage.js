@@ -1,5 +1,6 @@
 import React from 'react';
 import ky from 'ky';
+import {BarExample} from "./../common/components.js"
 
 export class CoursePage extends React.Component {
 	// basically asks a user to display one course at a time
@@ -16,6 +17,7 @@ export class CoursePage extends React.Component {
 			sections: [],
 			error: '',
 			errorCourse: '',
+
 		};
 	}
 
@@ -26,6 +28,18 @@ export class CoursePage extends React.Component {
 		this.setState({
 			[name]: value
 		});
+	}
+	async RemoveSectionFromCourse(ID,sem,year,CourseName){
+		// Adds a course to a curriculum
+
+		const parsed = await ky.post('http://localhost:8888/RemoveSectionFromCourse',{json: {
+			ID:ID,
+			CourseName:CourseName,
+			Semester: sem,
+			Year: year
+		}}).json();
+		console.log(parsed)
+
 	}
 	
 
@@ -110,11 +124,12 @@ export class CoursePage extends React.Component {
 													<div className="row">
 														<p className="col-3"> ID: {section["ID"]}	</p>
 														<p className="col-6"> Semester : {section["Semester"]+' '+section["Year"]}	</p>
+														<button className="col-md-2" style={{float:'right'}} onClick={(e) => {this.clickedCourse(section["ID"],section["Semester"],section["Year"],section["CourseName"]);}} > Delete Section  </button>
 													</div>
 												</div>
 											))}
 										</div>
-							<div className="col-lg-6"> BARRR </div>
+							<div className="col-lg-6"><BarExample data = {this.state.courses}/></div>
 						</div>
 					</div>
 				</div>

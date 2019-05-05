@@ -31,10 +31,11 @@ export class SectionsPage extends React.Component {
 			YearLower: 1900
 
 		}}).json();
-		console.log("test:", parsed.r2)
+		console.log("test:", parsed)
 		this.state.courses = parsed.r2
 		this.state.flag = true;
 		this.setState(this.state)
+		console.log(this.state.courses)
 	}
 
 	render() {

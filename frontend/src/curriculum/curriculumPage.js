@@ -105,6 +105,16 @@ export class CurriculumPagee extends React.Component {
 		console.log(parsed)
 		this.updateComp(nameCur)
 	}
+	async RemoveCourseFromCurriculum(nameCur,nameCourse){
+		// Adds a course to a curriculum
+		console.log(this.state.Required[nameCourse]);
+		const parsed = await ky.post('http://localhost:8888/RemoveCourseFromCurriculum',{json: {
+			Curriculum:nameCur,
+			CourseName:nameCourse,
+		}}).json();
+		console.log(parsed)
+		this.updateComp(nameCur)
+	}
 
 	render() {
 		return (
@@ -128,6 +138,7 @@ export class CurriculumPagee extends React.Component {
 										<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'5px'}}>
 											<div className="row">
 												<p className="col-lg-8"> Name: {course["CourseName"]}	</p>
+												<button className="col-lg-4" style={{float:'right',background:"red"}} onClick={(e) => {this.RemoveCourseFromCurriculum(curriculum["Name"],course["CourseName"]);}} > Remove from Curriculum </button>
 											</div>
 										</div>
 									))}
