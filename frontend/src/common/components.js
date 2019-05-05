@@ -196,26 +196,26 @@ export class Button extends React.Component {
 }
 
 
+
+
+
 var data = [
-	{name: 'A+',  pv: 2400},
-	{name: 'A',  pv: 3800},
-	{name: 'A-',  pv: 3800},
-	{name: 'B+',  pv: 3800},
-	{name: 'B',  pv: 1398},
-	{name: 'B-',  pv: 3800},
-	{name: 'C+',  pv: 3800},
-	{name: 'C',  pv: 9800},
-	{name: 'C-',  pv: 3800},
-	{name: 'D+',  pv: 3800},
-	{name: 'D',  pv: 3908},
-	{name: 'D-',  pv: 3800},
-	{name: 'F',  pv: 3800},
-	{name: 'W',  pv: 3800},
-	{name: 'I',  pv: 3800},
+	{name: 'A+',  pv: 2400, amount: 2400},
+	{name: 'A',  pv: 3800, amount: 2400},
+	{name: 'A-',  pv: 3800, amount: 2400},
+	{name: 'B+',  pv: 3800, amount: 2400},
+	{name: 'B',  pv: 1398, amount: 2400},
+	{name: 'B-',  pv: 3800, amount: 2400},
+	{name: 'C+',  pv: 3800, amount: 2400},
+	{name: 'C',  pv: 9800, amount: 2400},
+	{name: 'C-',  pv: 3800, amount: 2400},
+	{name: 'D+',  pv: 3800, amount: 2400},
+	{name: 'D',  pv: 3908, amount: 2400},
+	{name: 'D-',  pv: 3800, amount: 2400},
+	{name: 'F',  pv: 3800, amount: 2400},
+	{name: 'W',  pv: 3800, amount: 2400},
+	{name: 'I',  pv: 3800, amount: 2400},
 ];
-
-
-
 
 export class BarExample extends React.Component {
 	constructor(props){
@@ -229,16 +229,13 @@ export class BarExample extends React.Component {
 	async componentDidMount(){
 		
 		if (this.props.data){
-			this.state.myData = Object.values(this.props.data[0])
+			data = this.state.data= this.props.data
 			this.state.rendered = true;
+			
 		}else {
 			this.state.myData = []
 		}
-		console.log(data)
-		for(let i = 0; i < this.state.myData.length; i++){
-			data[i].pv = this.state.myData[i];
-			
-		}
+		
 	    
 		this.setState(this.state);
 		
@@ -248,7 +245,7 @@ export class BarExample extends React.Component {
 	render() {
        
 		
-        console.log("data: ",data)
+       
 	
 
 	  return (
