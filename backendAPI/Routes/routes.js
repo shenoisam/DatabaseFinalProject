@@ -35,7 +35,7 @@ var query = function(req,res,next){
         str = str + " WHERE " + res.locals.rmStr
     }
     var params = res.locals.params
-   
+    console.log(str,params)
     _db.query(str,params, function(err,r2){
         if(err){
             console.log(err)

@@ -9,6 +9,23 @@ export class CoursePage extends React.Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 		this.state = {
+			courses: [
+				{name: "A+", pv: 0},
+				{name: "A", pv: 0},
+				{name: "A-", pv: 0},
+				{name: "B+", pv: 0},
+				{name: "B", pv: 0},
+				{name: "B-", pv: 0},
+				{name: "C+", pv: 0},
+				{name: "C", pv: 0},
+				{name: "C-", pv: 0},
+				{name: "D+", pv: 0},
+				{name: "D", pv: 0},
+				{name: "D-", pv: 0},
+				{name: "F", pv: 0},
+				{name: "W", pv: 0},
+				{name: "I", pv: 0},
+			],
 			CourseName: '',
 			SubjectCode: '',
 			CourseNumber: '',

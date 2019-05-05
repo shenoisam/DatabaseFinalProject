@@ -7,37 +7,47 @@ export class SectionsPage extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			courses: [],
+			courses: [
+				{name: "A+", pv: 0},
+				{name: "A", pv: 0},
+				{name: "A-", pv: 0},
+				{name: "B+", pv: 0},
+				{name: "B", pv: 0},
+				{name: "B-", pv: 0},
+				{name: "C+", pv: 0},
+				{name: "C", pv: 0},
+				{name: "C-", pv: 0},
+				{name: "D+", pv: 0},
+				{name: "D", pv: 0},
+				{name: "D-", pv: 0},
+				{name: "F", pv: 0},
+				{name: "W", pv: 0},
+				{name: "I", pv: 0},
+			],
 			goals: [],
 			topics: [],
 			flag:false,
-			CourseName: "",
-			Spring: "",
-			Summer: "",
-			Winter: "",
-			Fall: "",
+			CourseName: "a",
+			Spring: "a",
+			Summer: "a",
+			Winter: "a",
+			Fall: "a",
 			YearUpper: 3000, 
 			YearLower: 1900
 		};
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
+	}
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+		this.setState({
+			[name]: value
+		});
 	}
 
-	async componentDidMount() {
-		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
-			CourseName: this.state.CourseName,
-			Spring : this.state.Spring, 
-			Summer : this.state.Summer,
-			Winter: this.state.Winter,
-			Fall: this.state.Fall,
-			YearUpper: 3000,
-			YearLower: 1900
-
-		}}).json();
-		console.log("test:", parsed)
-		this.state.courses = parsed.r2
-		this.state.flag = true;
-		this.setState(this.state)
-		console.log(this.state.courses)
-	}
+	
 
 	semester1Change(e){
 		if (e != null) {
@@ -69,15 +79,14 @@ export class SectionsPage extends React.Component {
 	};
 
 
-	handleInputChange(event) {
-		
-	}
+	
 
-	async onSubmit(){
-		this.state.Spring = semesterOptions;
-		this.state.Summer = semesterOptions1;
-		this.state.Fall = semesterOptions2;
-		this.state.Winter = semesterOptions3;
+
+	async onSubmit(event){
+		event.preventDefault();
+		
+		
+		
 		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
 			CourseName: this.state.CourseName,
 			Spring : this.state.Spring, 
@@ -88,8 +97,15 @@ export class SectionsPage extends React.Component {
 			YearLower: 1900
 
 		}}).json();
-		this.state.courses = parsed
-		this.state.rendered = true
+		var data = Object.values(parsed.r2[0])
+		console.log("The pulled data", data)
+		this.state.flag = true
+		for (var i = 0; i < data.length;i++){
+			this.state.courses[i].pv = data[i]
+		}
+		console.log(this.state.courses)
+	
+	
 	}
 
 	render() {
@@ -103,30 +119,30 @@ export class SectionsPage extends React.Component {
 						<input placeholder="Course Name" name="CourseName"  className="form-control" checked={this.state.CourseName} onChange={this.handleInputChange} required/>
 					</div>
 					<div className="row">
-						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Semester"
+						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Spring"
 							className='col-3'
-							friendlyName="Semester" placeholder={this.state.Spring}
+							friendlyName="Spring" placeholder={this.state.Spring}
 							options={semesterOptions} value={this.state.Spring}
 							onChange={opt => this.semester1Change(opt)}/>
-						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Semester"
+						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Summer"
 							className='col-3'
-							friendlyName="Semester" placeholder={this.state.Summer}
+							friendlyName="Summer" placeholder={this.state.Summer}
 							options={semesterOptions1} value={this.state.Summer}
 							onChange={opt => this.semester2Change(opt)}/>
-						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Semester"
+						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Fall"
 							className='col-3'
-							friendlyName="Semester" placeholder={this.state.Fall}
+							friendlyName="Fall" placeholder={this.state.Fall}
 							options={semesterOptions2} value={this.state.Fall}
 							onChange={opt => this.semester3Change(opt)}/>
-						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Semester"
+						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Winter"
 							className='col-3'
-							friendlyName="Semester" placeholder={this.state.Winter}
+							friendlyName="Winter" placeholder={this.state.Winter}
 							options={semesterOptions3} value={this.state.Winter}
 							onChange={opt => this.semester4Change(opt)}/>
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
-				{this.state.flag && 
+		        {this.state.flag == true && 
 				<div className="container padded">
 					<h2>Sections</h2>
 					<hr />
@@ -134,6 +150,7 @@ export class SectionsPage extends React.Component {
 					
 				</div>
 				}
+				
 			</div>
 		);
 	}
