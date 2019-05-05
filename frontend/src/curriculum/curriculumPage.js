@@ -96,7 +96,12 @@ export class CurriculumPagee extends React.Component {
 		const parsed9= await ky.post('http://localhost:8888/GoalValid',{json: {
 			Name: name
 		}}).json();
+	
 
+		const parsed10= await ky.post('http://localhost:8888/CreditsUsedToCover',{json: {
+			//GoalID: g
+		}}).json();
+		
 	
 		this.state.MyTopics = []
 		this.state.Courses = []
