@@ -79,7 +79,7 @@ export class SectionsPage extends React.Component {
 
 	async onSubmit(event){
 		event.preventDefault();
-		
+
 		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
 			CourseName: this.state.CourseName,
 			Spring : this.state.Spring,
@@ -98,10 +98,10 @@ export class SectionsPage extends React.Component {
 				this.state.courses[i].pv = data[i]
 			}
 			console.log(this.state.courses)
+			this.setState(this.state);
+			this.render();
 		}
 	}
-
-	
 
 	render() {
 
@@ -115,7 +115,7 @@ export class SectionsPage extends React.Component {
 					<div>
 						{this.state.courses[i].pv}
 					</div>
-					
+
 				</div>
 			)
 		}
@@ -155,7 +155,7 @@ export class SectionsPage extends React.Component {
 				</form>
 
 
-				
+
 				{this.state.flag == true &&
 					<div className="container padded">
 
@@ -170,7 +170,7 @@ export class SectionsPage extends React.Component {
 								{myArray}
 							</div>
 						}
-						
+
 
 					</div>
 				}
