@@ -47,6 +47,7 @@ export class CurriculumPagee extends React.Component {
 		}
 		this.state.ShowingCurr[name] = true;
 		this.setState(this.state);
+
 	}
 
 	async updateComp(name){
@@ -57,9 +58,9 @@ export class CurriculumPagee extends React.Component {
 		const parsed2 = await ky.post('http://localhost:8888/GetCoursesNotInCurriculum',{json: {
 			Curriculum: name
 		}}).json();
-
-		console.log(parsed1)
-		console.log(parsed2)
+		this.state.MyCourses = []
+		this.state.Courses = []
+		this.setState(this.state)
 
 		if(parsed1.r2){
 			for (let i = 0; i < parsed1.r2.length; i++) {
@@ -81,6 +82,7 @@ export class CurriculumPagee extends React.Component {
 		// Updates all courses,topics,and goals linked to a curriculum
 		this.setOtherCurriculumToFalse(name)
 		this.updateComp(name)
+
 
 	}
 
