@@ -108,17 +108,18 @@ export class SectionsPage extends React.Component {
 		const myArray = [];
 		for(let i = 0; i < this.state.courses.length; i++){
 			myArray.push(
-				<div>
-					<div>
+				<tr>
+					<td>
 						{this.state.courses[i].name}
-					</div>
-					<div>
+					</td>
+					<td>
 						{this.state.courses[i].pv}
-					</div>
+					</td>
 					
-				</div>
+				</tr>
 			)
 		}
+
 
 		return (
 			<div>
@@ -166,9 +167,9 @@ export class SectionsPage extends React.Component {
 							</div>
 						}
 						{myArray.length !== 0 &&
-							<div>
+							<table>
 								{myArray}
-							</div>
+							</table>
 						}
 						
 

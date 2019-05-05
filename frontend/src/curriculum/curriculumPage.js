@@ -56,7 +56,6 @@ export class CurriculumPagee extends React.Component {
 	}
 
 	async updateComp(name){
-
 		//Pull data for the various components
 		const parsed1 = await ky.post('http://localhost:8888/GetCurriculumCourses',{json: {
 			Curriculum: name
@@ -156,11 +155,22 @@ export class CurriculumPagee extends React.Component {
 		this.render()
 	}
 
+	async updateGoalRendering(name){
+		const parsed1 = await ky.post('http://localhost:8888/CreditsUsedToCover',{json: {
+			Curriculum: name
+		}}).json();
+
+	}
+	async clickedGoal(name){
+		// Updates all courses,topics,and goals linked to a curriculum
+		this.setOtherGoalToFalse(name)
+		this.updateGoalRendering(name)
+
+	}
 	async clickedCurriculum(name){
 		// Updates all courses,topics,and goals linked to a curriculum
 		this.setOtherCurriculumToFalse(name)
 		this.updateComp(name)
-
 
 	}
 
@@ -291,6 +301,7 @@ export class CurriculumPagee extends React.Component {
 									<div key={goal["ID"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
 											<div className="row">
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {goal["ID"]}	</p>
+												<button className="col-md-2" style={{float:'right'}} onClick={(e) => {this.clickedCurriculum(curriculum["Name"]);}} > View Curriculum </button>
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > # Credits Used to Cover: {goal["Description"]}	</p>
 												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveGoal(curriculum["Name"],goal["ID"]);}} > Remove from Curriculum </button>
