@@ -16,6 +16,7 @@ export class CurriculumPagee extends React.Component {
 			GoalCredHour: '',
 			ShowingCurr:[],
 			Courses:[],
+			MyCourses:[],
 			Topics:[],
 			Goals:[],
 			Required:[],
@@ -26,14 +27,11 @@ export class CurriculumPagee extends React.Component {
 		let i = 0;
 		const parsed = await ky.post('http://localhost:8888/GetAllCurriculums',{json: {
 		}}).json();
-<<<<<<< HEAD
-		console.log(parsed)
-=======
+
 		for (i = 0; i < parsed.r2.length; i++) {
 			this.state.curriculums[i] = parsed.r2[i];
 			this.state.ShowingCurr[parsed.r2[i].Name] = false;
 		}
->>>>>>> 29036c6cf14988860458fb29fa849241474dcd29
 		this.setState(this.state);
 	}
 
@@ -53,30 +51,29 @@ export class CurriculumPagee extends React.Component {
 	}
 
 	async updateComp(name){
-		const parsed = await ky.post('http://localhost:8888/GetAllCourses',{json: {
-		}}).json();
-
-		const parsed2 = await ky.post('http://localhost:8888/GetCurriculumCourses',{json: {
+		const parsed1 = await ky.post('http://localhost:8888/GetCurriculumCourses',{json: {
 			Curriculum: name
 		}}).json();
 
-		console.log(parsed)
+		const parsed2 = await ky.post('http://localhost:8888/GetCoursesNotInCurriculum',{json: {
+			Curriculum: name
+		}}).json();
+
+		console.log(parsed1)
 		console.log(parsed2)
 
-		if(parsed.r2){
-			for (let i = 0; i < parsed.r2.length; i++) {
-				this.state.Courses[i] = parsed.r2[i]
+		if(parsed1.r2){
+			for (let i = 0; i < parsed1.r2.length; i++) {
+				this.state.MyCourses[i] = parsed1.r2[i]
 			}
 		}
-		this.setState(this.state)
 
 		if(parsed2.r2){
-			this.state.Courses = this.state.Courses.filter(function(e){
-				return parsed2.r2.indexOf(e) < -1;
-			})
+			for (let i = 0; i < parsed2.r2.length; i++) {
+				this.state.Courses[i] = parsed2.r2[i]
+			}
 		}
 
-		console.log(this.state.Courses)
 		this.setState(this.state)
 		this.render()
 	}
@@ -123,8 +120,15 @@ export class CurriculumPagee extends React.Component {
 					<hr></hr>
 					{(this.state.ShowingCurr[curriculum["Name"]] === true) &&
 						<div className="row" >
-							<div className="col-lg-4">
-								<label> Courses </label>
+								<div className="col-lg-4">
+									<label> Courses </label>
+									{this.state.MyCourses.map(course => (
+										<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'5px'}}>
+											<div className="row">
+												<p className="col-lg-8"> Name: {course["CourseName"]}	</p>
+											</div>
+										</div>
+									))}
 								{this.state.Courses.map(course => (
 									<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
 										<div className="row">
