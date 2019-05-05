@@ -34,6 +34,7 @@ export class CoursePage extends React.Component {
 			sections: [],
 			error: '',
 			errorCourse: '',
+			Curriculums: []
 
 		};
 	}
@@ -67,6 +68,8 @@ export class CoursePage extends React.Component {
 			CourseName: this.state.CourseName
 		}}).json();
 
+		
+
 		if(parsed.r2.length === 1){
 			// Get Course data
 			this.state.error = '';
@@ -80,10 +83,19 @@ export class CoursePage extends React.Component {
 			const parsed2 = await ky.post('http://localhost:8888/GetAllSections',{json: {
 				CourseName: this.state.CourseName
 			}}).json();
-			console.log(parsed2.r2);
+			
 			for (i = 0; i < parsed2.r2.length; i++) {
 				this.state.sections[i] = parsed2.r2[i];
 			}
+
+			const parsed3 = await ky.post('http://localhost:8888/GetCourseCurriculums',{json: {
+				CourseName: this.state.CourseName
+			}}).json();
+			console.log("CourseCurriculums: ",parsed3.r2.length);
+			for (i = 0; i < parsed3.r2.length; i++) {
+				this.state.Curriculums[i] = parsed3.r2[i];
+			}
+
 			this.setState(this.state);
 		}
 		else {
@@ -146,6 +158,21 @@ export class CoursePage extends React.Component {
 											))}
 										</div>
 							<div className="col-lg-6"><BarExample data = {this.state.courses}/></div>
+						</div>
+						<div className="row">
+							<div id="sections" className="col-lg-6" >
+								<label> Curriculums Part of </label>
+								{this.state.Curriculums.map(section => (
+										<div key={section["ID"]} className="col-lg-12 clear" style={{border:'1px solid',marginBottom:'15px'}}>
+													<div className="row">
+														<p className="col-3"> Name: {section["Name"]}	</p>
+														<p className="col-3"> MinimumHours: {section["MinimumHours"]}	</p>
+														<p className="col-3"> MaxTopicsCovered: {section["MaxTopicsCovered"]}	</p>
+														<p className="col-3"> GoalCredHours: {section["GoalCredHours"]}	</p>
+													</div>
+												</div>
+											))}
+										</div>
 						</div>
 					</div>
 				</div>
