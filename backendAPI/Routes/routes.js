@@ -29,13 +29,13 @@ var insertData = function(req,res, next){
 }
 
 var query = function(req,res,next){
-    console.log(res.locals.params)
+   
     var str = "SELECT " +res.locals.select + " FROM " + res.locals.table;
     if(res.locals.rmStr){
         str = str + " WHERE " + res.locals.rmStr
     }
     var params = res.locals.params
-    console.log(str,params)
+   
     _db.query(str,params, function(err,r2){
         if(err){
             console.log(err)
@@ -63,6 +63,20 @@ var update = function (req,res,next){
    
 
 }
+var del = function(req,res,next){
+   var str = "DELETE FROM " + res.locals.table + " WHERE " + res.locals.rmStr
+   var params = res.locals.params
+   console.log(str)
+    _db.query(str,params, function(err,r2){
+        if(err){
+            res.send({err: err.code})
+        }else {
+            console.log
+            res.send({r2})
+        }
+     
+    })
+}
 
 //Send the user id for storage client side
 var sendUserId = function(req,res,next){
@@ -75,4 +89,4 @@ var end = function(req,res,next){
 
 
 
-module.exports = {query,insertData,sendUserId,end,update}
+module.exports = {query,insertData,sendUserId,end,update,del}
