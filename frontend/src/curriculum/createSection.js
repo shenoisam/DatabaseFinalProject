@@ -99,7 +99,7 @@ export class CreateSection extends React.Component {
     console.log(parsed)
 		console.log(this.state)
 
-    if(parsed.r2){
+    if(!parsed.err){
       this.setState({
 	      error: '',
         errorCourse: ''
