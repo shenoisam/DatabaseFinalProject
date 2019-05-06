@@ -73,17 +73,13 @@ var UpdateCurriculum = function(req,res,next){
     if(contains.call(a,"MinimumHours")){
         uString = uString + "MinimumHours = ?"
     }
-    
 
-
-    
-
-        res.locals.att = uString
-        res.locals.rmStr = " Name = ?"
-        params.push(req.body.Name)
-        res.locals.params = params
-        console.log(uString,params)
-        next()
+    res.locals.att = uString
+    res.locals.rmStr = " Name = ?"
+    params.push(req.body.Name)
+    res.locals.params = params
+    console.log(uString,params)
+    next()
 
  
 }
