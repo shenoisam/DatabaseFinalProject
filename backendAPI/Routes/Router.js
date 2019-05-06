@@ -429,7 +429,7 @@ router.post('/GetGoalsNotPartOfCourse', CourseGoals.GetGoalsNotPartOfCourse,rout
      -
 
 */
-router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)
+router.post('/UpdateCurriculum',Curriclum.UpdateCurriculum,routes.update)
 router.post('/UpdateGoals',Goals.UpdateGoals,routes.update)
 router.post('/UpdateSection',Section.UpdateSection,routes.update)
 router.post('/UpdateTopic',Topics.UpdateTopics,routes.update)

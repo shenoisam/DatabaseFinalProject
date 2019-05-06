@@ -29,13 +29,13 @@ var insertData = function(req,res, next){
 }
 
 var query = function(req,res,next){
-   
+
     var str = "SELECT " +res.locals.select + " FROM " + res.locals.table;
     if(res.locals.rmStr){
         str = str + " WHERE " + res.locals.rmStr
     }
     var params = res.locals.params
-    console.log(str)
+   
     _db.query(str,params, function(err,r2){
         if(err){
             console.log(err)
@@ -50,12 +50,13 @@ var query = function(req,res,next){
 var update = function (req,res,next){
    var str = "UPDATE " + res.locals.table + " SET " + res.locals.att + " WHERE " + res.locals.rmStr
    var params = res.locals.params
-
+   console.log(str)
     _db.query(str,params, function(err,r2){
         if(err){
+            console.log(err)
             res.send({err: err.code})
         }else {
-            res.send({r2})
+            res.send({})
         }
      
     })

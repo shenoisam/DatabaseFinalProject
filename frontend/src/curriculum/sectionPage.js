@@ -275,7 +275,6 @@ export class SectionsPage extends React.Component {
 						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/> 
 						</div>
 						<div className="col-lg-4">
-						
 						     <input placeholder="Goal ID" name="GoalID"  className="form-control" checked={this.state.GoalID} onChange={this.handleInputChange} required/> 
 						</div>
 						

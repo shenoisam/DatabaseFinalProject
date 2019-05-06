@@ -7,6 +7,7 @@ export class CurriculumPagee extends React.Component {
 	// basically list all curriculum in the database
 	constructor(props){
 		super(props);
+		this.handleInputChange = this.handleInputChange.bind(this);
 		this.state = {
 			curriculums: [],
 			Name: '',
@@ -26,6 +27,12 @@ export class CurriculumPagee extends React.Component {
 			NumRequired: 0,
 			NumOptional: 0,
 			GoalValid: "Not Valid",
+			CurriculumName : "",
+			MinimumHours2: -1,
+			MaxTopicsCovered2: -1,
+			GoalCredHour2: -1,
+			
+
 
 
 		};
@@ -47,7 +54,15 @@ export class CurriculumPagee extends React.Component {
 	handleCheckboxChange(e) {
       this.state.Required.set(e, !this.state.Required.get(e));
       this.setState(this.state);
-  }
+	}
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+		this.setState({
+			[name]: value
+		});
+	}
 
 	setOtherCurriculumToFalse(name){
 		for (var i = 0; i < this.state.curriculums.length; i++) {
@@ -246,6 +261,31 @@ export class CurriculumPagee extends React.Component {
 		this.updateComp(nameCur)
 	}
 
+	async UpdateCurriculum(nameCur){
+		var a = []
+		var p = []
+		if(this.state.MaxTopics2 > -1){
+					a.push("MaxTopicsCovered")
+					p.push(this.state.MaxTopics2)
+		}
+		if(this.state.GoalCredHour2 > -1){
+			a.push("GoalCredHours")
+			p.push(this.state.GoalCredHour2)
+		}
+		if(this.state.MinimumHours2 > -1){
+			a.push("MinimumHours")
+			p.push(this.state.MinimumHours2 )
+		}
+		
+		console.log(a,p)
+		const parsed = await ky.post('http://localhost:8888/UpdateCurriculum',{json: {
+			Name: nameCur,
+			Attribute : a, 
+			Values : p 	
+		}}).json();
+		this.updateComp(nameCur)
+	}
+
 	render() {
 		return (
 			<div className="d-lg-flex flex-lg-wrap justify-content-lg-start">
@@ -342,6 +382,21 @@ export class CurriculumPagee extends React.Component {
 						  <p className="col-2"> # Optional courses: {this.state.NumOptional}	</p>
 						  <p className="col-2"> Total Levels Covered : {curriculum["GoalCredHours"]}	</p>
 							<p className="col-2"> Goal Valid: {this.state.GoalValid}	</p>
+						</div>
+					
+					}
+				  
+					{(this.state.ShowingCurr[curriculum["Name"]] === true) &&
+			   
+						<div className = "row">
+								<form>
+
+										
+										<input placeholder="Minimum Hours" type="number" name="MinimumHours2" checked={this.state.MinimumHours2} onChange={this.handleInputChange} />
+										<input placeholder="Max Topics" type="string" name="MaxTopics2" checked={this.state.MaxTopics2} onChange={this.handleInputChange} />
+										<input placeholder="Goal Credit Hours" type="string" name="GoalCredHour2" checked={this.state.GoalCredHour2} onChange={this.handleInputChange} />
+										<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.UpdateCurriculum(curriculum["Name"]);}} > Update Curriculum </button>
+								</form>
 						</div>
 					}
 				</div>

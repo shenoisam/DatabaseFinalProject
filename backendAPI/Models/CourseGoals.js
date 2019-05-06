@@ -38,7 +38,7 @@
 	next()
  }
  
- module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover,GetGoalsPartOfCourse,GetGoalsNotPartOfCourse}
+ 
 
  var DeleteRelationship = function(req,res,next){
  	res.locals.table = "CourseGoals"
@@ -46,5 +46,4 @@
  	res.locals.params = [req.body.GoalsID,req.body.CourseName]
  	next()
  }
-
- module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover,DeleteRelationship}
+ module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover,GetGoalsPartOfCourse,GetGoalsNotPartOfCourse,DeleteRelationship}
