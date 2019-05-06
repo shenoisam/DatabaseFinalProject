@@ -57,6 +57,12 @@ export class CurriculumPagee extends React.Component {
 
 	async updateComp(name){
 		//Pull data for the various components
+		this.state.MyCourses = []
+		this.state.Courses = []
+		this.state.MyTopics = []
+		this.state.Topics = []
+		this.setState(this.state)
+
 		const parsed1 = await ky.post('http://localhost:8888/GetCurriculumCourses',{json: {
 			Curriculum: name
 		}}).json();
@@ -64,9 +70,6 @@ export class CurriculumPagee extends React.Component {
 		const parsed2 = await ky.post('http://localhost:8888/GetCoursesNotInCurriculum',{json: {
 			Curriculum: name
 		}}).json();
-		this.state.MyCourses = []
-		this.state.Courses = []
-		this.setState(this.state)
 
 		const parsed3 = await ky.post('http://localhost:8888/GetTopicsInCurriculum',{json: {
 			Name: name
@@ -147,7 +150,6 @@ export class CurriculumPagee extends React.Component {
 		if(parsed5.r2){
 			for (let i = 0; i < parsed5.r2.length; i++) {
 				this.state.Goals[i] = parsed5.r2[i]
-
 			}
 		}
 
@@ -186,13 +188,11 @@ export class CurriculumPagee extends React.Component {
 		const parsed = await ky.post('http://localhost:8888/CreateCurriculumTopics',{json: {
 			Name:nameCur,
 			ID:topic,
-
 		}}).json();
 		this.updateComp(nameCur)
 	}
 	async RemoveTopicFromCurriculum(nameCur,topic){
 		// Adds a course to a curriculum
-
 		const parsed = await ky.post('http://localhost:8888/RemoveTopicromCurriculum',{json: {
 			Name:nameCur,
 			ID:topic,
@@ -261,8 +261,13 @@ export class CurriculumPagee extends React.Component {
 								{this.state.Courses.map(course => (
 									<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
 										<div className="row">
-											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Name: {course["CourseName"]}	</p>
-											<span className="col-4" style={{paddingLeft:'0px', paddingRight:'0px'}} >
+											<p className="col-lg-12" style={{paddingLeft:'0px', paddingRight:'0px'}} > Name: {course["CourseName"]}	</p>
+											<span className="col-6" style={{paddingLeft:'0px', paddingRight:'0px'}} >
+												<Bessemer.Select name="Required" friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
+						                  options={requiredOptions} value={this.state.Required[course["CourseName"]]}
+						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>
+											</span>
+											<span className="col-6" style={{paddingLeft:'0px', paddingRight:'0px'}} >
 												<Bessemer.Select name="Required" friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
 						                  options={requiredOptions} value={this.state.Required[course["CourseName"]]}
 						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>

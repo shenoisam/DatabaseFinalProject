@@ -114,15 +114,9 @@ export class SectionsPage extends React.Component {
 					</td>
 					<td>
 						{this.state.courses[i].pv}
-<<<<<<< HEAD
-					</div>
-
-				</div>
-=======
 					</td>
-					
+
 				</tr>
->>>>>>> d0e35d443edc989c631c7a65a4ee4320b8889672
 			)
 		}
 
