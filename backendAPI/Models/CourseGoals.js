@@ -1,11 +1,11 @@
- 
+
  var CreateCourseGoal = function(req,res,next){
-	var cn = req.body.CourseName 
-    var gi = req.body.GoalsID  
-	
+	var cn = req.body.CourseName
+    var gi = req.body.GoalsID
+
 	res.locals.sql    = "INSERT INTO CourseGoals VALUES (?,?)"
-    res.locals.val = [[cn,gi]]
-	
+    res.locals.val = [cn,gi]
+
 	next()
  }
  var GetCourseGoal = function(req,res,next){
@@ -23,5 +23,5 @@
 	res.locals.params = [req.body.GoalsID]
 	next()
  }
- 
+
  module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover}

@@ -1,6 +1,7 @@
 import React from 'react';
 import ky from 'ky';
 import * as Bessemer from '../alloy/bessemer/components.js';
+import Select from 'react-select'
 
 export class CurriculumPagee extends React.Component {
 	// basically list all curriculum in the database
@@ -19,6 +20,8 @@ export class CurriculumPagee extends React.Component {
 			MyTopics:[],
 			Topics:[],
 			Goals:[],
+			OtherGoals:[],
+			CourseGoals:[],
 			Required:[],
 			NumRequired: 0,
 			NumOptional: 0,
@@ -61,6 +64,7 @@ export class CurriculumPagee extends React.Component {
 		this.state.Courses = []
 		this.state.MyTopics = []
 		this.state.Topics = []
+		this.state.OtherGoals = []
 		this.setState(this.state)
 
 		const parsed1 = await ky.post('http://localhost:8888/GetCurriculumCourses',{json: {
@@ -104,11 +108,6 @@ export class CurriculumPagee extends React.Component {
 			//GoalID: g
 		}}).json();
 
-
-		this.state.MyTopics = []
-		this.state.Courses = []
-		this.setState(this.state)
-
 		this.state.NumRequired = parsed7.r2[0].COUNT
 		this.state.NumOptional = parsed8.r2[0].COUNT
 
@@ -150,6 +149,7 @@ export class CurriculumPagee extends React.Component {
 		if(parsed5.r2){
 			for (let i = 0; i < parsed5.r2.length; i++) {
 				this.state.Goals[i] = parsed5.r2[i]
+				this.state.OtherGoals.push({label: parsed5.r2[i].ID, value: parsed5.r2[i].ID})
 			}
 		}
 
@@ -173,12 +173,18 @@ export class CurriculumPagee extends React.Component {
 		// Updates all courses,topics,and goals linked to a curriculum
 		this.setOtherCurriculumToFalse(name)
 		this.updateComp(name)
-
 	}
 
 	requiredChange(e,name){
 		if (e != null) {
 			this.state.Required[name]= e
+      this.setState(this.state);
+		}
+	};
+
+	goalChange(e,name){
+		if (e != null) {
+			this.state.CourseGoals[name] = e
       this.setState(this.state);
 		}
 	};
@@ -191,6 +197,7 @@ export class CurriculumPagee extends React.Component {
 		}}).json();
 		this.updateComp(nameCur)
 	}
+
 	async RemoveTopicFromCurriculum(nameCur,topic){
 		// Adds a course to a curriculum
 		const parsed = await ky.post('http://localhost:8888/RemoveTopicromCurriculum',{json: {
@@ -207,8 +214,20 @@ export class CurriculumPagee extends React.Component {
 			CourseName:nameCourse,
 			Required:this.state.Required[nameCourse]
 		}}).json();
+
+		if(!parsed.err){
+			for (var i = 0; i < this.state.CourseGoals[nameCourse].length; i++) {
+				const parsed1 = await ky.post('http://localhost:8888/CreateCourseGoals',{json: {
+					CourseName:nameCourse,
+					GoalsID:this.state.CourseGoals[nameCourse][0].label
+				}}).json();
+				console.log(parsed1)
+				console.log(this.state.CourseGoals[i])
+			}
+		}
 		this.updateComp(nameCur)
 	}
+
 	async RemoveCourseFromCurriculum(nameCur,nameCourse){
 		// Adds a course to a curriculum
 		console.log(this.state.Required[nameCourse]);
@@ -222,12 +241,9 @@ export class CurriculumPagee extends React.Component {
 
 	async RemoveGoal(nameCur, gid){
 		// Adds a course to a curriculum
-
 		const parsed = await ky.post('http://localhost:8888/DeleteGoal',{json: {
 			ID:gid,
-
 		}}).json();
-
 		this.updateComp(nameCur)
 	}
 
@@ -268,9 +284,7 @@ export class CurriculumPagee extends React.Component {
 						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>
 											</span>
 											<span className="col-6" style={{paddingLeft:'0px', paddingRight:'0px'}} >
-												<Bessemer.Select name="Required" friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
-						                  options={requiredOptions} value={this.state.Required[course["CourseName"]]}
-						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>
+												<Select options={this.state.OtherGoals} isMulti={true} onChange={opt => this.goalChange(opt,course["CourseName"])} />
 											</span>
 											<button className="col-lg-12" style={{float:'right'}} onClick={(e) => {this.addCurriculumAndCourse(curriculum["Name"],course["CourseName"]);}} > Add to Curriculum </button>
 										</div>
@@ -306,7 +320,6 @@ export class CurriculumPagee extends React.Component {
 									<div key={goal["ID"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
 											<div className="row">
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {goal["ID"]}	</p>
-												<button className="col-md-2" style={{float:'right'}} onClick={(e) => {this.clickedCurriculum(curriculum["Name"]);}} > View Curriculum </button>
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > # Credits Used to Cover: {goal["Description"]}	</p>
 												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveGoal(curriculum["Name"],goal["ID"]);}} > Remove from Curriculum </button>
