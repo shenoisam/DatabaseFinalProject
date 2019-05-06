@@ -409,6 +409,7 @@ router.post('/GetPersonInCharge',Curriclum.GetPersonInCharge, routes.query)
 
 router.post('/RemoveCourseFromCurriculum', CurCourse.DeleteRelationship,routes.del)
 
+router.post('/RemoveGoalFromCourse', CourseGoals.DeleteRelationship,routes.del)
 
 router.post('/DeleteSectionFromCourse', Section.DeleteSection,routes.del)
 
@@ -423,9 +424,9 @@ router.post('/GetGoalsNotPartOfCourse', CourseGoals.GetGoalsNotPartOfCourse,rout
 //Update all of the different types of data
 
 /*
-  description: This function updates the curriculums 
-  Parameters: 
-     - 
+  description: This function updates the curriculums
+  Parameters:
+     -
 
 */
 router.post('/UpdateCurriculum',Curriclum.GetCurriculum,routes.update)
