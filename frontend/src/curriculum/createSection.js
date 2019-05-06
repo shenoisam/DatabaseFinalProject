@@ -157,6 +157,7 @@ export class CreateSection extends React.Component {
 					</div>
 						<input placeholder ="Comment 2" name="Comment2"  className="form-control" checked={this.state.Comment2} onChange={this.handleInputChange} required/>
 					</div>
+				
 					<input placeholder="A+" type="number" name="APlus" checked={this.state.APlus} onChange={this.handleInputChange} />
           <input placeholder="A" type="number" name="A" checked={this.state.A} onChange={this.handleInputChange} />
           <input placeholder="A-" type="number" name="AMinus" checked={this.state.AMinus} onChange={this.handleInputChange} />

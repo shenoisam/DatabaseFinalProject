@@ -20,7 +20,7 @@ export class CurriculumPagee extends React.Component {
 			Topics:[],
 			Goals:[],
 			Required:[],
-			NumRequired: 0, 
+			NumRequired: 0,
 			NumOptional: 0,
 			GoalValid: "Not Valid",
 
@@ -31,13 +31,13 @@ export class CurriculumPagee extends React.Component {
 	async componentDidMount() {
 		let i = 0;
 		const parsed = await ky.post('http://localhost:8888/GetAllCurriculums',{json: {
-		
+
 	  }}).json();
 		for (i = 0; i < parsed.r2.length; i++) {
 			this.state.curriculums[i] = parsed.r2[i];
 			this.state.ShowingCurr[parsed.r2[i].Name] = false;
 		}
-		
+
 		this.setState(this.state);
 	}
 
@@ -58,6 +58,12 @@ export class CurriculumPagee extends React.Component {
 
 	async updateComp(name){
 		//Pull data for the various components
+		this.state.MyCourses = []
+		this.state.Courses = []
+		this.state.MyTopics = []
+		this.state.Topics = []
+		this.setState(this.state)
+
 		const parsed1 = await ky.post('http://localhost:8888/GetCurriculumCourses',{json: {
 			Curriculum: name
 		}}).json();
@@ -65,9 +71,6 @@ export class CurriculumPagee extends React.Component {
 		const parsed2 = await ky.post('http://localhost:8888/GetCoursesNotInCurriculum',{json: {
 			Curriculum: name
 		}}).json();
-		this.state.MyCourses = []
-		this.state.Courses = []
-		this.setState(this.state)
 
 		const parsed3 = await ky.post('http://localhost:8888/GetTopicsInCurriculum',{json: {
 			Name: name
@@ -96,21 +99,21 @@ export class CurriculumPagee extends React.Component {
 		const parsed9= await ky.post('http://localhost:8888/GoalValid',{json: {
 			Name: name
 		}}).json();
-	
+
 
 		const parsed10= await ky.post('http://localhost:8888/CreditsUsedToCover',{json: {
 			//GoalID: g
 		}}).json();
-		
-	
+
+
 		this.state.MyTopics = []
 		this.state.Courses = []
 		this.setState(this.state)
 
 		this.state.NumRequired = parsed7.r2[0].COUNT
 		this.state.NumOptional = parsed8.r2[0].COUNT
- 
-		
+
+
 		if(parsed9.r2[0].NUMGOALNOTVALID == 0 ){
 			this.state.GoalValid = "Valid"
 		}
@@ -118,7 +121,7 @@ export class CurriculumPagee extends React.Component {
 
 
 		if(parsed1.r2){
-			this.state.HeadPerson = parsed6.r2[0].FirstName + " "+  parsed6.r2[0].LastName 
+			this.state.HeadPerson = parsed6.r2[0].FirstName + " "+  parsed6.r2[0].LastName
 		}
 		if(parsed1.r2){
 			for (let i = 0; i < parsed1.r2.length; i++) {
@@ -129,7 +132,7 @@ export class CurriculumPagee extends React.Component {
 		if(parsed2.r2){
 			for (let i = 0; i < parsed2.r2.length; i++) {
 				this.state.Courses[i] = parsed2.r2[i]
-			
+
 			}
 		}
 		if(parsed3.r2){
@@ -141,14 +144,13 @@ export class CurriculumPagee extends React.Component {
 		if(parsed4.r2){
 			for (let i = 0; i < parsed4.r2.length; i++) {
 				this.state.Topics[i] = parsed4.r2[i]
-		
+
 			}
 		}
 
 		if(parsed5.r2){
 			for (let i = 0; i < parsed5.r2.length; i++) {
 				this.state.Goals[i] = parsed5.r2[i]
-		
 			}
 		}
 
@@ -176,13 +178,11 @@ export class CurriculumPagee extends React.Component {
 		const parsed = await ky.post('http://localhost:8888/CreateCurriculumTopics',{json: {
 			Name:nameCur,
 			ID:topic,
-
 		}}).json();
 		this.updateComp(nameCur)
 	}
 	async RemoveTopicFromCurriculum(nameCur,topic){
 		// Adds a course to a curriculum
-
 		const parsed = await ky.post('http://localhost:8888/RemoveTopicromCurriculum',{json: {
 			Name:nameCur,
 			ID:topic,
@@ -251,8 +251,13 @@ export class CurriculumPagee extends React.Component {
 								{this.state.Courses.map(course => (
 									<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'20px'}}>
 										<div className="row">
-											<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Name: {course["CourseName"]}	</p>
-											<span className="col-4" style={{paddingLeft:'0px', paddingRight:'0px'}} >
+											<p className="col-lg-12" style={{paddingLeft:'0px', paddingRight:'0px'}} > Name: {course["CourseName"]}	</p>
+											<span className="col-6" style={{paddingLeft:'0px', paddingRight:'0px'}} >
+												<Bessemer.Select name="Required" friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
+						                  options={requiredOptions} value={this.state.Required[course["CourseName"]]}
+						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>
+											</span>
+											<span className="col-6" style={{paddingLeft:'0px', paddingRight:'0px'}} >
 												<Bessemer.Select name="Required" friendlyName="Required" placeholder={this.state.Required[course["CourseName"]]}
 						                  options={requiredOptions} value={this.state.Required[course["CourseName"]]}
 						                  onChange={opt => this.requiredChange(opt,course["CourseName"])}/>
@@ -295,9 +300,7 @@ export class CurriculumPagee extends React.Component {
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > # Credits Used to Cover: {goal["Description"]}	</p>
 												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveGoal(curriculum["Name"],goal["ID"]);}} > Remove from Curriculum </button>
-												
 											</div>
-						
 									</div>
 									))}
 							</div>
@@ -312,7 +315,7 @@ export class CurriculumPagee extends React.Component {
 							<p className="col-2"> Goal Valid: {this.state.GoalValid}	</p>
 						</div>
 					}
-			
+
 				</div>
 			))}
 			</div>

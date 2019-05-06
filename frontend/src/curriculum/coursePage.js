@@ -81,7 +81,7 @@ export class CoursePage extends React.Component {
 			this.state.Curriculums = [];
 			this.setState(this.state);
 			// Get all sections with same CourseName
-			let i = 0;
+
 			const parsed2 = await ky.post('http://localhost:8888/GetAllSections',{json: {
 				CourseName: this.state.CourseName
 			}}).json();
@@ -93,7 +93,28 @@ export class CoursePage extends React.Component {
 			const parsed3 = await ky.post('http://localhost:8888/GetCourseCurriculums',{json: {
 				CourseName: this.state.CourseName
 			}}).json();
-			console.log("CourseCurriculums: ",parsed3.r2.length);
+
+			const parsed4 = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
+				CourseName: this.state.CourseName,
+				Spring : "Spring",
+				Summer : "Summer",
+				Winter: "Winter",
+				Fall: "Fall",
+				YearUpper: 3000,
+				YearLower: 1900
+
+			}}).json();
+			if(parsed4.r2){
+				var data = Object.values(parsed4.r2[0])
+				this.state.flag = true
+				for (var i = 0; i < data.length;i++){
+					this.state.courses[i].pv = data[i]
+				}
+				console.log(this.state.courses)
+				this.setState(this.state);
+				this.render();
+			}
+			console.log("CourseCurriculums: ",parsed4.r2.length);
 			for (i = 0; i < parsed3.r2.length; i++) {
 				this.state.Curriculums[i] = parsed3.r2[i];
 			}

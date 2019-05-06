@@ -225,14 +225,26 @@ export class BarExample extends React.Component {
   
 	render() {
 		const myArray = [];
-		for(let i = 0; i < this.state.myData.length; i++){
+		for(let i = 0; i < this.state.myData.length; i = i + 3){
 			myArray.push(
 				<tr>
-					<td>
+					<td style={{width: '15%', border : '1px solid black'}}>
 						{this.state.myData[i].name}
 					</td>
-					<td>
+					<td style={{width : '15%',border : '1px solid black'}}>
 						{this.state.myData[i].pv}
+					</td>
+					<td style={{width: '15%',border : '1px solid black'}}>
+						{this.state.myData[i+1].name}
+					</td>
+					<td style={{width : '15%',border : '1px solid black'}}>
+						{this.state.myData[i+1].pv}
+					</td>
+					<td style={{width: '15%',border : '1px solid black'}}>
+						{this.state.myData[i+2].name}
+					</td>
+					<td style={{width : '15%',border : '1px solid black'}}>
+						{this.state.myData[i+2].pv}
 					</td>
 					
 				</tr>
@@ -248,7 +260,7 @@ export class BarExample extends React.Component {
 							</div>
 						}
 						{myArray.length !== 0 &&
-							<table>
+							<table style = {{width: '100%', border: '1px solid black'}}>
 								{myArray}
 							</table>
 						}

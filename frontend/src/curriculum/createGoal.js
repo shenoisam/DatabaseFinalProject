@@ -9,7 +9,7 @@ export class CreateGoal extends React.Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.state = {
 			ID : '',
-            Description : '', 
+            Description : '',
             Curriculum: '',
 		};
 	}
@@ -35,11 +35,13 @@ export class CreateGoal extends React.Component {
 		event.preventDefault();
 		const parsed = await ky.post('http://localhost:8888/CreateGoals',{json: {
 			ID               : this.state.ID,
-            Description      : this.state.Description,
-		    Curriculum       : this.state.Curriculum,
-	
+      Description      : this.state.Description,
+		  Curriculum       : this.state.Curriculum,
 		}}).json();
-		window.location.reload();
+
+		console.log(parsed)
+		if(!parsed.err)
+			window.location.reload();
 	};
 
 	render() {
@@ -64,7 +66,7 @@ export class CreateGoal extends React.Component {
 					</div>
 						<input placeholder ="Curriculum" name="Curriculum"  className="form-control" checked={this.state.Curriculum} onChange={this.handleInputChange} required/>
 					</div>
-					
+
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Create Goal</button>
 				</form>
 			</div>
