@@ -1,4 +1,30 @@
 
+var contains = function(needle) {
+   // Per spec, the way to identify NaN is that it is not equal to itself
+   var findNaN = needle !== needle;
+   var indexOf;
+
+   if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+       indexOf = Array.prototype.indexOf;
+   } else {
+       indexOf = function(needle) {
+           var i = -1, index = -1;
+
+           for(i = 0; i < this.length; i++) {
+               var item = this[i];
+
+               if((findNaN && item !== item) || item === needle) {
+                   index = i;
+                   break;
+               }
+           }
+
+           return index;
+       };
+   }
+
+   return indexOf.call(this, needle) > -1;
+};
 var CreateCourses = function(req,res,next){
    var Name              = req.body.CourseName
    var SubjectCode       = req.body.SubjectCode
@@ -30,26 +56,31 @@ var UpdateCourses = function(req,res,next){
 
    //WHEN NAMING THESE ATTRIBUTES MAKE SURE TO USE Attribute[] AND Values[] FOR EACH OF THE FIELDS
    var a = req.body.Attribute
-   var val = req.body.Values
+   console.log("Attributes", a)
+   var params = req.body.Values
 
 
    var uString  = ""
-   var params = []
-   if (a.length == val.length){
-       for(var i =0; i<a.length; i++){
-           uString  = uString + "?  = ? "
-           params.append(a[i])
-           params.append(val[i])
-       }
-       res.locals.att = uString
-       res.locals.rmStr = " CourseName = ?"
-       params.append(req.body.ID)
-       res.locals.params = params
-       next()
-
-   }else{
-       res.send({err: "ERROR! Attributes and Lengths don't match up"})
+   if(contains.call(a,"CreditHours")){
+       uString = uString + "CreditHours = ?,"
    }
+   if(contains.call(a,"Description")){
+       uString = uString + "Description= ?,"
+   }
+   if(contains.call(a,"CourseNumber")){
+       uString = uString + "CourseNumber = ?"
+   }
+   if(contains.call(a,"SubjectCode")){
+      uString = uString + "SubjectCode= ?"
+   }
+  
+   
+   res.locals.att = uString
+   res.locals.rmStr = " CourseName = ?"
+   params.push(req.body.CourseName)
+   res.locals.params = params
+   console.log(uString,params)
+   next()
 }
 
 module.exports = {CreateCourses,GetCourses,UpdateCourses,GetAllCourses }

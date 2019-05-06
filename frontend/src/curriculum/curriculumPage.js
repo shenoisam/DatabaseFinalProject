@@ -31,6 +31,7 @@ export class CurriculumPagee extends React.Component {
 			MinimumHours2: -1,
 			MaxTopicsCovered2: -1,
 			GoalCredHour2: -1,
+	
 			
 
 
@@ -367,7 +368,7 @@ export class CurriculumPagee extends React.Component {
 											<div className="row">
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {goal["ID"]}	</p>
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
-												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > # Credits Used to Cover: {goal["Description"]}	</p>
+												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > # Credits Used to Cover: {this.state.CreditsUsedToCover}	</p>
 												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveGoal(curriculum["Name"],goal["ID"]);}} > Remove from Curriculum </button>
 											</div>
 									</div>
