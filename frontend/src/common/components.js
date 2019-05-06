@@ -199,65 +199,63 @@ export class Button extends React.Component {
 
 
 
-var data = [
-	{name: 'A+',  pv: 2400, amount: 2400},
-	{name: 'A',  pv: 3800, amount: 2400},
-	{name: 'A-',  pv: 3800, amount: 2400},
-	{name: 'B+',  pv: 3800, amount: 2400},
-	{name: 'B',  pv: 1398, amount: 2400},
-	{name: 'B-',  pv: 3800, amount: 2400},
-	{name: 'C+',  pv: 3800, amount: 2400},
-	{name: 'C',  pv: 9800, amount: 2400},
-	{name: 'C-',  pv: 3800, amount: 2400},
-	{name: 'D+',  pv: 3800, amount: 2400},
-	{name: 'D',  pv: 3908, amount: 2400},
-	{name: 'D-',  pv: 3800, amount: 2400},
-	{name: 'F',  pv: 3800, amount: 2400},
-	{name: 'W',  pv: 3800, amount: 2400},
-	{name: 'I',  pv: 3800, amount: 2400},
-];
-
 export class BarExample extends React.Component {
 	constructor(props){
 		super(props);
 	
 		this.state = {
-			myData: data,
+			myData: [],
 			rendered: false,
 		};
 	}
 
 	async componentDidMount(){
 
-		if (this.props.flag == true){
-			console.log(this.props.data)
-			data = this.state.myData= this.props.data
+	
+			console.log("Data: ",this.props.data)
+		this.state.myData= this.props.data
 			
-			
-		}
+
+
 		
-	    this.state.rendered = true;
 		this.setState(this.state);
 		
 
 	}
   
 	render() {
-
+		const myArray = [];
+		for(let i = 0; i < this.state.myData.length; i++){
+			myArray.push(
+				<tr>
+					<td>
+						{this.state.myData[i].name}
+					</td>
+					<td>
+						{this.state.myData[i].pv}
+					</td>
+					
+				</tr>
+			)
+		}
 	  return (
 		<div>
-			{this.state.rendered &&
-			  <BarChart width={600} height={300} data={data}
-					margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-				<CartesianGrid strokeDasharray="3 3"/>
-				<XAxis dataKey="name"/>
-				<YAxis/>
-				<Tooltip/>
-				<Legend />
-				<Bar dataKey='pv' fill="#8884d8"   />
-				
-			 </BarChart>
-			}
+			<div className="container padded">
+						{/* display info in a chart */}
+						{this.state.myData.length === 0 &&
+							<div>
+								No Sections During This Semester
+							</div>
+						}
+						{myArray.length !== 0 &&
+							<table>
+								{myArray}
+							</table>
+						}
+						
+
+					</div>
+			
 		</div>
 	  );
 	}

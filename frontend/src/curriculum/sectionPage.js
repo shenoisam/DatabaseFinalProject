@@ -97,28 +97,16 @@ export class SectionsPage extends React.Component {
 			for (var i = 0; i < data.length;i++){
 				this.state.courses[i].pv = data[i]
 			}
-			console.log(this.state.courses)
+			
 		}
+
 	}
 
 	
 
 	render() {
 
-		const myArray = [];
-		for(let i = 0; i < this.state.courses.length; i++){
-			myArray.push(
-				<tr>
-					<td>
-						{this.state.courses[i].name}
-					</td>
-					<td>
-						{this.state.courses[i].pv}
-					</td>
-					
-				</tr>
-			)
-		}
+	
 
 
 		return (
@@ -158,22 +146,7 @@ export class SectionsPage extends React.Component {
 
 				
 				{this.state.flag == true &&
-					<div className="container padded">
-
-						{/* display info in a chart */}
-						{myArray.length === 0 &&
-							<div>
-								No Sections During This Semester
-							</div>
-						}
-						{myArray.length !== 0 &&
-							<table>
-								{myArray}
-							</table>
-						}
-						
-
-					</div>
+					<BarExample data = {this.state.courses}></BarExample>
 				}
 
 			</div>

@@ -32,7 +32,7 @@ var GetTopicsNotInCurriculum = function(req,res,next){
 var DeleteCurriculumTopic = function(req,res,next){
 	res.locals.table = "CurriculumTopic"
 	res.locals.rmStr = "Name = ? AND ID = ?"
-	res.locals.params = [req.body.Namereq.body.ID]
+	res.locals.params = [req.body.Name,req.body.ID]
 	next()
 
 }

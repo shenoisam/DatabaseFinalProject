@@ -22,7 +22,8 @@ export class CurriculumPagee extends React.Component {
 			Required:[],
 			NumRequired: 0, 
 			NumOptional: 0,
-			GoalValid: "Not Valid"
+			GoalValid: "Not Valid",
+
 
 		};
 	}
@@ -155,18 +156,7 @@ export class CurriculumPagee extends React.Component {
 		this.render()
 	}
 
-	async updateGoalRendering(name){
-		const parsed1 = await ky.post('http://localhost:8888/CreditsUsedToCover',{json: {
-			Curriculum: name
-		}}).json();
-
-	}
-	async clickedGoal(name){
-		// Updates all courses,topics,and goals linked to a curriculum
-		this.setOtherGoalToFalse(name)
-		this.updateGoalRendering(name)
-
-	}
+	
 	async clickedCurriculum(name){
 		// Updates all courses,topics,and goals linked to a curriculum
 		this.setOtherCurriculumToFalse(name)
