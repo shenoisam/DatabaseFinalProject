@@ -51,6 +51,7 @@ var CoursesNotInCurriculum = function(req,res,next){
 	res.locals.params = [req.body.Curriculum]
 	next()
 }
+
 var DeleteRelationship = function(req,res,next){
 	res.locals.table = "CurCourse"
 	res.locals.rmStr = "Curriculum = ? AND CourseName = ?"

@@ -24,4 +24,11 @@
 	next()
  }
 
- module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover}
+ var DeleteRelationship = function(req,res,next){
+ 	res.locals.table = "CourseGoals"
+ 	res.locals.rmStr = "GoalsID = ? AND CourseName = ?"
+ 	res.locals.params = [req.body.GoalsID,req.body.CourseName]
+ 	next()
+ }
+
+ module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover,DeleteRelationship}
