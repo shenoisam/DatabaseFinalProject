@@ -417,6 +417,9 @@ router.post('/RemoveTopicromCurriculum', CurriclumTopics.DeleteCurriculumTopic,r
 
 router.post('/CreditsUsedToCover', CourseGoals.CreditsUsedToCover,routes.query)
 
+router.post('/GetGoalsPartOfCourse', CourseGoals.GetGoalsPartOfCourse,routes.query)
+router.post('/GetGoalsNotPartOfCourse', CourseGoals.GetGoalsNotPartOfCourse,routes.query)
+
 //Update all of the different types of data
 
 /*

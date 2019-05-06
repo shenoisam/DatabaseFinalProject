@@ -1,11 +1,11 @@
-
+ 
  var CreateCourseGoal = function(req,res,next){
-	var cn = req.body.CourseName
-    var gi = req.body.GoalsID
-
+	var cn = req.body.CourseName 
+    var gi = req.body.GoalsID  
+	
 	res.locals.sql    = "INSERT INTO CourseGoals VALUES (?,?)"
     res.locals.val = [cn,gi]
-
+	
 	next()
  }
  var GetCourseGoal = function(req,res,next){
@@ -23,5 +23,19 @@
 	res.locals.params = [req.body.GoalsID]
 	next()
  }
-
- module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover}
+ var GetGoalsPartOfCourse = function(req,res,next){
+	res.locals.select = "*"
+	res.locals.table = "Goals, CourseGoals"
+	res.locals.rmStr = "Goals.ID = CourseGoals.GoalsID AND CourseGoals.CourseName = ? AND Goals.Curriculum = ?"
+	res.locals.params = [req.body.CourseName, req.body.GoalsID]
+	next()
+ }
+ var GetGoalsNotPartOfCourse = function(req,res,next){
+	res.locals.select = "*"
+	res.locals.table = "Goals"
+	res.locals.rmStr = "ID NOT IN SELECT CourseGoals.GoalsID FROM CourseGoals WHERE Goals.ID = CourseGoals.GoalsID AND CourseGoals.CourseName = ? AND Goals.Curriculum = ?"
+	res.locals.params = [req.body.CourseName, req.body.GoalsID]
+	next()
+ }
+ 
+ module.exports = {CreateCourseGoal,GetCourseGoal,CreditsUsedToCover,GetGoalsPartOfCourse,GetGoalsNotPartOfCourse}
