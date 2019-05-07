@@ -71,12 +71,7 @@ export class SectionsPage extends React.Component {
 			F: 0,
 			W: 0,
 			I: 0,
-<<<<<<< HEAD
-=======
 			SectionID : ""
-
-			
->>>>>>> b983836edc6215712a3a325116f5f26c553b0a3a
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -227,14 +222,14 @@ export class SectionsPage extends React.Component {
 							onChange={opt => this.semester4Change(opt)}/>
 					</div>
 					<div className="col-lg-3">
-						     <input placeholder="Section ID" name="SectionID"  className="form-control" checked={this.state.SectionID} onChange={this.handleInputChange} required/> 
+						     <input placeholder="Section ID" name="SectionID"  className="form-control" checked={this.state.SectionID} onChange={this.handleInputChange} required/>
 						</div>
-						
+
 					<div className="row" style = {{marginTop:'2%'}}>
 					    <input className='col-3' style={{backgroundColor:'white',width:'49%',marginLeft: '15px'}}placeholder="Lower Year" name="YearLower"  className="form-control" checked={this.state.YearLower} onChange={this.handleInputChange} required/>
 						<input className='col-3'style={{backgroundColor:'white',width:'48.5%', paddingLeft: '15px'}} placeholder="Upper Year" name="YearUpper"  className="form-control" checked={this.state.YearUpper} onChange={this.handleInputChange} required/>
 					</div>
-					
+
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
 				<p>Section Grade Distribution</p>
@@ -256,13 +251,13 @@ export class SectionsPage extends React.Component {
 							options={semesterOptions4} value={this.state.Semester}
 							onChange={opt => this.semester1Change(opt)}/>
 						<div className="col-lg-4">
-						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/> 
+						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/>
 						</div>
 						<div className="col-lg-4">
-						
-						     <input placeholder="Goal" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/> 
+
+						     <input placeholder="Goal" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/>
 						</div>
-						
+
 					</div>
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
@@ -272,7 +267,7 @@ export class SectionsPage extends React.Component {
 			    <br></br>
 				<br></br>
 				<form  name="form" onSubmit={this.onSubmit2}>
-			
+
 				<div className="input-group form-group">
 					<div className="input-group-prepend">
 						<span className="input-group-text"><i className="fas fa-user"></i></span>
@@ -286,15 +281,15 @@ export class SectionsPage extends React.Component {
 							options={semesterOptions4} value={this.state.Semester}
 							onChange={opt => this.semester5Change(opt)}/>
 						<div className="col-lg-3">
-						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/> 
+						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/>
 						</div>
 						<div className="col-lg-3">
-						     <input placeholder="Goal ID" name="GoalID"  className="form-control" checked={this.state.GoalID} onChange={this.handleInputChange} required/> 
+						     <input placeholder="Goal ID" name="GoalID"  className="form-control" checked={this.state.GoalID} onChange={this.handleInputChange} required/>
 						</div>
 						<div className="col-lg-3">
-						     <input placeholder="Section ID" name="SectionID"  className="form-control" checked={this.state.SectionID} onChange={this.handleInputChange} required/> 
+						     <input placeholder="Section ID" name="SectionID"  className="form-control" checked={this.state.SectionID} onChange={this.handleInputChange} required/>
 						</div>
-						
+
 					</div>
 					<input placeholder="A+" type="number" name="APlus" checked={this.state.APlus} onChange={this.handleInputChange} />
 					<input placeholder="A" type="number" name="A" checked={this.state.A} onChange={this.handleInputChange} />
