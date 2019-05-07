@@ -1,9 +1,9 @@
 
 var CreateTopic = function(req,res,next){
-	var ID      = req.body.ID
+    var ID      = req.body.ID
+    var Name    = req.body.Name 
 	var Units   = req.body.Units
 	var Level   = req.body.Level
-	var Name    = req.body.Name 
 	var SA      = req.body.SubjectArea
 	
 	res.locals.sql    = "INSERT INTO Topics VALUES (?,?,?,?,?)"

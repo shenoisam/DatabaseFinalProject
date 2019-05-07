@@ -42,10 +42,8 @@ CREATE TABLE CurCourse (
 );
 CREATE TABLE Topics(
   ID            VARCHAR (25) PRIMARY KEY,
-  Units         Decimal(20,1)NOT NULL, 
-  Level         INT          NOT NULL CHECK (Level>0 AND Level < 4),
   Name          VARCHAR (25) NOT NULL, 
-  SubjectArea   VARCHAR (25) NOT NULL
+  
 );
 CREATE TABLE Goals(
   ID          VarChar (25) PRIMARY KEY,
@@ -122,6 +120,9 @@ CREATE TABLE CourseGoals(
 CREATE TABLE CurriculumTopics(
    Name          varchar (25) ,
    ID            VARCHAR (25) ,
+   Units         Decimal(20,1)NOT NULL, 
+   Level         INT          NOT NULL CHECK (Level>0 AND Level < 4),
+   SubjectArea   VARCHAR (25) NOT NULL
     
    FOREIGN KEY (Name)  REFERENCES Curriculum(Name),
    FOREIGN KEY (ID)       REFERENCES Topics(ID),

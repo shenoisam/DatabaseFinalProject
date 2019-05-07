@@ -1,10 +1,11 @@
 var CreateCourseTopic = function(req,res,next){
     var c   = req.body.Curriculum
 	var cN  = req.body.CourseName
-	var req = req.body.Topic
+	var r = req.body.Topic
+	var time = req.body.NumUnitsCovered
 
-	res.locals.sql    = "INSERT INTO CourseTopic VALUES (?,?,?)"
-    res.locals.val = [c,cN,req]
+	res.locals.sql    = "INSERT INTO CourseTopic VALUES (?,?,?,?)"
+    res.locals.val = [c,cN,r,time
 
     next()
 }
