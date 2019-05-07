@@ -1,13 +1,13 @@
 
 
 var CreateSectionGoal = function(req,res,next){
-   var vals = [req.body.SectionID,req.body.Year,req.body.CourseName,req.body.Semester,req.body.GoalsID, req.body.GAPlus, req.body.GA,req.body.GAMinus ,req.body.GBPlus,req.body.GB ,req.body.GBMinus,req.body.GCPlus ,req.body.GC ,req.body.GCMinus,req.body.GDPlus,req.body.GD ,req.body.GDMinus ,req.body.GF,req.body.GW,req.body.GI]  
-	
+   var vals = [req.body.SectionID,req.body.Year,req.body.CourseName,req.body.Semester,req.body.GoalsID, req.body.GAPlus, req.body.GA,req.body.GAMinus ,req.body.GBPlus,req.body.GB ,req.body.GBMinus,req.body.GCPlus ,req.body.GC ,req.body.GCMinus,req.body.GDPlus,req.body.GD ,req.body.GDMinus ,req.body.GF,req.body.GW,req.body.GI]
+
 	res.locals.sql    = "INSERT INTO SectionGoal VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     res.locals.val = vals
-    
-    next()	
-	
+
+    next()
+
 }
 var GetSectionGoal = function(req,res,next){
 	res.locals.select = "*"
@@ -33,7 +33,7 @@ var GetSectionGoalByCourseNameYearSemesterGoalID = function(req,res,next){
  var GetSectionGoalByCurriculum = function(req,res,next){
     res.locals.select = "Sum(GAPlus), Sum(GA), Sum(GAMinus), Sum(GBPlus), Sum(GB), Sum(GBMinus), Sum(GCPlus), Sum(GC), Sum(GCMinus), Sum(GDPlus), Sum(GD), Sum(GDMinus), Sum(GF), Sum(GW), Sum(GI)"
     res.locals.table = "SectionGoal, Goals "
-    res.locals.rmStr = "Goals.ID = SectionGoals.GoalID AND Goals.Curriculum = ? AND  (Semester = ? OR Semester = ? OR Semester = ? OR Semester = ?) AND Year >= ? AND Year <= ? AND GoalsID = ?"
+    res.locals.rmStr = "Goals.ID = SectionGoal.GoalsID AND Goals.Curriculum = ? AND  (Semester = ? OR Semester = ? OR Semester = ? OR Semester = ?) AND Year >= ? AND Year <= ? AND GoalsID = ?"
     res.locals.params = [req.body.Curriculum, req.body.Spring,req.body.Summer,req.body.Fall,req.body.Winter,req.body.YearLower,req.body.YearUpper,req.body.GoalsID]
     next()
  }

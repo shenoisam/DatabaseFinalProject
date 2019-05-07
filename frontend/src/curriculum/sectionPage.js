@@ -46,7 +46,7 @@ export class SectionsPage extends React.Component {
 			topics: [],
 			flag:true,
 			flag2:true,
-			CourseName: "",
+			CurriculumName: "",
 			Spring: "",
 			Summer: "",
 			Winter: "",
@@ -125,33 +125,41 @@ export class SectionsPage extends React.Component {
 	async onSubmit(event){
 		event.preventDefault();
 
-		const parsed = await ky.post('http://localhost:8888/GetSectionByCourseNameYearSemester',{json: {
-			CourseName: this.state.CourseName,
+		const parsed = await ky.post('http://localhost:8888/GetGradeDistributionByCurriculum',{json: {
+			Curriculum: this.state.CurriculumName,
 			Spring : this.state.Spring,
 			Summer : this.state.Summer,
 			Winter: this.state.Winter,
 			Fall: this.state.Fall,
 			YearUpper: this.state.YearUpper,
-			YearLower: this.state.YearLower
-
+			YearLower: this.state.YearLower,
+			GoalsID:this.state.GoalsID,
 		}}).json();
 		if(parsed.r2){
 			var data = Object.values(parsed.r2[0])
 			console.log("The pulled data", data)
 			this.state.flag = true
 			for (var i = 0; i < data.length;i++){
-				this.state.courses[i].pv = data[i]
+				if(this.state.courses[i].pv)
+					this.state.courses[i].pv = data[i]
+				else
+					this.state.courses[i].pv = 0
 			}
 			console.log(this.state.courses)
-			this.setState(this.state);
-			this.render();
+			this.setState(this.state)
+			this.render()
+		}
+		else{
+			console.log(parsed)
+			this.state.courses = []
+			this.setState(this.state)
+			this.render()
 		}
 	}
 
 
 	async onSubmit2(event){
 		event.preventDefault();
-
 		const parsed = await ky.post('http://localhost:8888/CreateSectionGoal',{json: {
 			GoalsID         : this.state.GoalID,
 			Year       : this.state.Year,
@@ -185,7 +193,6 @@ export class SectionsPage extends React.Component {
 			this.setState(this.state);
 			this.render();
 		}
-
 	}
 
 	render() {
@@ -197,7 +204,7 @@ export class SectionsPage extends React.Component {
 					<div className="input-group-prepend">
 						<span className="input-group-text"><i className="fas fa-user"></i></span>
 					</div>
-						<input placeholder="Course Name" name="CourseName"  className="form-control" checked={this.state.CourseName} onChange={this.handleInputChange} required/>
+						<input placeholder="Curriculum Name" name="CurriculumName"  className="form-control" checked={this.state.CurriculumName} onChange={this.handleInputChange} required/>
 					</div>
 					<div className="row">
 						<Bessemer.Select style={{backgroundColor:'black',width:'35%'}} name="Spring"
@@ -221,13 +228,10 @@ export class SectionsPage extends React.Component {
 							options={semesterOptions3} value={this.state.Winter}
 							onChange={opt => this.semester4Change(opt)}/>
 					</div>
-					<div className="col-lg-3">
-						     <input placeholder="Section ID" name="SectionID"  className="form-control" checked={this.state.SectionID} onChange={this.handleInputChange} required/>
-						</div>
-
 					<div className="row" style = {{marginTop:'2%'}}>
-					    <input className='col-3' style={{backgroundColor:'white',width:'49%',marginLeft: '15px'}}placeholder="Lower Year" name="YearLower"  className="form-control" checked={this.state.YearLower} onChange={this.handleInputChange} required/>
-						<input className='col-3'style={{backgroundColor:'white',width:'48.5%', paddingLeft: '15px'}} placeholder="Upper Year" name="YearUpper"  className="form-control" checked={this.state.YearUpper} onChange={this.handleInputChange} required/>
+						<input className='col-lg-4' style={{backgroundColor:'white'}} placeholder="GoalID" name="GoalID"  checked={this.state.GoalsID} onChange={this.handleInputChange} required/>
+					  <input className='col-lg-4' style={{backgroundColor:'white'}} placeholder="Lower Year" name="YearLower"  checked={this.state.YearLower} onChange={this.handleInputChange} required/>
+						<input className='col-lg-4' style={{backgroundColor:'white'}} placeholder="Upper Year" name="YearUpper"   checked={this.state.YearUpper} onChange={this.handleInputChange} required/>
 					</div>
 
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
