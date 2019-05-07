@@ -71,8 +71,6 @@ export class SectionsPage extends React.Component {
 			F: 0,
 			W: 0,
 			I: 0,
-
-			
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -140,8 +138,9 @@ export class SectionsPage extends React.Component {
 			this.setState(this.state);
 			this.render();
 		}
-
 	}
+
+
 	async onSubmit2(event){
 		event.preventDefault();
 
@@ -181,9 +180,6 @@ export class SectionsPage extends React.Component {
 	}
 
 	render() {
-
-		
-
 
 		return (
 			<div>
