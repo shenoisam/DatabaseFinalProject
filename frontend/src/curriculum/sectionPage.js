@@ -54,7 +54,8 @@ export class SectionsPage extends React.Component {
 			YearUpper: 3000,
 			YearLower: 1900,
             GoalID : "",
-			Semester: "Semester",
+			Semester: "",
+			Semester2: "",
 			Year : "",
 			APlus: 0,
 			A: 0,
@@ -121,6 +122,13 @@ export class SectionsPage extends React.Component {
       });
 		}
 	};
+	semester6Change(e){
+		if (e != null) {
+      this.setState({
+        Semester2: e
+      });
+		}
+	};
 
 	async onSubmit(event){
 		event.preventDefault();
@@ -135,6 +143,11 @@ export class SectionsPage extends React.Component {
 			YearLower: this.state.YearLower,
 			GoalsID:this.state.GoalsID,
 		}}).json();
+
+		console.log(this.state)
+
+		console.log(parsed)
+
 		if(parsed.r2){
 			var data = Object.values(parsed.r2[0])
 			console.log("The pulled data", data)
@@ -157,14 +170,13 @@ export class SectionsPage extends React.Component {
 		}
 	}
 
-
 	async onSubmit2(event){
 		event.preventDefault();
 		const parsed = await ky.post('http://localhost:8888/CreateSectionGoal',{json: {
 			GoalsID         : this.state.GoalID,
 			Year       : this.state.Year,
 			CourseName : this.state.CourseName,
-			Semester   : this.state.Semester,
+			Semester   : this.state.Semester2,
 			GAPlus: this.state.APlus,
 			GA: this.state.A,
 			GAMinus: this.state.AMinus,
@@ -189,7 +201,42 @@ export class SectionsPage extends React.Component {
 			for (var i = 0; i < data.length;i++){
 				this.state.courses[i].pv = data[i]
 			}
-			console.log(this.state.courses)
+			this.setState(this.state);
+			this.render();
+		}
+	}
+
+	async onSubmit3(event){
+		event.preventDefault();
+		const parsed = await ky.post('http://localhost:8888/CreateSectionGoal',{json: {
+			GoalsID         : this.state.GoalID,
+			Year       : this.state.Year,
+			CourseName : this.state.CourseName,
+			Semester   : this.state.Semester2,
+			GAPlus: this.state.APlus,
+			GA: this.state.A,
+			GAMinus: this.state.AMinus,
+			GBPlus: this.state.BPlus,
+			GB: this.state.B,
+			GBMinus: this.state.BMinus,
+			GCPlus: this.state.CPlus,
+			GC: this.state.C,
+			GCMinus: this.state.CMinus,
+			GDPlus: this.state.DPlus,
+			GD: this.state.D,
+			GDMinus: this.state.DMinus,
+			GF: this.state.F,
+			GW: this.state.W,
+			GI: this.state.I,
+			SectionID : this.state.SectionID
+		}}).json();
+		if(parsed.r2){
+			var data = Object.values(parsed.r2[0])
+			console.log("The pulled data", data)
+			this.state.flag = true
+			for (var i = 0; i < data.length;i++){
+				this.state.courses[i].pv = data[i]
+			}
 			this.setState(this.state);
 			this.render();
 		}
@@ -241,7 +288,7 @@ export class SectionsPage extends React.Component {
 					<BarExample data = {this.state.courses}></BarExample>
 				}
 				<p>Grade the goal distribution of this section</p>
-				<form name="form" onSubmit={this.onSubmit}>
+				<form name="form" onSubmit={this.onSubmit3}>
 					<div className="input-group form-group">
 					<div className="input-group-prepend">
 						<span className="input-group-text"><i className="fas fa-user"></i></span>
@@ -253,7 +300,7 @@ export class SectionsPage extends React.Component {
 							className='col-3'
 							friendlyName="Semester" placeholder={this.state.Semester}
 							options={semesterOptions4} value={this.state.Semester}
-							onChange={opt => this.semester1Change(opt)}/>
+							onChange={opt => this.semester5Change(opt)}/>
 						<div className="col-lg-4">
 						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/>
 						</div>
@@ -281,9 +328,9 @@ export class SectionsPage extends React.Component {
 					<div className="row">
 						<Bessemer.Select className="col-lg-4" name="Semester"
 							className='col-3'
-							friendlyName="Semester" placeholder={this.state.Semester}
-							options={semesterOptions4} value={this.state.Semester}
-							onChange={opt => this.semester5Change(opt)}/>
+							friendlyName="Semester" placeholder={this.state.Semester2}
+							options={semesterOptions4} value={this.state.Semester2}
+							onChange={opt => this.semester6Change(opt)}/>
 						<div className="col-lg-3">
 						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/>
 						</div>

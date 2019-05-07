@@ -318,7 +318,7 @@ export class CoursePage extends React.Component {
 				}
 
 						<div className="row">
-							<div id="sections" className="col-lg-6" >
+							<div id="sections" className="col-lg-12" >
 								<label> Curriculums Part of : </label>
 									{this.state.Curriculums.map(section => (
 									<div key={section["ID"]} className="col-lg-12 clear" style={{border:'1px solid',marginBottom:'15px'}}>

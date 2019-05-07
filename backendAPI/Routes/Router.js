@@ -443,36 +443,30 @@ router.post('/GetCourseTopicByCourseNameCurriculum', CourseTopics.GetTopicByCour
 //Update all of the different types of data
 
 /*
-  params 
-    - Curriculum 
+  params
+    - Curriculum
 */
 router.post('CheckExtensive',Curriclum.CheckExtensive,routes.query)
 /*
-  params 
-    - Curriculum 
+  params
+    - Curriculum
 */
 router.post('CheckInclusive',Curriclum.CheckInclusive,routes.query)
 /*
-  params 
-    - Curriculum 
+  params
+    - Curriculum
 */
 router.post('CheckBasicPlus',Curriclum.CheckBasicPlus,routes.query)
 /*
-  params 
-    - Curriculum 
+  params
+    - Curriculum
 */
 router.post('CheckBasic',Curriclum.CheckBasic,routes.query)
 /*
-  params 
-    - Curriculum 
+  params
+    - Curriculum
 */
 router.post('CheckUnsatisfactory',Curriclum.CheckUnsatisfactory,routes.query)
-/*
-  params 
-    - Curriculum 
-*/
-router.post('CheckBasic',Curriclum.Substandard,routes.query)
-
 
 /*
   description: This function updates the curriculums

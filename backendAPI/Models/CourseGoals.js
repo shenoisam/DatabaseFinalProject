@@ -38,8 +38,6 @@
 	next()
  }
 
-
-
  var DeleteRelationship = function(req,res,next){
  	res.locals.table = "CourseGoals"
  	res.locals.rmStr = "GoalsID = ? AND CourseName = ?"
