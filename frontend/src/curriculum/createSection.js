@@ -70,48 +70,59 @@ export class CreateSection extends React.Component {
 
 	async onSubmit (event) {
 		event.preventDefault();
-		const parsed = await ky.post('http://localhost:8888/CreateSection',{json: {
-      Year: this.state.Year,
-			Semester: this.state.Semester,
-			NumStu: this.state.NumStu,
-		  Comment1: this.state.Comment1,
-			Comment2: this.state.Comment2,
-      CourseName: this.state.CourseName,
-      APlus: this.state.APlus,
-			A: this.state.A,
-      AMinus: this.state.AMinus,
-      BPlus: this.state.BPlus,
-			B: this.state.B,
-      BMinus: this.state.BMinus,
-      CPlus: this.state.CPlus,
-			C: this.state.C,
-      CMinus: this.state.CMinus,
-      DPlus: this.state.DPlus,
-			D: this.state.D,
-      DMinus: this.state.DMinus,
-      F: this.state.F,
-			W: this.state.W,
-      I: this.state.I,
-		}}).json().catch(err => {
-      console.log(err)
-    });
+		let sum =  parseInt(this.state.APlus) + parseInt(this.state.A) + parseInt(this.state.AMinus) + parseInt(this.state.BPlus) + parseInt(this.state.B)
+			+ parseInt(this.state.BMinus) + parseInt(this.state.CPlus) + parseInt(this.state.C) + parseInt(this.state.CMinus) + parseInt(this.state.DPlus)
+			+ parseInt(this.state.D) + parseInt(this.state.DMinus) + parseInt(this.state.F) + parseInt(this.state.W) + parseInt(this.state.I)
 
-    console.log(parsed)
-		console.log(this.state)
+		if(parseInt(sum) === parseInt(this.state.NumStu)){
+			const parsed = await ky.post('http://localhost:8888/CreateSection',{json: {
+	      Year: this.state.Year,
+				Semester: this.state.Semester,
+				NumStu: this.state.NumStu,
+			  Comment1: this.state.Comment1,
+				Comment2: this.state.Comment2,
+	      CourseName: this.state.CourseName,
+	      APlus: this.state.APlus,
+				A: this.state.A,
+	      AMinus: this.state.AMinus,
+	      BPlus: this.state.BPlus,
+				B: this.state.B,
+	      BMinus: this.state.BMinus,
+	      CPlus: this.state.CPlus,
+				C: this.state.C,
+	      CMinus: this.state.CMinus,
+	      DPlus: this.state.DPlus,
+				D: this.state.D,
+	      DMinus: this.state.DMinus,
+	      F: this.state.F,
+				W: this.state.W,
+	      I: this.state.I,
+			}}).json().catch(err => {
+	      console.log(err)
+	    });
 
-    if(!parsed.err){
-      this.setState({
-	      error: '',
-        errorCourse: ''
-	    });
+	    if(!parsed.err){
+	      this.setState({
+		      error: '',
+	        errorCourse: ''
+		    });
+				window.location.reload()
+			}
+			else {
+	      this.setState({
+		      error: 'Incorrect Data. Try Again!',
+	        errorCourse: this.state.CourseName
+		    });
+			}
+	    this.render();
 		}
-		else {
-      this.setState({
-	      error: 'Incorrect Data. Try Again!',
-        errorCourse: this.state.CourseName
-	    });
+		else{
+			this.setState({
+				error: 'Incorrect Data. Try Again!',
+				errorCourse: this.state.CourseName
+			});
+			this.render();
 		}
-    this.render();
 	};
 
 	render() {
@@ -157,7 +168,7 @@ export class CreateSection extends React.Component {
 					</div>
 						<input placeholder ="Comment 2" name="Comment2"  className="form-control" checked={this.state.Comment2} onChange={this.handleInputChange} required/>
 					</div>
-				
+
 					<input placeholder="A+" type="number" name="APlus" checked={this.state.APlus} onChange={this.handleInputChange} />
           <input placeholder="A" type="number" name="A" checked={this.state.A} onChange={this.handleInputChange} />
           <input placeholder="A-" type="number" name="AMinus" checked={this.state.AMinus} onChange={this.handleInputChange} />

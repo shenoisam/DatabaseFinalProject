@@ -196,13 +196,15 @@ export class CurriculumPagee extends React.Component {
 	};
 
 	async addCourseGoal(name){
-		for (var i = 0; i < this.state.CourseGoals[name].length; i++) {
-			const parsed1 = await ky.post('http://localhost:8888/CreateCourseGoals',{json: {
-				CourseName:name,
-				GoalsID:this.state.CourseGoals[name][0].label
-			}}).json();
-			console.log(parsed1)
-			console.log(this.state.CourseGoals[i])
+		if(this.state.CourseGoals[name]){
+			for (var i = 0; i < this.state.CourseGoals[name].length; i++) {
+				const parsed1 = await ky.post('http://localhost:8888/CreateCourseGoals',{json: {
+					CourseName:name,
+					GoalsID:this.state.CourseGoals[name][0].label
+				}}).json();
+				console.log(parsed1)
+				console.log(this.state.CourseGoals[i])
+			}
 		}
 	}
 
