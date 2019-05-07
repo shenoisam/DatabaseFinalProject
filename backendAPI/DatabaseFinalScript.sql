@@ -130,9 +130,10 @@ CREATE TABLE CurriculumTopics(
 
 );
 CREATE TABLE CourseTopic(
-   CourseName VARCHAR (25) NOT NULL,
-   Topic      VARCHAR(25)  NOT NULL,
-   Curriculum VARCHAR(25) NOT NULL, 
+   CourseName      VARCHAR (25) NOT NULL,
+   Topic           VARCHAR(25)  NOT NULL,
+   Curriculum      VARCHAR(25) NOT NULL, 
+   NumUnitsCovered Decimal(20,1)NOT NULL,
    
    FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
    FOREIGN KEY (Topic)       REFERENCES Topics(ID),

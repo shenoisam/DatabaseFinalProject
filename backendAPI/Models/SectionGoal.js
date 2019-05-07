@@ -30,4 +30,11 @@ var GetSectionGoalByCourseNameYearSemesterGoalID = function(req,res,next){
     res.locals.params = [req.body.Spring,req.body.Summer,req.body.Fall,req.body.Winter,req.body.YearLower,req.body.YearUpper, req.body.CourseName,req.body.GoalsID]
     next()
  }
-module.exports = {CreateSectionGoal,GetSectionGoal,GetSectionGoalByCourseNameYearSemesterGoalID,GetSectionGoalByYearSemesterGoalID  }
+ var GetSectionGoalByCurriculum = function(req,res,next){
+    res.locals.select = "Sum(GAPlus), Sum(GA), Sum(GAMinus), Sum(GBPlus), Sum(GB), Sum(GBMinus), Sum(GCPlus), Sum(GC), Sum(GCMinus), Sum(GDPlus), Sum(GD), Sum(GDMinus), Sum(GF), Sum(GW), Sum(GI)"
+    res.locals.table = "SectionGoal, Goals "
+    res.locals.rmStr = "Goals.ID = SectionGoals.GoalID AND Goals.Curriculum = ? AND  (Semester = ? OR Semester = ? OR Semester = ? OR Semester = ?) AND Year >= ? AND Year <= ? AND GoalsID = ?"
+    res.locals.params = [req.body.Curriculum, req.body.Spring,req.body.Summer,req.body.Fall,req.body.Winter,req.body.YearLower,req.body.YearUpper,req.body.GoalsID]
+    next()
+ }
+module.exports = {CreateSectionGoal,GetSectionGoal,GetSectionGoalByCourseNameYearSemesterGoalID,GetSectionGoalByYearSemesterGoalID ,GetSectionGoalByCurriculum}

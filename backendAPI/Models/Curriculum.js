@@ -59,19 +59,16 @@ var UpdateCurriculum = function(req,res,next){
     var a = req.body.Attribute
     var params =  req.body.Values
 
-
     var uString  = ""
 
-    
-
     if(contains.call(a,"MaxTopicsCovered")){
-        uString = uString + "MaxTopicsCovered = ?,"
+        uString = uString + ",MaxTopicsCovered = ?"
     }
     if(contains.call(a,"GoalCredHours")){
-        uString = uString + "GoalCredHours = ?,"
+        uString = uString + ",GoalCredHours = ?,"
     }
     if(contains.call(a,"MinimumHours")){
-        uString = uString + "MinimumHours = ?"
+        uString = uString + ",MinimumHours = ?"
     }
 
     res.locals.att = uString

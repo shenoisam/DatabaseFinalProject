@@ -58,20 +58,38 @@ var UpdateCourses = function(req,res,next){
    var a = req.body.Attribute
    console.log("Attributes", a)
    var params = req.body.Values
+   var counter = 0; 
 
 
    var uString  = ""
    if(contains.call(a,"CreditHours")){
-       uString = uString + "CreditHours = ?,"
+       uString = uString + "CreditHours = ?"
+       if(uString != "" && a.length > counter ){
+           uString = uString + ",";
+       }
+       counter++ 
+       
    }
    if(contains.call(a,"Description")){
-       uString = uString + "Description= ?,"
+       uString = uString + " CourseDescription= ?"
+       if(uString != "" && a.length > counter +1 ){
+         uString = uString + ",";
+       }
+       counter++ 
    }
    if(contains.call(a,"CourseNumber")){
-       uString = uString + "CourseNumber = ?"
+       uString = uString + " CourseNumber = ?"
+       if(uString != "" && a.length > counter ){
+         uString = uString + ",";
+       }
+       counter++ 
    }
    if(contains.call(a,"SubjectCode")){
       uString = uString + "SubjectCode= ?"
+      if(uString != "" && a.length > counter ){
+         uString = uString + ",";
+      }
+      counter++ 
    }
   
    

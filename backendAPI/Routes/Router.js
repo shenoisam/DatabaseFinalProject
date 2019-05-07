@@ -22,6 +22,7 @@ var Curriclum       = require('./../Models/Curriculum.js')
 var Goals           = require('./../Models/Goals.js')
 var Section         = require('./../Models/Section.js')
 var Topics          = require('./../Models/Topics.js')
+var CourseTopics    = require('./../Models/CourseTopics.js')
 var routes          = require('./routes.js')
 
 
@@ -423,6 +424,22 @@ router.post('/GetGoalsNotPartOfCourse', CourseGoals.GetGoalsNotPartOfCourse,rout
 
 router.post('/GetSectionGoalByCourseNameYearSemesterGoalID',SectionGoal.GetSectionGoalByCourseNameYearSemesterGoalID, routes.query)
 router.post('/GetSectionGoalByYearSemesterGoalID',SectionGoal.GetSectionGoalByYearSemesterGoalID, routes.query)
+/*
+  params 
+   - req.body.Curriculum, 
+   - req.body.Spring,
+   - req.body.Summer,
+   - req.body.Fall,
+   - req.body.Winter,
+   - req.body.YearLower,
+   - req.body.YearUpper,
+   - req.body.GoalsID
+*/
+router.post('/GetGradeDistributionByCurriculum',SectionGoal.GetSectionGoalByCurriculum,routes.query)
+
+router.post('/CreateCourseTopic', CourseTopics.CreateCourseTopic,routes.insertData,routes.end)
+
+router.post('/GetCourseTopicByCourseNameCurriculum', CourseTopics.GetTopicByCourseNameCurriculum,routes.query)
 //Update all of the different types of data
 
 /*
