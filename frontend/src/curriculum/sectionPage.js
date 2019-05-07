@@ -71,12 +71,6 @@ export class SectionsPage extends React.Component {
 			F: 0,
 			W: 0,
 			I: 0,
-<<<<<<< HEAD
-=======
-			SectionID : ""
-
-			
->>>>>>> b983836edc6215712a3a325116f5f26c553b0a3a
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
