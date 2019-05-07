@@ -69,6 +69,7 @@ export class CoursePage extends React.Component {
 		event.preventDefault();
 		var a = []
 		var val= []
+		console.log(this.state.CreditHours2)
 		if(this.state.CreditHours2> -1){
 			a.push("CreditHours")
 			val.push(this.state.CreditHours2)
@@ -85,7 +86,7 @@ export class CoursePage extends React.Component {
 			a.push("SubjectCode")
 			val.push(this.state.SubjectCode2)
 		}
-		alert(a[0])
+		
 
 		const parsed = await ky.post('http://localhost:8888/UpdateCourses',{json: {
 
@@ -240,7 +241,7 @@ export class CoursePage extends React.Component {
 									<div className="input-group-prepend">
 										<span className="input-group-text"><i className="fas fa-user"></i></span>
 									</div>
-										<input placeholder="Credit Hours" name="CreditHours"  className="form-control" checked={this.state.CreditHours2} onChange={this.handleInputChange} />
+										<input placeholder="Credit Hours" name="CreditHours2"  className="form-control" checked={this.state.CreditHours2} onChange={this.handleInputChange} />
 								</div>
 								<div className="input-group form-group">
 									<div className="input-group-prepend">
