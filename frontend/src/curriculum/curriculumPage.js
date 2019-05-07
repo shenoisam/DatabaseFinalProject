@@ -31,8 +31,8 @@ export class CurriculumPagee extends React.Component {
 			MinimumHours2: -1,
 			MaxTopicsCovered2: -1,
 			GoalCredHour2: -1,
-	
-			
+
+
 
 
 
@@ -174,7 +174,7 @@ export class CurriculumPagee extends React.Component {
 		this.render()
 	}
 
-	
+
 	async clickedCurriculum(name){
 		// Updates all courses,topics,and goals linked to a curriculum
 		this.setOtherCurriculumToFalse(name)
@@ -277,12 +277,12 @@ export class CurriculumPagee extends React.Component {
 			a.push("MinimumHours")
 			p.push(this.state.MinimumHours2 )
 		}
-		
+
 		console.log(a,p)
 		const parsed = await ky.post('http://localhost:8888/UpdateCurriculum',{json: {
 			Name: nameCur,
-			Attribute : a, 
-			Values : p 	
+			Attribute : a,
+			Values : p
 		}}).json();
 		this.updateComp(nameCur)
 	}
@@ -384,21 +384,16 @@ export class CurriculumPagee extends React.Component {
 						  <p className="col-2"> Total Levels Covered : {curriculum["GoalCredHours"]}	</p>
 							<p className="col-2"> Goal Valid: {this.state.GoalValid}	</p>
 						</div>
-					
-					}
-				  
-					{(this.state.ShowingCurr[curriculum["Name"]] === true) &&
-			   
-						<div className = "row">
-								<form>
 
-										
-										<input placeholder="Minimum Hours" type="number" name="MinimumHours2" checked={this.state.MinimumHours2} onChange={this.handleInputChange} />
-										<input placeholder="Max Topics" type="string" name="MaxTopics2" checked={this.state.MaxTopics2} onChange={this.handleInputChange} />
-										<input placeholder="Goal Credit Hours" type="string" name="GoalCredHour2" checked={this.state.GoalCredHour2} onChange={this.handleInputChange} />
-										<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.UpdateCurriculum(curriculum["Name"]);}} > Update Curriculum </button>
-								</form>
-						</div>
+					}
+
+					{(this.state.ShowingCurr[curriculum["Name"]] === true) &&
+							<form>
+									<input className="col-lg-4" placeholder="Minimum Hours" type="number" name="MinimumHours2" checked={this.state.MinimumHours2} onChange={this.handleInputChange} />
+									<input className="col-lg-4" placeholder="Max Topics" type="string" name="MaxTopics2" checked={this.state.MaxTopics2} onChange={this.handleInputChange} />
+									<input className="col-lg-4" placeholder="Goal Credit Hours" type="string" name="GoalCredHour2" checked={this.state.GoalCredHour2} onChange={this.handleInputChange} />
+									<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.UpdateCurriculum(curriculum["Name"]);}} > Update Curriculum </button>
+							</form>
 					}
 				</div>
 			))}
