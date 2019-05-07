@@ -103,7 +103,6 @@ export class CoursePage extends React.Component {
 			Year: year
 		}}).json();
 		window.location.reload()
-
 	}
 
     async onSubmit2(event){
@@ -127,13 +126,13 @@ export class CoursePage extends React.Component {
 			a.push("SubjectCode")
 			val.push(this.state.SubjectCode2)
 		}
-		
+
 
 		const parsed = await ky.post('http://localhost:8888/UpdateCourses',{json: {
 
 			CourseName: this.state.CourseName,
 			Attribute : a,
-			Values : val 
+			Values : val
 
 		}}).json();
 	}
@@ -310,7 +309,7 @@ export class CoursePage extends React.Component {
 					    <input className='col-3' style={{backgroundColor:'white',width:'49%',marginLeft: '15px'}}placeholder="Lower Year" name="YearLower"  className="form-control" checked={this.state.YearLower} onChange={this.handleInputChange} required/>
 						<input className='col-3'style={{backgroundColor:'white',width:'48.5%', paddingLeft: '15px'}} placeholder="Upper Year" name="YearUpper"  className="form-control" checked={this.state.YearUpper} onChange={this.handleInputChange} required/>
 					</div>
-					
+
 					<button className="btn float-right register_btn" style={{border:'1px solid'}}>Does something</button>
 				</form>
 
@@ -361,7 +360,7 @@ export class CoursePage extends React.Component {
 									</div>
 										<input placeholder ="CourseNumber" name="CourseNumber"  className="form-control" checked={this.state.CourseNumber2} onChange={this.handleInputChange} />
 								</div>
-								
+
 								<button className="btn float-right register_btn" style={{border:'1px solid'}}>Edit Course</button>
 							</form>
 						</div>

@@ -23,7 +23,9 @@ export class CurriculumPagee extends React.Component {
 			Goals:[],
 			OtherGoals:[],
 			CourseGoals:[],
+			MyCourseGoals:[],
 			Required:[],
+			CreditsUsedToCover: [],
 			NumRequired: 0,
 			NumOptional: 0,
 			GoalValid: "Not Valid",
@@ -31,11 +33,6 @@ export class CurriculumPagee extends React.Component {
 			MinimumHours2: -1,
 			MaxTopicsCovered2: -1,
 			GoalCredHour2: -1,
-
-
-
-
-
 		};
 	}
 
@@ -83,6 +80,7 @@ export class CurriculumPagee extends React.Component {
 		this.state.Topics = []
 		this.state.Goals = []
 		this.state.CourseGoals = []
+		this.state.MyCourseGoals = []
 		this.state.OtherGoals = []
 		this.setState(this.state)
 
@@ -122,14 +120,8 @@ export class CurriculumPagee extends React.Component {
 			Name: name
 		}}).json();
 
-
-		const parsed10= await ky.post('http://localhost:8888/CreditsUsedToCover',{json: {
-			//GoalID: g
-		}}).json();
-
 		this.state.NumRequired = parsed7.r2[0].COUNT
 		this.state.NumOptional = parsed8.r2[0].COUNT
-
 
 		if(parsed9.r2[0].NUMGOALNOTVALID == 0 ){
 			this.state.GoalValid = "Valid"
@@ -141,13 +133,19 @@ export class CurriculumPagee extends React.Component {
 		if(parsed1.r2){
 			for (let i = 0; i < parsed1.r2.length; i++) {
 				this.state.MyCourses[i] = parsed1.r2[i]
+				const parsed11 = await ky.post('http://localhost:8888/GetGoalsPartOfCourse',{json: {
+					CourseName: this.state.MyCourses[i].CourseName,
+					Curriculum: this.state.MyCourses[i].Curriculum
+				}}).json();
+				if(!parsed11.err){
+					this.state.MyCourseGoals[this.state.MyCourses[i].CourseName] = parsed11.r2
+				}
 			}
 		}
 
 		if(parsed2.r2){
 			for (let i = 0; i < parsed2.r2.length; i++) {
 				this.state.Courses[i] = parsed2.r2[i]
-
 			}
 		}
 		if(parsed3.r2){
@@ -159,7 +157,6 @@ export class CurriculumPagee extends React.Component {
 		if(parsed4.r2){
 			for (let i = 0; i < parsed4.r2.length; i++) {
 				this.state.Topics[i] = parsed4.r2[i]
-
 			}
 		}
 
@@ -167,6 +164,16 @@ export class CurriculumPagee extends React.Component {
 			for (let i = 0; i < parsed5.r2.length; i++) {
 				this.state.Goals[i] = parsed5.r2[i]
 				this.state.OtherGoals.push({label: parsed5.r2[i].ID, value: parsed5.r2[i].ID})
+				console.log(this.state.Goals[i].ID);
+				const parsed10 = await ky.post('http://localhost:8888/CreditsUsedToCover',{json: {
+					GoalsID: this.state.Goals[i].ID
+				}}).json();
+
+				console.log(parsed10.r2[0]['Sum(Courses.CreditHours)']);
+				if(parsed10.r2[0]['Sum(Courses.CreditHours)'])
+					this.state.CreditsUsedToCover[this.state.Goals[i].ID] = parsed10.r2[0]['Sum(Courses.CreditHours)']
+				else
+					this.state.CreditsUsedToCover[this.state.Goals[i].ID] = 0
 			}
 		}
 
@@ -195,14 +202,15 @@ export class CurriculumPagee extends React.Component {
 		}
 	};
 
-	async addCourseGoal(name){
-		for (var i = 0; i < this.state.CourseGoals[name].length; i++) {
-			const parsed1 = await ky.post('http://localhost:8888/CreateCourseGoals',{json: {
-				CourseName:name,
-				GoalsID:this.state.CourseGoals[name][0].label
-			}}).json();
-			console.log(parsed1)
-			console.log(this.state.CourseGoals[i])
+	async addCourseGoal(name,nameCur){
+		if(this.state.CourseGoals[name]){
+			for (var i = 0; i < this.state.CourseGoals[name].length; i++) {
+				const parsed1 = await ky.post('http://localhost:8888/CreateCourseGoals',{json: {
+					CourseName:name,
+					GoalsID:this.state.CourseGoals[name][i].label
+				}}).json();
+			}
+			this.updateComp(nameCur)
 		}
 	}
 
@@ -310,15 +318,15 @@ export class CurriculumPagee extends React.Component {
 										<div key={course["CourseName"]} className="col-lg-12" style={{border:'1px solid',marginBottom:'5px'}}>
 											<div className="row">
 												<p className="col-lg-12" style={{paddingLeft:'0px', paddingRight:'0px'}}> Name: {course["CourseName"]}	</p>
-												{this.state.Goals.map(goal => (
+												{this.state.MyCourseGoals[course["CourseName"]].map(goal => (
 													<div key={goal["ID"]} className="col-lg-12">
-														<p className="col-lg-12" >Goal : {goal["ID"]}</p>
+														<p className="col-lg-12" >GoalID : {goal["ID"]}</p>
 														<button className="col-lg-12"  onClick={(e) => {this.deleteCourseGoal(curriculum["Name"],course["CourseName"],goal["ID"]); }} > Delete goal </button>
 													</div>
 												))}
 													<span className="col-lg-12" style={{paddingLeft:'0px', paddingRight:'0px'}} >
 														<Select options={this.state.OtherGoals} isMulti={true} onChange={opt => this.goalChange(opt,course["CourseName"])} />
-														<button className="col-lg-12" style={{float:'right'}} onClick={(e) => {this.addCourseGoal(course["CourseName"]); }} > Add goals to Course </button>
+														<button className="col-lg-12" style={{float:'right'}} onClick={(e) => {this.addCourseGoal(course["CourseName"],curriculum["Name"]); }} > Add goals to Course </button>
 													</span>
 												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveCourseFromCurriculum(curriculum["Name"],course["CourseName"]);}} > Remove from Curriculum </button>
 											</div>
@@ -368,7 +376,7 @@ export class CurriculumPagee extends React.Component {
 											<div className="row">
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > ID: {goal["ID"]}	</p>
 												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > Description: {goal["Description"]}	</p>
-												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > # Credits Used to Cover: {this.state.CreditsUsedToCover}	</p>
+												<p className="col-lg-8" style={{paddingLeft:'0px', paddingRight:'0px'}} > # Credits Used to Cover: {this.state.CreditsUsedToCover[goal["ID"]]}	</p>
 												<button className="col-lg-12" style={{float:'right',background:"#ff0000"}} onClick={(e) => {this.RemoveGoal(curriculum["Name"],goal["ID"]);}} > Remove from Curriculum </button>
 											</div>
 									</div>

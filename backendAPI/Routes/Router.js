@@ -425,8 +425,8 @@ router.post('/GetGoalsNotPartOfCourse', CourseGoals.GetGoalsNotPartOfCourse,rout
 router.post('/GetSectionGoalByCourseNameYearSemesterGoalID',SectionGoal.GetSectionGoalByCourseNameYearSemesterGoalID, routes.query)
 router.post('/GetSectionGoalByYearSemesterGoalID',SectionGoal.GetSectionGoalByYearSemesterGoalID, routes.query)
 /*
-  params 
-   - req.body.Curriculum, 
+  params
+   - req.body.Curriculum,
    - req.body.Spring,
    - req.body.Summer,
    - req.body.Fall,
