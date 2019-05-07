@@ -71,6 +71,12 @@ export class SectionsPage extends React.Component {
 			F: 0,
 			W: 0,
 			I: 0,
+<<<<<<< HEAD
+=======
+			SectionID : ""
+
+			
+>>>>>>> b983836edc6215712a3a325116f5f26c553b0a3a
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -113,6 +119,13 @@ export class SectionsPage extends React.Component {
       });
 		}
 	};
+	semester5Change(e){
+		if (e != null) {
+      this.setState({
+        Semester: e
+      });
+		}
+	};
 
 	async onSubmit(event){
 		event.preventDefault();
@@ -145,25 +158,26 @@ export class SectionsPage extends React.Component {
 		event.preventDefault();
 
 		const parsed = await ky.post('http://localhost:8888/CreateSectionGoal',{json: {
-			ID         : this.state.GoalID,
+			GoalsID         : this.state.GoalID,
 			Year       : this.state.Year,
 			CourseName : this.state.CourseName,
 			Semester   : this.state.Semester,
-			APlus: this.state.APlus,
-			A: this.state.A,
-			AMinus: this.state.AMinus,
-			BPlus: this.state.BPlus,
-			B: this.state.B,
-			BMinus: this.state.BMinus,
-			CPlus: this.state.CPlus,
-			C: this.state.C,
-			CMinus: this.state.CMinus,
-			DPlus: this.state.DPlus,
-			D: this.state.D,
-			DMinus: this.state.DMinus,
-			F: this.state.F,
-			W: this.state.W,
-			I: this.state.I,
+			GAPlus: this.state.APlus,
+			GA: this.state.A,
+			GAMinus: this.state.AMinus,
+			GBPlus: this.state.BPlus,
+			GB: this.state.B,
+			GBMinus: this.state.BMinus,
+			GCPlus: this.state.CPlus,
+			GC: this.state.C,
+			GCMinus: this.state.CMinus,
+			GDPlus: this.state.DPlus,
+			GD: this.state.D,
+			GDMinus: this.state.DMinus,
+			GF: this.state.F,
+			GW: this.state.W,
+			GI: this.state.I,
+			SectionID : this.state.SectionID
 		}}).json();
 		if(parsed.r2){
 			var data = Object.values(parsed.r2[0])
@@ -212,6 +226,10 @@ export class SectionsPage extends React.Component {
 							options={semesterOptions3} value={this.state.Winter}
 							onChange={opt => this.semester4Change(opt)}/>
 					</div>
+					<div className="col-lg-3">
+						     <input placeholder="Section ID" name="SectionID"  className="form-control" checked={this.state.SectionID} onChange={this.handleInputChange} required/> 
+						</div>
+						
 					<div className="row" style = {{marginTop:'2%'}}>
 					    <input className='col-3' style={{backgroundColor:'white',width:'49%',marginLeft: '15px'}}placeholder="Lower Year" name="YearLower"  className="form-control" checked={this.state.YearLower} onChange={this.handleInputChange} required/>
 						<input className='col-3'style={{backgroundColor:'white',width:'48.5%', paddingLeft: '15px'}} placeholder="Upper Year" name="YearUpper"  className="form-control" checked={this.state.YearUpper} onChange={this.handleInputChange} required/>
@@ -266,12 +284,15 @@ export class SectionsPage extends React.Component {
 							className='col-3'
 							friendlyName="Semester" placeholder={this.state.Semester}
 							options={semesterOptions4} value={this.state.Semester}
-							onChange={opt => this.semester1Change(opt)}/>
-						<div className="col-lg-4">
+							onChange={opt => this.semester5Change(opt)}/>
+						<div className="col-lg-3">
 						     <input placeholder="Year" name="Year"  className="form-control" checked={this.state.Year} onChange={this.handleInputChange} required/> 
 						</div>
-						<div className="col-lg-4">
+						<div className="col-lg-3">
 						     <input placeholder="Goal ID" name="GoalID"  className="form-control" checked={this.state.GoalID} onChange={this.handleInputChange} required/> 
+						</div>
+						<div className="col-lg-3">
+						     <input placeholder="Section ID" name="SectionID"  className="form-control" checked={this.state.SectionID} onChange={this.handleInputChange} required/> 
 						</div>
 						
 					</div>

@@ -9,6 +9,7 @@ export class CoursePage extends React.Component {
 		super(props);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.onSubmit2 = this.onSubmit2.bind(this);
 		this.state = {
 			courses: [
 				{name: "A+", pv: 0, value: 0 },
@@ -43,6 +44,11 @@ export class CoursePage extends React.Component {
 			Fall: "",
 			YearUpper: 3000,
 			YearLower: 1900,
+			CreditHours2: -1,
+			Description : "",
+			SubjectCode2 : "",
+			CourseNumber2: 0
+
 
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -100,7 +106,36 @@ export class CoursePage extends React.Component {
 
 	}
 
+    async onSubmit2(event){
+		event.preventDefault();
+		var a = []
+		var val= []
+		if(this.state.CreditHours2> -1){
+			a.push("CreditHours")
+			val.push(this.state.CreditHours2)
+		}
+		if(this.state.Description!= ""){
+			a.push("Description")
+			val.push(this.state.Description)
+		}
+		if(this.state.CourseNumber2> 0){
+			a.push("CourseNumber")
+			val.push(this.state.CourseNumber2)
+		}
+		if(this.state.SubjectCode2!=""){
+			a.push("SubjectCode")
+			val.push(this.state.SubjectCode2)
+		}
+		alert(a[0])
 
+		const parsed = await ky.post('http://localhost:8888/UpdateCourses',{json: {
+
+			CourseName: this.state.CourseName,
+			Attribute : a,
+			Values : val 
+
+		}}).json();
+	}
 	async onSubmit (event) {
 		event.preventDefault();
 		const parsed = await ky.post('http://localhost:8888/GetCourses',{json: {
@@ -224,7 +259,7 @@ export class CoursePage extends React.Component {
 							<button className="btn float-right register_btn" style={{border:'1px solid'}}>Search for a Course</button>
 						</form>
 						<div className="row">
-							<p className="col-md-2"> Course Name: {this.state.SubjectCode}{this.state.CourseNumber} </p>
+							<p className="col-md-2"> Course Acronym: {this.state.SubjectCode}{this.state.CourseNumber} </p>
 							<p className="col-md-2"> Credit Hours : {this.state.CreditHours}	</p>
 							<p className="col-md-6"> Course Description : {this.state.CourseDescription}	</p>
 							<p className="col--md-2"> </p>
@@ -297,6 +332,37 @@ export class CoursePage extends React.Component {
 										))}
 										{this.state.Curriculums.length == 0 && <span> None </span> }
 								</div>
+						</div>
+						<p>Update This Course</p>
+						<div>
+						   <form name="form" onSubmit={this.onSubmit2}>
+								<div className="input-group form-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text"><i className="fas fa-user"></i></span>
+									</div>
+										<input placeholder="Credit Hours" name="CreditHours"  className="form-control" checked={this.state.CreditHours2} onChange={this.handleInputChange} />
+								</div>
+								<div className="input-group form-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text"><i className="fas fa-key"></i></span>
+									</div>
+										<input placeholder ="Description" name="Description"  className="form-control" checked={this.state.Description} onChange={this.handleInputChange} />
+								</div>
+								<div className="input-group form-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text"><i className="fas fa-key"></i></span>
+									</div>
+										<input placeholder ="SubjectCode" name="SubjectCode"  className="form-control" checked={this.state.SubjectCode2} onChange={this.handleInputChange} />
+								</div>
+								<div className="input-group form-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text"><i className="fas fa-key"></i></span>
+									</div>
+										<input placeholder ="CourseNumber" name="CourseNumber"  className="form-control" checked={this.state.CourseNumber2} onChange={this.handleInputChange} />
+								</div>
+								
+								<button className="btn float-right register_btn" style={{border:'1px solid'}}>Edit Course</button>
+							</form>
 						</div>
 					</div>
 				</div>

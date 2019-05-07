@@ -421,6 +421,8 @@ router.post('/CreditsUsedToCover', CourseGoals.CreditsUsedToCover,routes.query)
 router.post('/GetGoalsPartOfCourse', CourseGoals.GetGoalsPartOfCourse,routes.query)
 router.post('/GetGoalsNotPartOfCourse', CourseGoals.GetGoalsNotPartOfCourse,routes.query)
 
+router.post('/GetSectionGoalByCourseNameYearSemesterGoalID',SectionGoal.GetSectionGoalByCourseNameYearSemesterGoalID, routes.query)
+router.post('/GetSectionGoalByYearSemesterGoalID',SectionGoal.GetSectionGoalByYearSemesterGoalID, routes.query)
 //Update all of the different types of data
 
 /*

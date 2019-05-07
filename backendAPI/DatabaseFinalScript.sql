@@ -129,3 +129,13 @@ CREATE TABLE CurriculumTopics(
    
 
 );
+CREATE TABLE CourseTopic(
+   CourseName VARCHAR (25) NOT NULL,
+   Topic      VARCHAR(25)  NOT NULL,
+   Curriculum VARCHAR(25) NOT NULL, 
+   
+   FOREIGN KEY (CourseName)  REFERENCES Courses(CourseName),
+   FOREIGN KEY (Topic)       REFERENCES Topics(ID),
+   FOREIGN KEY (Curriculum)  REFERENCES Curriculum(Name),
+   CONSTRAINT CourseTopics_pk PRIMARY KEY (CourseName, Topic,Curriculum)
+);
