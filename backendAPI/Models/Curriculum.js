@@ -98,5 +98,111 @@ var GetPersonInCharge = function(req,res,next){
 	next()
 }
 
+var CheckExtensive = function(req,res,next){
+    res.locals.select = "Count(*)"
+    res.locals.table = " Curriculum"
 
-module.exports = {CreateCurriculum,GetCurriculum,UpdateCurriculum,GoalValid,GetAllCurriculums,GetPersonInCharge}
+    var str = "Curriculum.Name = ? AND  Curriculum.MaxTopicsCovered <(" 
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND (Topics.Level = 1 OR Topics.Level = 2) AND Topics.Units < ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str +   "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    str = str + "UNION SELECT Count(*) FROM Curriculum WHERE Curriculum.Name = ? AND Curriculum.MaxTopicsCovered <= ("
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND CurriculumTopics.Name = Curriculum.Name AND Topics.Level = 3 AND Curriculum.MaxTopicsCovered <= ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str + "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    
+
+    res.local.rmStr = str
+    res.locals.params = [req.body.Curriculum, req.body.Curriculum]
+	next()
+}
+var CheckInclusive = function(req,res,next){
+    res.locals.select = "Count(*)"
+    res.locals.table = " Curriculum"
+
+    var str = "Curriculum.Name = ? AND  Curriculum.MaxTopicsCovered <(" 
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND (Topics.Level = 1 OR Topics.Level = 2) AND Topics.Units < ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str +   "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    
+
+    res.local.rmStr = str
+    res.locals.params = [req.body.Curriculum]
+	next()
+}
+
+//DON'T THINK THIS WORKS BUT OH WELL 
+var CheckBasicPlus = function(req,res,next){
+    res.locals.select = "Count(*)"
+    res.locals.table = " Curriculum"
+
+    var str = "Curriculum.Name = ? AND  Curriculum.MaxTopicsCovered <(" 
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND Topics.Level = 1  AND Topics.Units < ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str +   "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    str = str + "UNION SELECT Count(*) FROM Curriculum WHERE Curriculum.Name = ? AND Curriculum.MaxTopicsCovered <= ("
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND CurriculumTopics.Name = Curriculum.Name AND Topics.Level = 2 AND Curriculum.MaxTopicsCovered <= ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str + "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    str = str + "UNION SELECT Count(*) FROM Curriculum WHERE Curriculum.Name = ? AND Curriculum.MaxTopicsCovered <= ("
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND CurriculumTopics.Name = Curriculum.Name AND Topics.Level = 2 AND Curriculum.MaxTopicsCovered <= ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str + "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = False )))"
+    
+
+    res.local.rmStr = str
+    res.locals.params = [req.body.Curriculum, req.body.Curriculum,req.body.Curriculum]
+	next()
+}
+var CheckBasic = function(req,res,next){
+    res.locals.select = "Count(*)"
+    res.locals.table = " Curriculum"
+
+    var str = "Curriculum.Name = ? AND  Curriculum.MaxTopicsCovered <(" 
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND Topics.Level = 1 AND Topics.Units < ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str +   "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    str = str + "UNION SELECT Count(*) FROM Curriculum WHERE Curriculum.Name = ? AND Curriculum.MaxTopicsCovered <= ("
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND CurriculumTopics.Name = Curriculum.Name AND Topics.Level = 2 AND Curriculum.MaxTopicsCovered <= ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str + "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    
+    res.local.rmStr = str
+    res.locals.params = [req.body.Curriculum, req.body.Curriculum]
+	next()
+}
+var CheckUnsatisfactory = function(req,res,next){
+    res.locals.select = "Count(*)"
+    res.locals.table = " Curriculum"
+
+    var str = "Curriculum.Name = ? AND  Curriculum.MaxTopicsCovered <(" 
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND Topics.Level = 1 AND Topics.Units < ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str +   "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    str = str + "UNION SELECT Count(*) FROM Curriculum WHERE Curriculum.Name = ? AND Curriculum.MaxTopicsCovered >= ("
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND CurriculumTopics.Name = Curriculum.Name AND Topics.Level = 2 AND Curriculum.MaxTopicsCovered <= ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str + "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    
+    res.local.rmStr = str
+    res.locals.params = [req.body.Curriculum, req.body.Curriculum]
+	next()
+}
+
+//Technically wont always work either
+var CheckUnsatisfactory = function(req,res,next){
+    res.locals.select = "Count(*)"
+    res.locals.table = " Curriculum"
+
+    var str = "SELECT Count(*) FROM Curriculum WHERE Curriculum.Name = ? AND Curriculum.MaxTopicsCovered >= ("
+    str = str + "SELECT Count(Topics.ID) FROM Topics, CurriculumTopics WHERE CurriculumTopics.ID = Topics.ID AND CurriculumTopics.Name = Curriculum.Name AND Topics.Level = 2 AND Curriculum.MaxTopicsCovered <= ("
+    str = str +  "SELECT Sum(NumUnitsCovered) FROM CourseTopic WHERE CourseTopic.Topic = Topics.ID AND CourseTopic.Curriculum = Curriculum.Name AND CourseTopic.CourseName IN ("
+    str = str + "SELECT CourseName From CurCourse WHERE CurCourse.Curriculum = Curriculum.Name AND CurCourse.Required = True )))"
+    
+    res.local.rmStr = str
+    res.locals.params = [req.body.Curriculum]
+	next()
+}
+
+
+module.exports = {CreateCurriculum,GetCurriculum,UpdateCurriculum,GoalValid,GetAllCurriculums,GetPersonInCharge,CheckExtensive,CheckInclusive,CheckBasicPlus,CheckBasic,CheckUnsatisfactory}
